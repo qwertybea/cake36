@@ -63,7 +63,8 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('role')
+            ->scalar('role')
+            ->maxLength('role', 255)
             ->requirePresence('role', 'create')
             ->notEmpty('role');
 

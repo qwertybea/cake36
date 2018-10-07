@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\Utility\Inflector;
+use Cake\ORM\TableRegistry;
 
 /**
  * Documents Controller
@@ -13,6 +16,30 @@ use App\Controller\AppController;
 class DocumentsController extends AppController
 {
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $user = $this->Auth->user();
+        if ($user) {
+           switch ($user['role']) {
+            case 'creator':
+                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'has_rights'
+                        // temp permissions
+                        ,'edit'
+                    ]);
+                break;
+            case 'admin':
+                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'has_rights'
+                    // temp permissions
+                        ,'edit'
+                    ]);
+                break;
+            }
+        } else {
+            $this->Auth->allow(['index', 'view', 'has_rights']);
+        }
+    }
+
     /**
      * Index method
      *
@@ -20,8 +47,26 @@ class DocumentsController extends AppController
      */
     public function index()
     {
+
         $this->paginate = [
-            'contain' => ['DocumentTypes', 'Users']
+            'contain' => ['DocumentTypes', 'Users'],
+            'conditions' => [
+                'Documents.published' => 1,
+                'Documents.deleted' => 0
+            ],
+        ];
+        $documents = $this->paginate($this->Documents);
+
+        $this->set(compact('documents'));
+    }
+
+    public function viewAllDocuments($value='')
+    {
+        $this->paginate = [
+            'contain' => ['DocumentTypes', 'Users'],
+            'conditions' => [
+                'Documents.deleted' => 0
+            ],
         ];
         $documents = $this->paginate($this->Documents);
 
@@ -49,21 +94,38 @@ class DocumentsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($type_id = null)
     {
         $document = $this->Documents->newEntity();
-        if ($this->request->is('post')) {
-            $document = $this->Documents->patchEntity($document, $this->request->getData());
+        $type = $this->Documents->DocumentTypes
+            ->find()
+            ->where(['id' => $type_id])
+            ->first();
+
+        if ($type != null) {
+            $document['type_id'] = $type['id'];
+            $document['user_id'] = $this->Auth->user()['id'];
             if ($this->Documents->save($document)) {
                 $this->Flash->success(__('The document has been saved.'));
+                // $type_name = Inflector::camelize($type['type']);
+                // redirect to a specific controller
+                // will add after we have many types
+                // return $this->redirect(['controller' => $type_name.'Documents', 'action' => 'edit', $document['id']]);
 
-                return $this->redirect(['action' => 'index']);
+                // TEMP
+                $textTable = TableRegistry::get('TextDocuments');
+                $textDoc = $textTable->newEntity([
+                    'document_id' => $document['id']
+                ]);
+                $textTable->save($textDoc);
+
+                return $this->redirect(['controller' => 'Documents', 'action' => 'edit', $document['id']]);
             }
             $this->Flash->error(__('The document could not be saved. Please, try again.'));
+            $this->redirect($this->referer());
+        } else {
+            $this->redirect($this->referer());
         }
-        $documentTypes = $this->Documents->DocumentTypes->find('list', ['limit' => 200]);
-        $users = $this->Documents->Users->find('list', ['limit' => 200]);
-        $this->set(compact('document', 'documentTypes', 'users'));
     }
 
     /**
@@ -81,15 +143,31 @@ class DocumentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $document = $this->Documents->patchEntity($document, $this->request->getData());
             if ($this->Documents->save($document)) {
+                $text = $this->request->getData()['content'];
+
+                // TEMP
+                $textTable = TableRegistry::get('TextDocuments');
+                $textDoc = $textTable->find('all', [
+                    'conditions' => [
+                        'document_id' => $document['id']
+                    ]
+                ])->first();
+                debug($textDoc);
+                $textDoc['text'] = $text;
+                $textTable->save($textDoc);
+
                 $this->Flash->success(__('The document has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'myWork']);
             }
             $this->Flash->error(__('The document could not be saved. Please, try again.'));
         }
-        $documentTypes = $this->Documents->DocumentTypes->find('list', ['limit' => 200]);
-        $users = $this->Documents->Users->find('list', ['limit' => 200]);
-        $this->set(compact('document', 'documentTypes', 'users'));
+        $textDocument = $this->Documents->TextDocuments->find('all', [
+                'conditions' => [
+                    'document_id' => $document['id']
+                ]
+            ])->first();
+        $this->set(compact('document', 'textDocument'));
     }
 
     /**
@@ -103,12 +181,29 @@ class DocumentsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $document = $this->Documents->get($id);
-        if ($this->Documents->delete($document)) {
+        $document['deleted'] = 1;
+        if ($this->Documents->save($document)) {
             $this->Flash->success(__('The document has been deleted.'));
         } else {
             $this->Flash->error(__('The document could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());
+    }
+
+    public function myWork()
+    {
+        $documents = $this->Documents->find('all', [
+            'contain' => ['documentTypes', 'users'],
+            'conditions' => [
+                'Documents.user_id' => $this->Auth->user()['id'],
+                'Documents.deleted' => 0
+            ],
+        ]);
+
+        $documentTypes = $this->Documents->DocumentTypes
+            ->find();
+
+        $this->set(compact(['user', 'documents', 'documentTypes']));
     }
 }

@@ -34,6 +34,11 @@ class TextDocumentsTable extends Table
         $this->setTable('text_documents');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Documents', [
+            'foreignKey' => 'document_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -50,8 +55,7 @@ class TextDocumentsTable extends Table
 
         $validator
             ->scalar('text')
-            ->requirePresence('text', 'create')
-            ->notEmpty('text');
+            ->allowEmpty('text');
 
         return $validator;
     }

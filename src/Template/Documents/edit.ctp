@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Document $document
  */
+
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -27,14 +28,14 @@
     <fieldset>
         <legend><?= __('Edit Document') ?></legend>
         <?php
-            echo $this->Form->control('type_id', ['options' => $documentTypes]);
-            echo $this->Form->control('user_id', ['options' => $users]);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('other_details');
             echo $this->Form->control('document_cover');
             echo $this->Form->control('published');
-            echo $this->Form->control('deleted');
+            //echo $this->Form->control('deleted');
+
+            echo $this->Form->control('content', ['type' => 'textarea', 'default' => $textDocument['text']]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

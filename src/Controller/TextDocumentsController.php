@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * TextDocuments Controller
@@ -12,6 +13,24 @@ use App\Controller\AppController;
  */
 class TextDocumentsController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $user = $this->Auth->user();
+        if ($user) {
+           switch ($user['role']) {
+            case 'creator':
+                $this->Auth->allow(['index', 'view', 'add', 'edit', 'myWork', 'has_rights']);
+                break;
+            case 'administrator':
+                $this->Auth->allow(['index', 'view', 'add', 'edit', 'myWork', 'has_rights']);
+                break;
+            }
+        } else {
+            $this->Auth->allow(['index', 'view', 'has_rights']);
+        }
+    }
 
     /**
      * Index method

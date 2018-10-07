@@ -54,6 +54,9 @@ class DocumentsTable extends Table
         $this->hasMany('Interactions', [
             'foreignKey' => 'document_id'
         ]);
+        $this->hasMany('TextDocuments', [
+            'foreignKey' => 'document_id'
+        ]);
     }
 
     /**
@@ -71,26 +74,22 @@ class DocumentsTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->allowEmpty('name');
 
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->allowEmpty('description');
 
         $validator
             ->scalar('other_details')
             ->maxLength('other_details', 255)
-            ->requirePresence('other_details', 'create')
-            ->notEmpty('other_details');
+            ->allowEmpty('other_details');
 
         $validator
             ->scalar('document_cover')
             ->maxLength('document_cover', 255)
-            ->requirePresence('document_cover', 'create')
-            ->notEmpty('document_cover');
+            ->allowEmpty('document_cover');
 
         $validator
             ->boolean('published')

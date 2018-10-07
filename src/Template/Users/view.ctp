@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Role') ?></th>
-            <td><?= $this->Number->format($user->role) ?></td>
+            <td><?= h($user->role) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
