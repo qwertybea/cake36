@@ -82,4 +82,16 @@ class AppController extends Controller
     public function isAuthorized($user) {
         return false;
     }
+
+    public static function array_on_key($array, $key)
+    {
+        if($array) {
+            foreach ($array as $value) {
+                $result[] = $value[$key];
+            }
+        } else {
+            $result = array();
+        }
+        return $result;
+    }
 }

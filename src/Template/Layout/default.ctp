@@ -29,6 +29,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
 
+    <!-- This is probably a bad way of doing it -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -46,6 +49,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 $loguser = $this->request->session()->read('Auth.User');
                 if($loguser) {
                    // user is logged in, show logout..user menu etc
+                   echo '<li>'.$this->Html->link('My favorites', array('controller' => 'Documents', 'action' => 'myFavorites')).'</li>';
                     $my_menu_text = sprintf('%s %s', $loguser['role'], $loguser['username']);
                    echo '<li>'.$this->Html->link($my_menu_text, array('controller' => 'Documents', 'action' => 'myWork')).'</li>';
                    echo '<li>'.$this->Html->link($loguser['email'] . ' Logout', array('controller' => 'users', 'action' => 'logout')).'</li>';
@@ -55,8 +59,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                    echo '<li>'.$this->Html->link('sign up', array('controller' => 'users', 'action' => 'add')).'</li>';
                 }
                 ?>
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
             </ul>
         </div>
     </nav>

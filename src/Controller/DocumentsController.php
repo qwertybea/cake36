@@ -23,20 +23,20 @@ class DocumentsController extends AppController
         if ($user) {
            switch ($user['role']) {
             case 'creator':
-                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView'
+                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
                         // temp permissions
                         ,'edit'
                     ]);
                 break;
             case 'admin':
-                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView'
+                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
                     // temp permissions
                         ,'edit'
                     ]);
                 break;
             }
         } else {
-            $this->Auth->allow(['index', 'view', 'has_rights', 'canView']);
+            $this->Auth->allow(['index', 'view', 'has_rights', 'canView', 'handleFavorite']);
         }
     }
 
@@ -87,26 +87,47 @@ class DocumentsController extends AppController
                 'contain' => ['DocumentTypes', 'Users', 'Interactions', 'TextDocuments']
             ]);
 
-            $interactive_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+            $view_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
                 'conditions' => [
                     'InteractiveMethods.method' => 'view'
+                ]
+            ])->first()['id'];
+
+            $favorite_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+                'conditions' => [
+                    'InteractiveMethods.method' => 'favorite'
                 ]
             ])->first()['id'];
 
             $view_query = $this->Documents->Interactions->find('all', [
                 'conditions' => [
                     'Interactions.document_id' => $id,
-                    'Interactions.interactiveMethod_id' => $interactive_method_id
+                    'Interactions.interactiveMethod_id' => $view_method_id
                 ]
             ]);
+
+            if ($this->Auth->user()) {
+                $favorite_query = $this->Documents->Interactions->find('all', [
+                    'conditions' => [
+                        'Interactions.document_id' => $id,
+                        'Interactions.user_id' => $this->Auth->user()['id'],
+                        'Interactions.interactiveMethod_id' => $favorite_method_id
+                    ]
+                ])->first();
+                $favorited = $favorite_query != null;
+            } else {
+                $favorited = null;
+            }
+            
 
             $view_count = $view_query->count();
 
             $has_rights = $this->hasRights($id);
 
+
             $this->handleViewInteraction($id);
 
-            $this->set(compact('document', 'view_count', 'view_query', 'has_rights'));
+            $this->set(compact('document', 'view_count', 'favorited', 'has_rights'));
         } else {
             $this->Flash->error(__('You do not have the right to view this document.'));
             return $this->redirect($this->referer());
@@ -261,6 +282,42 @@ class DocumentsController extends AppController
         $this->set(compact('user', 'documents', 'documentTypes'));
     }
 
+    public function myFavorites()
+    {
+
+        $favorites = $this->Documents->Interactions->find('all')
+        ->select(['document_id'])
+        ->contain(['InteractiveMethods'])
+        ->where([
+            'InteractiveMethods.method' => 'favorite',
+            'Interactions.user_id' => $this->Auth->user()['id'],
+        ])->toList();
+
+        $favorites = AppController::array_on_key($favorites, 'document_id');
+
+        if ($favorites) {
+            $conditions = [
+                'Documents.id IN' => $favorites,
+                'Documents.published' => 1,
+                'Documents.deleted' => 0
+            ];
+        } else {
+            $conditions = [
+                'TRUE' => false
+            ];
+        }
+        $this->paginate = [
+            'contain' => [
+                'DocumentTypes',
+                'Users'
+            ],
+            'conditions' => $conditions,
+        ];
+        $documents = $this->paginate($this->Documents);
+
+        $this->set(compact('documents'));
+    }
+
     public function hasRights($doc_id=null)
     {
         $has_rights = false;
@@ -366,4 +423,42 @@ class DocumentsController extends AppController
             $this->Documents->Interactions->save($new_interaction);
         //}
     }
+
+    public function handleFavorite($doc_id)
+    {
+        $user = $this->Auth->user();
+        if ($user) {
+            $favorite_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+                'conditions' => [
+                    'InteractiveMethods.method' => 'favorite'
+                ]
+            ])->first()['id'];
+            $favorite = $this->Documents->Interactions->find('all', [
+                'conditions' => [
+                    'Interactions.document_id' => $doc_id,
+                    'Interactions.user_id' => $this->Auth->user()['id'],
+                    'Interactions.interactiveMethod_id' => $favorite_method_id
+                ]
+            ])->first();
+            if ($favorite) {
+                $this->Documents->Interactions->delete($favorite);
+                $favorited = false;
+            } else {
+                $favorite = $this->Documents->Interactions->newEntity([
+                    'document_id' => $doc_id,
+                    'user_id' => $user['id'],
+                    'interactiveMethod_id' => $favorite_method_id
+                ]);
+                $this->Documents->Interactions->save($favorite);
+                $favorited = true;
+            }
+
+            return $this->redirect(['controller' => 'Documents', 'action' => 'view', $doc_id]);
+        } else {
+            $this->Flash->error(__('Login to favorite documents.'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+        
+    }
+
 }

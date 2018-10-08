@@ -10,8 +10,9 @@
         <ul>
             <?php
             foreach ($new_docs as $doc) {
-                $doc_name = ($doc['name']) ? $doc['name'] : 'Untitled';
-                echo $this->Html->link(__(sprintf('<span style="font-size: 1.3em">%s</span> <span style="color: grey">by %s</span>', $doc_name, $doc->user['username'])), array('controller' => 'Documents', 'action' => 'view', $doc['id']), array('escape' => false));
+                $doc_name = ($doc['name']) ? mb_strimwidth($doc['name'], 0, 15, "...") : 'Untitled';
+                $user_name = mb_strimwidth($doc->user['username'], 0, 15, "...");
+                echo $this->Html->link(__(sprintf('<span style="font-size: 1.3em">%s</span> <span style="color: grey">by %s</span>', $doc_name, $user_name)), array('controller' => 'Documents', 'action' => 'view', $doc['id']), array('escape' => false));
                 echo '<br>';
             }
             ?>
@@ -33,8 +34,9 @@
             foreach ($popular_docs as $interaction) {
                 $doc = $interaction->document;
                 $user = $interaction->user;
-                $doc_name = ($doc['name']) ? $doc['name'] : 'Untitled';
-                echo $this->Html->link(__(sprintf('<span style="font-size: 1.3em">%s</span> <span style="color: grey">by %s with %s views</span>', $doc_name, $user['username'], $interaction['views'])), array('controller' => 'Documents', 'action' => 'view', $doc['id']), array('escape' => false));
+                $doc_name = ($doc['name']) ? mb_strimwidth($doc['name'], 0, 15, "...") : 'Untitled';
+                $user_name = mb_strimwidth($user['username'], 0, 15, "...");
+                echo $this->Html->link(__(sprintf('<span style="font-size: 1.3em">%s</span> <span style="color: grey">by %s with %s views</span>', $doc_name, $user_name, $interaction['views'])), array('controller' => 'Documents', 'action' => 'view', $doc['id']), array('escape' => false));
                 echo '<br>';
             }
             ?>

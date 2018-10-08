@@ -77,6 +77,10 @@
         <table>
             <tr>
                 <td>Viewed <?= $view_count ?> times</td>
+                <?php 
+                $fav_style = ($favorited) ? 'color:DeepSkyBlue' : 'color:gray';
+                ?>
+                <td>Favorite <?php echo $this->Html->link('<i class="fa fa-star fa-lg" style="'.$fav_style.'"></i>', ['controller' => 'Documents',  'action' => 'handleFavorite', $document->id], ['escape' => false]); ?></td>
             </tr>
         </table>
     </div>
