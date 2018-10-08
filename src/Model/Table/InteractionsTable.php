@@ -39,7 +39,7 @@ class InteractionsTable extends Table
 
         $this->setTable('interactions');
         $this->setDisplayField('id');
-        $this->setPrimaryKey(['id']);
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 

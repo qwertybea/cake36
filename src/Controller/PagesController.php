@@ -19,6 +19,7 @@ use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Static content controller
@@ -77,6 +78,38 @@ class PagesController extends AppController
 
     public function myhome()
     {
-        
+        $doc_table = $textTable = TableRegistry::get('Documents');
+        $int_table = $textTable = TableRegistry::get('Interactions');
+
+        $new_docs = $doc_table->find('all', [
+            'limit' => 5,
+            'conditions' => [
+                'Documents.published' => 1,
+                'Documents.deleted' => 0
+            ]
+        ])
+        ->contain(['Users'])
+        ->order(['Documents.created' => 'DESC']);
+
+
+        $query = $int_table->find();
+
+        $popular_docs = $int_table->find('all')
+        ->select(['views' => $query->func()->count('Interactions.id')])
+        ->contain(['InteractiveMethods', 'Documents', 'Users'])
+        ->where([
+            'InteractiveMethods.method' => 'view',
+             'Documents.published' => 1,
+             'Documents.deleted' => 0
+        ])
+        ->group(['document_id'])
+        ->order(['count(Interactions.id)' => 'DESC'])
+        ->limit(5)
+        // get all the other fields too (not just the select)
+        ->enableAutoFields(true)
+        ->toList();
+        //debug($popular_docs_list);
+
+        $this->set(compact('new_docs', 'popular_docs'));
     }
 }

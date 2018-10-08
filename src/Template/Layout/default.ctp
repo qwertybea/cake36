@@ -46,6 +46,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 $loguser = $this->request->session()->read('Auth.User');
                 if($loguser) {
                    // user is logged in, show logout..user menu etc
+                    $my_menu_text = sprintf('%s %s', $loguser['role'], $loguser['username']);
+                   echo '<li>'.$this->Html->link($my_menu_text, array('controller' => 'Documents', 'action' => 'myWork')).'</li>';
                    echo '<li>'.$this->Html->link($loguser['email'] . ' Logout', array('controller' => 'users', 'action' => 'logout')).'</li>';
                 } else {
                    // the user is not logged in
