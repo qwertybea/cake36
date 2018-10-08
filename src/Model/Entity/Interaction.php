@@ -29,10 +29,13 @@ class Interaction extends Entity
      * @var array
      */
     protected $_accessible = [
+        'document_id' => true,
+        'user_id' => true,
+        'interactiveMethod_id' => true,
         'created' => true,
         'modified' => true,
         'document' => true,
         'user' => true,
-        'interactive_method' => true
+        'interactiveMethod' => true
     ];
 }

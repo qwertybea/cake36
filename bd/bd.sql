@@ -80,12 +80,16 @@ INSERT INTO `interactive_methods` (`method`) VALUES
 
 DROP TABLE IF EXISTS `interactions`;
 CREATE TABLE IF NOT EXISTS `interactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'This is so we can have many interactions of the same kind (doc, user, method)',
   `document_id` int(11) NOT NULL COMMENT 'PF documents(id)',
   `user_id` int(11) NOT NULL COMMENT 'PF users(id)',
   `interactiveMethod_id` int(11) NOT NULL COMMENT 'PF interactive_methods(id)',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`document_id`, `user_id`, `interactiveMethod_id`)
+  PRIMARY KEY (`id`),
+  KEY `document_id` (`document_id`),
+  KEY `user_id` (`user_id`),
+  KEY `interactiveMethod_id` (`interactiveMethod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -107,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`role`, `username`, `email`, `password`) VALUES
+('visitor', '', '', ''),
 ('admin', 'Admin', 'admin@gmail.com', '123');
 
 --

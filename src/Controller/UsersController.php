@@ -23,7 +23,7 @@ class UsersController extends AppController
             case 'creator':
                 $this->Auth->allow(['logout']);
                 break;
-            case 'administrator':
+            case 'admin':
                 $this->Auth->allow(['logout']);
                 break;
             }

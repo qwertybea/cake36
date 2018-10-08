@@ -21,38 +21,34 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('type_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id', 'Author') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('other_details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('document_cover') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('published') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('deleted') ?></th>
+<!-- 
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                 -->
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($documents as $document): ?>
             <tr>
-                <td><?= $this->Number->format($document->id) ?></td>
-                <td><?= $document->has('document_type') ? $this->Html->link($document->document_type->id, ['controller' => 'DocumentTypes', 'action' => 'view', $document->document_type->id]) : '' ?></td>
-                <td><?= $document->has('user') ? $this->Html->link($document->user->id, ['controller' => 'Users', 'action' => 'view', $document->user->id]) : '' ?></td>
+                <td><?= $document->has('document_type') ? $document->document_type->type : '' ?></td>
+                <td><?= $document->has('user') ? $this->Html->link($document->user->username, ['controller' => 'Users', 'action' => 'view', $document->user->id]) : '' ?></td>
                 <td><?= h($document->name) ?></td>
                 <td><?= h($document->description) ?></td>
                 <td><?= h($document->other_details) ?></td>
                 <td><?= h($document->document_cover) ?></td>
-                <td><?= h($document->published) ?></td>
-                <td><?= h($document->deleted) ?></td>
+<!-- 
                 <td><?= h($document->created) ?></td>
                 <td><?= h($document->modified) ?></td>
+                 -->
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $document->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $document->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $document->id], ['confirm' => __('Are you sure you want to delete # {0}?', $document->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

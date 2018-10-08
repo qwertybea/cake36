@@ -24,16 +24,16 @@
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Document Type') ?></th>
-            <td><?= $document->has('document_type') ? $this->Html->link($document->document_type->id, ['controller' => 'DocumentTypes', 'action' => 'view', $document->document_type->id]) : '' ?></td>
+            <td><?= $document->has('document_type') ? $document->document_type->type : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $document->has('user') ? $this->Html->link($document->user->id, ['controller' => 'Users', 'action' => 'view', $document->user->id]) : '' ?></td>
+            <th scope="row"><?= __('Author') ?></th>
+            <td><?= $document->has('user') ? $this->Html->link($document->user->username, ['controller' => 'Users', 'action' => 'view', $document->user->id]) : '' ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($document->name) ?></td>
-        </tr>
+        </tr> -->
         <tr>
             <th scope="row"><?= __('Description') ?></th>
             <td><?= h($document->description) ?></td>
@@ -47,10 +47,6 @@
             <td><?= h($document->document_cover) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($document->id) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($document->created) ?></td>
         </tr>
@@ -62,11 +58,54 @@
             <th scope="row"><?= __('Published') ?></th>
             <td><?= $document->published ? __('Yes') : __('No'); ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Deleted') ?></th>
-            <td><?= $document->deleted ? __('Yes') : __('No'); ?></td>
-        </tr>
     </table>
+    <div class="related">
+        <h2>Content</h2>
+        <?php 
+        $text = $document['text_documents'][0]['text'];
+        foreach(preg_split("/((\r?\n)|(\r\n?))/", $text) as $line){
+            echo '<p>'.$line.'</p>';
+        } 
+        ?>
+        
+    </div>
+
+    <hr>
+    <div class="related">
+        <table>
+            <tr>
+                <td>Viewed <?= $view_count ?> times</td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br> will beacome statistics page of sorts
     <div class="related">
         <h4><?= __('Related Interactions') ?></h4>
         <?php if (!empty($document->interactions)): ?>

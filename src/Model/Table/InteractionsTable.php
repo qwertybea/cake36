@@ -38,8 +38,8 @@ class InteractionsTable extends Table
         parent::initialize($config);
 
         $this->setTable('interactions');
-        $this->setDisplayField('document_id');
-        $this->setPrimaryKey(['document_id', 'user_id', 'interactiveMethod_id']);
+        $this->setDisplayField('id');
+        $this->setPrimaryKey(['id']);
 
         $this->addBehavior('Timestamp');
 

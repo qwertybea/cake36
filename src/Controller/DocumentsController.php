@@ -23,20 +23,20 @@ class DocumentsController extends AppController
         if ($user) {
            switch ($user['role']) {
             case 'creator':
-                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'has_rights'
+                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView'
                         // temp permissions
                         ,'edit'
                     ]);
                 break;
             case 'admin':
-                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'has_rights'
+                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView'
                     // temp permissions
                         ,'edit'
                     ]);
                 break;
             }
         } else {
-            $this->Auth->allow(['index', 'view', 'has_rights']);
+            $this->Auth->allow(['index', 'view', 'has_rights', 'canView']);
         }
     }
 
@@ -82,11 +82,33 @@ class DocumentsController extends AppController
      */
     public function view($id = null)
     {
-        $document = $this->Documents->get($id, [
-            'contain' => ['DocumentTypes', 'Users', 'Interactions']
-        ]);
+        if ($this->canView($id)) {
+            $document = $this->Documents->get($id, [
+                'contain' => ['DocumentTypes', 'Users', 'Interactions', 'TextDocuments']
+            ]);
 
-        $this->set('document', $document);
+            $interactive_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+                'conditions' => [
+                    'InteractiveMethods.method' => 'view'
+                ]
+            ])->first()['id'];
+
+            $view_query = $this->Documents->Interactions->find('all', [
+                'conditions' => [
+                    'Interactions.document_id' => $id,
+                    'Interactions.interactiveMethod_id' => $interactive_method_id
+                ]
+            ]);
+
+            $view_count = $view_query->count();
+
+            $this->handleViewInteraction($id);
+
+            $this->set(compact('document', 'view_count', 'view_query'));
+        } else {
+            $this->Flash->error(__('You do not have the right to view this document.'));
+            return $this->redirect($this->referer());
+        }
     }
 
     /**
@@ -137,37 +159,42 @@ class DocumentsController extends AppController
      */
     public function edit($id = null)
     {
-        $document = $this->Documents->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $document = $this->Documents->patchEntity($document, $this->request->getData());
-            if ($this->Documents->save($document)) {
-                $text = $this->request->getData()['content'];
+        if ($this->hasRights($id)) {
+            $document = $this->Documents->get($id, [
+                'contain' => []
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $document = $this->Documents->patchEntity($document, $this->request->getData());
+                if ($this->Documents->save($document)) {
+                    $text = $this->request->getData()['content'];
 
-                // TEMP
-                $textTable = TableRegistry::get('TextDocuments');
-                $textDoc = $textTable->find('all', [
+                    // TEMP
+                    $textTable = TableRegistry::get('TextDocuments');
+                    $textDoc = $textTable->find('all', [
+                        'conditions' => [
+                            'document_id' => $document['id']
+                        ]
+                    ])->first();
+                    debug($textDoc);
+                    $textDoc['text'] = $text;
+                    $textTable->save($textDoc);
+
+                    $this->Flash->success(__('The document has been saved.'));
+
+                    return $this->redirect(['action' => 'myWork']);
+                }
+                $this->Flash->error(__('The document could not be saved. Please, try again.'));
+            }
+            $textDocument = $this->Documents->TextDocuments->find('all', [
                     'conditions' => [
                         'document_id' => $document['id']
                     ]
                 ])->first();
-                debug($textDoc);
-                $textDoc['text'] = $text;
-                $textTable->save($textDoc);
-
-                $this->Flash->success(__('The document has been saved.'));
-
-                return $this->redirect(['action' => 'myWork']);
-            }
-            $this->Flash->error(__('The document could not be saved. Please, try again.'));
+            $this->set(compact('document', 'textDocument'));
+        } else {
+            $this->Flash->error(__('You do not have the right to edit this document.'));
+            return $this->redirect($this->referer());
         }
-        $textDocument = $this->Documents->TextDocuments->find('all', [
-                'conditions' => [
-                    'document_id' => $document['id']
-                ]
-            ])->first();
-        $this->set(compact('document', 'textDocument'));
     }
 
     /**
@@ -179,31 +206,143 @@ class DocumentsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $document = $this->Documents->get($id);
-        $document['deleted'] = 1;
-        if ($this->Documents->save($document)) {
-            $this->Flash->success(__('The document has been deleted.'));
-        } else {
-            $this->Flash->error(__('The document could not be deleted. Please, try again.'));
-        }
+        if ($this->hasRights($id)) {
+            $this->request->allowMethod(['post', 'delete']);
+            $document = $this->Documents->get($id);
+            $document['deleted'] = 1;
+            if ($this->Documents->save($document)) {
+                $this->Flash->success(__('The document has been deleted.'));
+            } else {
+                $this->Flash->error(__('The document could not be deleted. Please, try again.'));
+            }
 
-        return $this->redirect($this->referer());
+            return $this->redirect($this->referer());
+        } else {
+            $this->Flash->error(__('You do not have the right to delete this document.'));
+            return $this->redirect($this->referer());
+        }
     }
 
     public function myWork()
     {
-        $documents = $this->Documents->find('all', [
-            'contain' => ['documentTypes', 'users'],
+        $this->paginate = [
+            'contain' => ['DocumentTypes', 'Users'],
             'conditions' => [
                 'Documents.user_id' => $this->Auth->user()['id'],
                 'Documents.deleted' => 0
             ],
-        ]);
+        ];
+        $documents = $this->paginate($this->Documents);
 
         $documentTypes = $this->Documents->DocumentTypes
             ->find();
 
-        $this->set(compact(['user', 'documents', 'documentTypes']));
+        $this->set(compact('user', 'documents', 'documentTypes'));
+    }
+
+    public function hasRights($doc_id=null)
+    {
+        $has_rights = false;
+        if ($doc_id) {
+            $user = $this->Auth->user();
+            if ($user) {
+                if ($user['role'] == 'admin') {
+                    $has_rights = true;
+                } elseif ($user['role'] == 'creator') {
+                    $doc = $this->Documents->find('all', [
+                        'conditions' => [
+                            'Documents.id' => $doc_id,
+                            'Documents.user_id' => $user['id']
+                        ]
+                    ])->first();
+                    if ($doc) {
+                        $has_rights = true;
+                    }
+                }
+            }
+        }
+        return $has_rights;
+    }
+
+    public function canView($doc_id=null)
+    {
+        $has_rights = false;
+        if ($doc_id) {
+
+            $doc = $this->Documents->find('all', [
+                'conditions' => [
+                    'Documents.id' => $doc_id
+                ]
+            ])->first();
+
+            if($doc['deleted'] == false) {
+                if ($doc['published'] == true) {
+                    $has_rights = true;
+                } else {
+                    $user = $this->Auth->user();
+
+                    if ($user) {
+                        
+                        switch ($user['role']) {
+                            case 'creator':
+                                
+                                if ($doc['user_id'] == $user['id']) {
+                                    $has_rights = true;
+                                }
+
+                                break;
+                            
+                            case 'admin':
+                                $has_rights = true;
+                                break;
+                        }
+
+                    }
+                    
+                }
+
+            }
+
+        }
+        return $has_rights;
+    }
+
+    public function handleViewInteraction($doc_id)
+    {
+        $user = $this->Auth->user();
+        $visitor_id = $this->Documents->Users->find('all', [
+            'conditions' => [
+                'Users.role' => 'visitor'
+            ]
+        ])->first()['id'];
+
+        if ($user) {
+            $user_id = $this->Auth->user()['id'];
+        } else {
+            $user_id = $visitor_id;
+        }
+        
+        $interactive_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+            'conditions' => [
+                'InteractiveMethods.method' => 'view'
+            ]
+        ])->first()['id'];
+
+        $interaction = $this->Documents->Interactions->find('all', [
+            'conditions' => [
+                'Interactions.document_id' => $doc_id,
+                'Interactions.user_id' => $user_id,
+                'Interactions.interactiveMethod_id' => $interactive_method_id
+            ]
+        ])->first();
+
+        //if (!$interaction || $user_id == $visitor_id) {
+            $new_interaction = $this->Documents->Interactions->newEntity([
+                'document_id' => $doc_id,
+                'user_id' => $user_id,
+                'interactiveMethod_id' => $interactive_method_id
+            ]);
+            $this->Documents->Interactions->save($new_interaction);
+        //}
     }
 }
