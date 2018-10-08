@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Document[]|\Cake\Collection\CollectionInterface $documents
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Document'), ['action' => 'add']) ?></li>
@@ -15,8 +15,8 @@
         <li><?= $this->Html->link(__('List Interactions'), ['controller' => 'Interactions', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Interaction'), ['controller' => 'Interactions', 'action' => 'add']) ?></li>
     </ul>
-</nav>
-<div class="documents index large-9 medium-8 columns content">
+</nav> -->
+<div class="documents index large-12 medium-8 columns content">
     <h3><?= __('Documents') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

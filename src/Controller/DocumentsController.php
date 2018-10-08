@@ -102,9 +102,11 @@ class DocumentsController extends AppController
 
             $view_count = $view_query->count();
 
+            $has_rights = $this->hasRights($id);
+
             $this->handleViewInteraction($id);
 
-            $this->set(compact('document', 'view_count', 'view_query'));
+            $this->set(compact('document', 'view_count', 'view_query', 'has_rights'));
         } else {
             $this->Flash->error(__('You do not have the right to view this document.'));
             return $this->redirect($this->referer());
@@ -160,37 +162,45 @@ class DocumentsController extends AppController
     public function edit($id = null)
     {
         if ($this->hasRights($id)) {
-            $document = $this->Documents->get($id, [
-                'contain' => []
-            ]);
-            if ($this->request->is(['patch', 'post', 'put'])) {
-                $document = $this->Documents->patchEntity($document, $this->request->getData());
-                if ($this->Documents->save($document)) {
-                    $text = $this->request->getData()['content'];
+            $document = $this->Documents->find('all', [
+                'contain' => [],
+                'conditions' => [
+                    'Documents.id' => $id
+                ]
+            ])->first();
+            if ($document) {
+                if ($this->request->is(['patch', 'post', 'put'])) {
+                    $document = $this->Documents->patchEntity($document, $this->request->getData());
+                    if ($this->Documents->save($document)) {
+                        $text = $this->request->getData()['content'];
 
-                    // TEMP
-                    $textTable = TableRegistry::get('TextDocuments');
-                    $textDoc = $textTable->find('all', [
+                        // TEMP
+                        $textTable = TableRegistry::get('TextDocuments');
+                        $textDoc = $textTable->find('all', [
+                            'conditions' => [
+                                'document_id' => $document['id']
+                            ]
+                        ])->first();
+                        debug($textDoc);
+                        $textDoc['text'] = $text;
+                        $textTable->save($textDoc);
+
+                        $this->Flash->success(__('The document has been saved.'));
+
+                        return $this->redirect(['action' => 'myWork']);
+                    }
+                    $this->Flash->error(__('The document could not be saved. Please, try again.'));
+                }
+                $textDocument = $this->Documents->TextDocuments->find('all', [
                         'conditions' => [
                             'document_id' => $document['id']
                         ]
                     ])->first();
-                    debug($textDoc);
-                    $textDoc['text'] = $text;
-                    $textTable->save($textDoc);
-
-                    $this->Flash->success(__('The document has been saved.'));
-
-                    return $this->redirect(['action' => 'myWork']);
-                }
-                $this->Flash->error(__('The document could not be saved. Please, try again.'));
+                $this->set(compact('document', 'textDocument'));
+            } else {
+                $this->Flash->error(__('No such document exists.'));
+                return $this->redirect($this->referer());
             }
-            $textDocument = $this->Documents->TextDocuments->find('all', [
-                    'conditions' => [
-                        'document_id' => $document['id']
-                    ]
-                ])->first();
-            $this->set(compact('document', 'textDocument'));
         } else {
             $this->Flash->error(__('You do not have the right to edit this document.'));
             return $this->redirect($this->referer());
@@ -208,15 +218,26 @@ class DocumentsController extends AppController
     {
         if ($this->hasRights($id)) {
             $this->request->allowMethod(['post', 'delete']);
-            $document = $this->Documents->get($id);
-            $document['deleted'] = 1;
-            if ($this->Documents->save($document)) {
-                $this->Flash->success(__('The document has been deleted.'));
-            } else {
-                $this->Flash->error(__('The document could not be deleted. Please, try again.'));
-            }
+            $document = $this->Documents->find('all', [
+                'conditions' => [
+                    'Documents.id' => $id
+                ]
+            ])->first();
+            if ($document) {
+                $document['deleted'] = 1;
+                if ($this->Documents->save($document)) {
+                    $this->Flash->success(__('The document has been deleted.'));
+                } else {
+                    $this->Flash->error(__('The document could not be deleted. Please, try again.'));
+                }
 
-            return $this->redirect($this->referer());
+                return $this->redirect($this->referer());
+            } else {
+                $this->Flash->error(__('No such document exists.'));
+                return $this->redirect($this->referer());
+            }
+            
+            
         } else {
             $this->Flash->error(__('You do not have the right to delete this document.'));
             return $this->redirect($this->referer());

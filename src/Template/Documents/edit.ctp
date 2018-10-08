@@ -14,13 +14,7 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $document->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Documents'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Document Types'), ['controller' => 'DocumentTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Document Type'), ['controller' => 'DocumentTypes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Interactions'), ['controller' => 'Interactions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Interaction'), ['controller' => 'Interactions', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List my documents'), ['action' => 'myWork']) ?></li>
     </ul>
 </nav>
 <div class="documents form large-9 medium-8 columns content">

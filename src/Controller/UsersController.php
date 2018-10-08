@@ -21,14 +21,14 @@ class UsersController extends AppController
         if ($user) {
            switch ($user['role']) {
             case 'creator':
-                $this->Auth->allow(['logout']);
+                $this->Auth->allow(['logout', 'view']);
                 break;
             case 'admin':
-                $this->Auth->allow(['logout']);
+                $this->Auth->allow(['logout', 'view']);
                 break;
             }
         } else {
-            $this->Auth->allow(['login', 'add']);
+            $this->Auth->allow(['login', 'view', 'add']);
         }
     }
 
@@ -54,10 +54,18 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Documents', 'Interactions']
+            'contain' => [
+                'Documents' => [
+                    'DocumentTypes' => [
+
+                    ]
+                ]
+            ]
         ]);
 
-        $this->set('user', $user);
+        $has_rights = $this->hasRights($id);
+
+        $this->set(compact('user', 'has_rights'));
     }
 
     /**
@@ -143,5 +151,22 @@ class UsersController extends AppController
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
+    }
+
+    // we should have a unique place where this is
+    public function hasRights($user_id=null)
+    {
+        $has_rights = false;
+        if ($user_id) {
+            $user = $this->Auth->user();
+            if ($user) {
+                if ($user['role'] == 'admin') {
+                    $has_rights = true;
+                } elseif ($user['id'] == $user_id) {
+                    $has_rights = true;
+                }
+            }
+        }
+        return $has_rights;
     }
 }
