@@ -57,9 +57,8 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [
                 'Documents' => [
-                    'DocumentTypes' => [
-
-                    ]
+                    'DocumentTypes',
+                    'Files'
                 ]
             ]
         ]);

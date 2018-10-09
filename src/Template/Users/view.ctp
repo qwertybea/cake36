@@ -19,7 +19,7 @@
 </nav> -->
 <div class="columns"> </div>
 <div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
+    <h3><?= h($user->username) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Username') ?></th>
@@ -44,53 +44,83 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Type') ?></th>
-                <th scope="col"><?= __('User') ?></th>
+                <!-- <th scope="col"><?= __('User') ?></th> -->
                 <th scope="col"><?= __('Name') ?></th>
                 <th scope="col"><?= __('Description') ?></th>
-                <th scope="col"><?= __('Other Details') ?></th>
+                <!-- <th scope="col"><?= __('Other Details') ?></th> -->
                 <th scope="col"><?= __('Document Cover') ?></th>
                 <?php echo ($has_rights) ? '<th scope="col">Published</th>' : ''; ?>
                 <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
+                <!-- <th scope="col"><?= __('Modified') ?></th> -->
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php 
             if ($has_rights) {
-                foreach ($user->documents as $documents): 
+                foreach ($user->documents as $document): 
             ?>
                 <tr>
-                    <td><?= h($documents->document_type->type) ?></td>
-                    <td><?= h($user->username) ?></td>
-                    <td><?= h($documents->name) ?></td>
-                    <td><?= h($documents->description) ?></td>
-                    <td><?= h($documents->other_details) ?></td>
-                    <td><?= h($documents->document_cover) ?></td>
-                    <td><?= $documents->published ? __('Yes') : __('No'); ?></td>
-                    <td><?= h($documents->created) ?></td>
-                    <td><?= h($documents->modified) ?></td>
+                    <td><?= h($document->document_type->type) ?></td>
+                    <!-- <td><?= h($user->username) ?></td> -->
+                    <td><?= h($document->name) ?></td>
+                    <td><?= h($document->description) ?></td>
+                    <!-- <td><?= h($document->other_details) ?></td> -->
+
+                    <td>
+                        <?php
+                        if ($document->file->status) {
+                            echo $this->Html->image($document->file->path . $document->file->name, [
+                                "alt" => $document->file->name,
+                                "width" => "220px",
+                                "height" => "150px",
+                                'url' => ['controller' => 'Documents', 'action' => 'view', $document->id]
+                            ]);
+                        } else {
+                            echo 'No cover';
+                        }
+                        ?>
+                    </td>
+
+                    <td><?= $document->published ? __('Yes') : __('No'); ?></td>
+                    <td><?= h($document->created) ?></td>
+                    <!-- <td><?= h($document->modified) ?></td> -->
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller' => 'Documents', 'action' => 'view', $documents->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['controller' => 'Documents', 'action' => 'edit', $documents->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Documents', 'action' => 'delete', $documents->id], ['confirm' => __('Are you sure you want to delete # {0}?', $documents->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['controller' => 'Documents', 'action' => 'view', $document->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['controller' => 'Documents', 'action' => 'edit', $document->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Documents', 'action' => 'delete', $document->id], ['confirm' => __('Are you sure you want to delete # {0}?', $document->id)]) ?>
                     </td>
                 </tr>
             <?php
                 endforeach;
             } else {
-                foreach ($user->documents as $documents): 
-                    if ($documents->published) { 
+                foreach ($user->documents as $document): 
+                    if ($document->published) { 
                 ?>
                         <tr>
-                            <td><?= h($documents->document_type->type) ?></td>
-                            <td><?= h($user->username) ?></td>
-                            <td><?= h($documents->name) ?></td>
-                            <td><?= h($documents->description) ?></td>
-                            <td><?= h($documents->other_details) ?></td>
-                            <td><?= h($documents->document_cover) ?></td>
-                            <td><?= h($documents->created) ?></td>
-                            <td><?= h($documents->modified) ?></td>
+                            <td><?= h($document->document_type->type) ?></td>
+                            <!-- <td><?= h($user->username) ?></td> -->
+                            <td><?= h($document->name) ?></td>
+                            <td><?= h($document->description) ?></td>
+                            <!-- <td><?= h($document->other_details) ?></td> -->
+
+                            <td>
+                                <?php
+                                if ($document->file->status) {
+                                    echo $this->Html->image($document->file->path . $document->file->name, [
+                                        "alt" => $document->file->name,
+                                        "width" => "220px",
+                                        "height" => "150px",
+                                        'url' => ['controller' => 'Documents', 'action' => 'view', $document->id]
+                                    ]);
+                                } else {
+                                    echo 'No cover';
+                                }
+                                ?>
+                            </td>
+
+                            <td><?= h($document->created) ?></td>
+                            <!-- <td><?= h($document->modified) ?></td> -->
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Documents', 'action' => 'view', $documents->id]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Documents', 'action' => 'view', $document->id]) ?>
                             </td>
                         </tr>
             <?php

@@ -70,9 +70,11 @@
         <h2>Content</h2>
         <?php 
         $text = $document['text_documents'][0]['text'];
+        echo '<p>';
         foreach(preg_split("/((\r?\n)|(\r\n?))/", $text) as $line){
-            echo '<p>'.$line.'</p>';
+            echo $line.'<br>';
         } 
+        echo '</p>';
         ?>
         
     </div>

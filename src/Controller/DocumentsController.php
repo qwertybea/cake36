@@ -93,12 +93,6 @@ class DocumentsController extends AppController
                 ]
             ])->first()['id'];
 
-            $favorite_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
-                'conditions' => [
-                    'InteractiveMethods.method' => 'favorite'
-                ]
-            ])->first()['id'];
-
             $view_query = $this->Documents->Interactions->find('all', [
                 'conditions' => [
                     'Interactions.document_id' => $id,
@@ -107,6 +101,12 @@ class DocumentsController extends AppController
             ]);
 
             if ($this->Auth->user()) {
+                $favorite_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+                    'conditions' => [
+                        'InteractiveMethods.method' => 'favorite'
+                    ]
+                ])->first()['id'];
+
                 $favorite_query = $this->Documents->Interactions->find('all', [
                     'conditions' => [
                         'Interactions.document_id' => $id,

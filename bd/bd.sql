@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS `documents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `documents` (`type_id`, `user_id`, `document_cover`, `name`, `published`) VALUES
-('1', '3', '2', 'Frogs', '1');
+('1', '3', '2', 'Frogs', '1'),
+('1', '4', '3', 'Trees', '1');
 
 -- --------------------------------------------------------
 
@@ -48,7 +49,8 @@ CREATE TABLE `files` (
 -- contains dont work well if there is a foreign key constant at null
 INSERT INTO `files` (`name`, `path`, `status`) VALUES
 ('', '', '0'),
-('frog.jpg', 'Files/', '1');
+('frog.jpg', 'Files/', '1'),
+('trees.jpg', 'Files/', '1');
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,24 @@ The body plan of an adult frog is generally characterized by a stout body, protr
 
 Frogs typically lay their eggs in water. The eggs hatch into aquatic larvae called tadpoles that have tails and internal gills. They have highly specialized rasping mouth parts suitable for herbivorous, omnivorous or planktivorous diets. The life cycle is completed when they metamorphose into adults. A few species deposit eggs on land or bypass the tadpole stage. Adult frogs generally have a carnivorous diet consisting of small invertebrates, but omnivorous species exist and a few feed on fruit. Frogs are extremely efficient at converting what they eat into body mass. They are an important food source for predators and part of the food web dynamics of many of the world's ecosystems. The skin is semi-permeable, making them susceptible to dehydration, so they either live in moist places or have special adaptations to deal with dry habitats. Frogs produce a wide range of vocalizations, particularly in their breeding season, and exhibit many different kinds of complex behaviours to attract mates, to fend off predators and to generally survive.
 
-Frogs are valued as food by humans and also have many cultural roles in literature, symbolism and religion. Frog populations have declined significantly since the 1950s. More than one third of species are considered to be threatened with extinction and over 120 are believed to have become extinct since the 1980s.[1] The number of malformations among frogs is on the rise and an emerging fungal disease, chytridiomycosis, has spread around the world. Conservation biologists are working to understand the causes of these problems and to resolve them. ");
+Frogs are valued as food by humans and also have many cultural roles in literature, symbolism and religion. Frog populations have declined significantly since the 1950s. More than one third of species are considered to be threatened with extinction and over 120 are believed to have become extinct since the 1980s.[1] The number of malformations among frogs is on the rise and an emerging fungal disease, chytridiomycosis, has spread around the world. Conservation biologists are working to understand the causes of these problems and to resolve them. "),
+('2', 'I think that I shall never see
+A poem lovely as a tree.
+
+A tree whose hungry mouth is prest
+Against the earth’s sweet flowing breast;
+
+A tree that looks at God all day,
+And lifts her leafy arms to pray;
+
+A tree that may in Summer wear
+A nest of robins in her hair;
+
+Upon whose bosom snow has lain;
+Who intimately lives with rain.
+
+Poems are made by fools like me,
+But only God can make a tree.');
 
 -- --------------------------------------------------------
 
@@ -122,6 +141,14 @@ CREATE TABLE IF NOT EXISTS `interactions` (
   KEY `interactiveMethod_id` (`interactiveMethod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `interactions` (`document_id`, `user_id`, `interactiveMethod_id`) VALUES
+('2', '1', '1'),
+('2', '1', '1'),
+('2', '1', '1'),
+('2', '1', '1'),
+('2', '1', '1'),
+('2', '1', '1');
+
 -- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `users`;
@@ -137,10 +164,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- Les mot de passes devraient être 123
 INSERT INTO `users` (`role`, `username`, `email`, `password`, `verified`) VALUES
 ('visitor', '', '', '', 0),
 ('admin', 'Admin', 'admin@gmail.com', '$2y$10$ONneUhzLKfpWoiKMeFi0au7/wxcqV/6CyTsAzCAWDF.XkdWqGMkRm', 1),
-('creator', 'justin', 'justin@gmail.com', '$2y$10$ONneUhzLKfpWoiKMeFi0au7/wxcqV/6CyTsAzCAWDF.XkdWqGMkRm', 1);
+('creator', 'wikipedia', 'wiki@gmail.com', '$2y$10$ONneUhzLKfpWoiKMeFi0au7/wxcqV/6CyTsAzCAWDF.XkdWqGMkRm', 1),
+('creator', 'Joyce_Kilmer', 'JK@gmail.com', '$2y$10$ONneUhzLKfpWoiKMeFi0au7/wxcqV/6CyTsAzCAWDF.XkdWqGMkRm', 1);
 
 -- --------------------------------------------------------
 
