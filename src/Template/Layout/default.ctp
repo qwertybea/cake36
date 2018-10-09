@@ -59,6 +59,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                    echo '<li>'.$this->Html->link('sign up', array('controller' => 'users', 'action' => 'add')).'</li>';
                 }
                 ?>
+                <li>
+                    <?= $this->Html->link(__('About'), ['controller' => 'Pages','action' => 'about'], ['escape' => false]) ?>
+                </li>
             </ul>
         </div>
     </nav>

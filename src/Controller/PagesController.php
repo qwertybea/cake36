@@ -35,7 +35,7 @@ class PagesController extends AppController
     {
         parent::beforeFilter($event);
         
-        $this->Auth->allow(['myhome']);
+        $this->Auth->allow(['myhome', 'about']);
     }
 
     /**
@@ -111,5 +111,10 @@ class PagesController extends AppController
         //debug($popular_docs_list);
 
         $this->set(compact('new_docs', 'popular_docs'));
+    }
+
+    public function about()
+    {
+        
     }
 }
