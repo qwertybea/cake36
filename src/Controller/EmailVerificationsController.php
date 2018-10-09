@@ -8,6 +8,11 @@ use Cake\ORM\TableRegistry;
 
 class EmailVerificationsController extends AppController
 {
+    public function initialize()
+    { 
+        parent::initialize();
+        // $this->setLoc();
+    }
 
     public function beforeFilter(Event $event)
     {

@@ -15,6 +15,11 @@ use Cake\ORM\TableRegistry;
  */
 class DocumentsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        // $this->setLoc();
+    }
 
     public function beforeFilter(Event $event)
     {

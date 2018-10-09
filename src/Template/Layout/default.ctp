@@ -65,6 +65,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <li>
                     <?= $this->Html->link(__('About'), ['controller' => 'Pages','action' => 'about'], ['escape' => false]) ?>
                 </li>
+
+                <li>
+                    <?= $this->Html->link('Français', ['controller' => 'Pages','action' => 'changeLang', 'fr_CA'], ['escape' => false]) ?>
+                </li>
+                <li>
+                    <?= $this->Html->link('English', ['controller' => 'Pages','action' => 'changeLang', 'en_US'], ['escape' => false]) ?>
+                </li>
+                <li>
+                    <?= $this->Html->link('中文', ['controller' => 'Pages','action' => 'changeLang', 'zh_CN'], ['escape' => false]) ?>
+                </li>
+
             </ul>
         </div>
     </nav>

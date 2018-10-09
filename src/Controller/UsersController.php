@@ -14,6 +14,11 @@ use Cake\Utility\Text;
  */
 class UsersController extends AppController
 {
+    public function initialize()
+    { 
+        parent::initialize();
+        // $this->setLoc();
+    }
 
     public function beforeFilter(Event $event)
     {

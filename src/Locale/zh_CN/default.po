@@ -1,0 +1,578 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2018-10-09 18:44+0000\n"
+"PO-Revision-Date: 2018-10-09 15:23-0400\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
+"Last-Translator: \n"
+"Language: zh_CN\n"
+
+#: Controller/AppController.php:139
+msgid "File has been uploaded and inserted successfully."
+msgstr "文件已成功上传和插入。"
+
+#: Controller/AppController.php:141
+msgid "Unable to upload file, please try again."
+msgstr "无法上传文件，请重试。"
+
+#: Controller/AppController.php:144
+msgid "Unable to save file, please try again."
+msgstr "无法保存文件，请重试。"
+
+#: Controller/AppController.php:147
+msgid "Please choose a file to upload."
+msgstr "请选择要上传的文件。"
+
+#: Controller/AppController.php:158
+msgid "The file has been deleted."
+msgstr "该文件已被删除。"
+
+#: Controller/AppController.php:160
+msgid "The file could not be deleted. Please, try again."
+msgstr "该文件无法删除。请再试一次。"
+
+#: Controller/AppController.php:183
+msgid "localhost{0}EmailVerifications/verification?uid={1}&code={2}"
+msgstr "localhost{0}EmailVerifications/verification?uid={1}&code={2}"
+
+#: Controller/AppController.php:185
+msgid "<a href=\"{0}\">Verify my email</a>"
+msgstr "<a href=\"{0}\">验证我的电子邮件</a>"
+
+#: Controller/AppController.php:187
+msgid ""
+"Welcome to Story city in order to get access to all our functionalities "
+"please verify your email by clicking the link bellow. <br><br>{0}"
+msgstr "欢迎来到Story city，以便访问我们的所有功能，请点击下面的链接验证您的电子邮件。 <br> <br> {0}"
+
+#: Controller/AppController.php:193
+msgid "You have been sent an email to verify your account."
+msgstr "您收到了一封确认帐户的电子邮件。"
+
+#: Controller/AppController.php:196
+msgid "You must be logged in to send a verification email."
+msgstr "您必须先登录才能发送验证邮件。"
+
+#: Controller/DocumentsController.php:132
+msgid "You do not have the right to view this document."
+msgstr "您无权查看此文档。"
+
+#: Controller/DocumentsController.php:164;230
+msgid "The document has been saved."
+msgstr "该文件已保存。"
+
+#: Controller/DocumentsController.php:179;234
+msgid "The document could not be saved. Please, try again."
+msgstr "无法保存该文档。请再试一次。"
+
+#: Controller/DocumentsController.php:185;364
+msgid "You're account is not verified."
+msgstr "您的帐户未经过验证。"
+
+#: Controller/DocumentsController.php:243;278
+msgid "No such document exists."
+msgstr "没有这样的文件。"
+
+#: Controller/DocumentsController.php:247
+msgid "You do not have the right to edit this document."
+msgstr "您无权编辑此文档。"
+
+#: Controller/DocumentsController.php:271
+msgid "The document has been deleted."
+msgstr "该文件已被删除。"
+
+#: Controller/DocumentsController.php:273
+msgid "The document could not be deleted. Please, try again."
+msgstr "该文件无法删除。请再试一次。"
+
+#: Controller/DocumentsController.php:284
+msgid "You do not have the right to delete this document."
+msgstr "您无权删除此文档。"
+
+#: Controller/DocumentsController.php:486
+msgid "Login to favorite documents."
+msgstr "登录收藏的文件。"
+
+#: Controller/EmailVerificationsController.php:62
+msgid "Your account has been verified."
+msgstr "您的帐户已经过验证。"
+
+#: Controller/EmailVerificationsController.php:64
+msgid "The account has failed to be verified."
+msgstr "该帐户未能通过验证。"
+
+#: Controller/EmailVerificationsController.php:67
+msgid "Wrong verification information."
+msgstr "错误的验证信息。"
+
+#: Controller/TextDocumentsController.php:74;98
+msgid "The text document has been saved."
+msgstr "文本文档已保存。"
+
+#: Controller/TextDocumentsController.php:78;102
+msgid "The text document could not be saved. Please, try again."
+msgstr "无法保存文本文档。请再试一次。"
+
+#: Controller/TextDocumentsController.php:119
+msgid "The text document has been deleted."
+msgstr "文本文档已被删除。"
+
+#: Controller/TextDocumentsController.php:121
+msgid "The text document could not be deleted. Please, try again."
+msgstr "无法删除文本文档。请再试一次。"
+
+#: Controller/UsersController.php:84;121
+msgid "The user has been saved."
+msgstr "用户已保存。"
+
+#: Controller/UsersController.php:100;125
+msgid "The user could not be saved. Please, try again."
+msgstr "无法保存用户。请再试一次。"
+
+#: Controller/UsersController.php:142
+msgid "The user has been deleted."
+msgstr "用户已被删除。"
+
+#: Controller/UsersController.php:144
+msgid "The user could not be deleted. Please, try again."
+msgstr "无法删除用户。请再试一次。"
+
+#: Controller/UsersController.php:158
+#: Template/EmailVerifications/verify_query.ctp:10
+msgid ""
+"Your account has not been verified yet. You will not be able to create new "
+"content."
+msgstr "您的帐户尚未经过验证。您将无法创建新内容。"
+
+#: Controller/UsersController.php:164
+msgid "Invalid username or password, try again"
+msgstr "用户名或密码无效，请重试"
+
+#: Template/Documents/add.ctp:9 Template/Documents/edit.ctp:10
+#: Template/Documents/index.ctp:9;34 Template/Documents/my_favorites.ctp:15
+#: Template/Documents/my_work.ctp:6;27 Template/Documents/view.ctp:10
+#: Template/Documents/view_all_documents.ctp:9;32
+#: Template/TextDocuments/add.ctp:9 Template/TextDocuments/edit.ctp:9
+#: Template/TextDocuments/index.ctp:9;19 Template/TextDocuments/view.ctp:9
+#: Template/Users/add.ctp:9 Template/Users/edit.ctp:9
+#: Template/Users/index.ctp:9;29 Template/Users/view.ctp:9;55
+msgid "Actions"
+msgstr "操作"
+
+#: Template/Documents/add.ctp:10 Template/Documents/view.ctp:13
+#: Template/Users/add.ctp:11 Template/Users/edit.ctp:17
+#: Template/Users/index.ctp:11 Template/Users/view.ctp:14
+msgid "List Documents"
+msgstr "列出文件"
+
+#: Template/Documents/add.ctp:11 Template/Documents/index.ctp:11
+#: Template/Documents/view.ctp:15 Template/Documents/view_all_documents.ctp:11
+msgid "List Document Types"
+msgstr "列出文档类型"
+
+#: Template/Documents/add.ctp:12 Template/Documents/index.ctp:12
+#: Template/Documents/view.ctp:16 Template/Documents/view_all_documents.ctp:12
+msgid "New Document Type"
+msgstr "新文档类型"
+
+#: Template/Documents/add.ctp:13 Template/Documents/index.ctp:13
+#: Template/Documents/view.ctp:17 Template/Documents/view_all_documents.ctp:13
+#: Template/Users/add.ctp:10 Template/Users/edit.ctp:16
+#: Template/Users/view.ctp:12
+msgid "List Users"
+msgstr "列出用户"
+
+#: Template/Documents/add.ctp:14 Template/Documents/index.ctp:14
+#: Template/Documents/view.ctp:18 Template/Documents/view_all_documents.ctp:14
+#: Template/Users/index.ctp:10 Template/Users/view.ctp:13
+msgid "New User"
+msgstr "新用户"
+
+#: Template/Documents/add.ctp:15 Template/Documents/index.ctp:15
+#: Template/Documents/view.ctp:19 Template/Documents/view_all_documents.ctp:15
+#: Template/Users/add.ctp:13 Template/Users/edit.ctp:19
+#: Template/Users/index.ctp:13 Template/Users/view.ctp:16
+msgid "List Interactions"
+msgstr "列出相互作用"
+
+#: Template/Documents/add.ctp:16 Template/Documents/index.ctp:16
+#: Template/Documents/view.ctp:20 Template/Documents/view_all_documents.ctp:16
+#: Template/Users/add.ctp:14 Template/Users/edit.ctp:20
+#: Template/Users/index.ctp:14 Template/Users/view.ctp:17
+msgid "New Interaction"
+msgstr "新的互动"
+
+#: Template/Documents/add.ctp:22
+msgid "Add Document"
+msgstr "添加文档"
+
+#: Template/Documents/add.ctp:34 Template/Documents/edit.ctp:41
+#: Template/EmailVerifications/verify_query.ctp:18
+#: Template/TextDocuments/add.ctp:21 Template/TextDocuments/edit.ctp:27
+#: Template/Users/add.ctp:28 Template/Users/edit.ctp:34
+msgid "Submit"
+msgstr "提交"
+
+#: Template/Documents/edit.ctp:12 Template/Documents/my_work.ctp:59
+#: Template/Documents/view_all_documents.ctp:62
+#: Template/TextDocuments/edit.ctp:11 Template/TextDocuments/index.ctp:29
+#: Template/Users/edit.ctp:11 Template/Users/index.ctp:45
+#: Template/Users/view.ctp:89
+msgid "Delete"
+msgstr "删除"
+
+#: Template/Documents/edit.ctp:14 Template/Documents/my_work.ctp:59
+#: Template/Documents/view.ctp:12 Template/Documents/view_all_documents.ctp:62
+#: Template/TextDocuments/edit.ctp:13 Template/TextDocuments/index.ctp:29
+#: Template/TextDocuments/view.ctp:11 Template/Users/edit.ctp:13
+#: Template/Users/index.ctp:45 Template/Users/view.ctp:11;89
+msgid "Are you sure you want to delete # {0}?"
+msgstr "您确定要删除 # {0}吗?"
+
+#: Template/Documents/edit.ctp:17
+msgid "List my documents"
+msgstr "列出我的文件"
+
+#: Template/Documents/edit.ctp:23 Template/Documents/view.ctp:11
+msgid "Edit Document"
+msgstr "编辑文档"
+
+#: Template/Documents/index.ctp:10 Template/Documents/view.ctp:14
+#: Template/Documents/view_all_documents.ctp:10 Template/Users/add.ctp:12
+#: Template/Users/edit.ctp:18 Template/Users/index.ctp:12
+#: Template/Users/view.ctp:15
+msgid "New Document"
+msgstr "新文件"
+
+#: Template/Documents/index.ctp:20 Template/Documents/my_favorites.ctp:4
+#: Template/Documents/my_work.ctp:16
+#: Template/Documents/view_all_documents.ctp:20
+msgid "Documents"
+msgstr "文件"
+
+#: Template/Documents/index.ctp:56 Template/Documents/my_favorites.ctp:36
+#: Template/Documents/my_work.ctp:50
+#: Template/Documents/view_all_documents.ctp:53 Template/Users/view.ctp:78;115
+msgid "No cover"
+msgstr "无掩饰"
+
+#: Template/Documents/index.ctp:66 Template/Documents/my_favorites.ctp:42
+#: Template/Documents/my_work.ctp:57
+#: Template/Documents/view_all_documents.ctp:60
+#: Template/TextDocuments/index.ctp:27 Template/Users/index.ctp:43
+#: Template/Users/view.ctp:87;123
+msgid "View"
+msgstr "视图"
+
+#: Template/Documents/index.ctp:74 Template/Documents/my_favorites.ctp:50
+#: Template/Documents/my_work.ctp:67
+#: Template/Documents/view_all_documents.ctp:70
+#: Template/TextDocuments/index.ctp:37 Template/Users/index.ctp:53
+msgid "first"
+msgstr "第一"
+
+#: Template/Documents/index.ctp:75 Template/Documents/my_favorites.ctp:51
+#: Template/Documents/my_work.ctp:68
+#: Template/Documents/view_all_documents.ctp:71
+#: Template/TextDocuments/index.ctp:38 Template/Users/index.ctp:54
+msgid "previous"
+msgstr "以前"
+
+#: Template/Documents/index.ctp:77 Template/Documents/my_favorites.ctp:53
+#: Template/Documents/my_work.ctp:70
+#: Template/Documents/view_all_documents.ctp:73
+#: Template/TextDocuments/index.ctp:40 Template/Users/index.ctp:56
+msgid "next"
+msgstr "下一个"
+
+#: Template/Documents/index.ctp:78 Template/Documents/my_favorites.ctp:54
+#: Template/Documents/my_work.ctp:71
+#: Template/Documents/view_all_documents.ctp:74
+#: Template/TextDocuments/index.ctp:41 Template/Users/index.ctp:57
+msgid "last"
+msgstr "持续"
+
+#: Template/Documents/index.ctp:80 Template/Documents/my_favorites.ctp:56
+#: Template/Documents/my_work.ctp:73
+#: Template/Documents/view_all_documents.ctp:76
+#: Template/TextDocuments/index.ctp:43 Template/Users/index.ctp:59
+msgid ""
+"Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} "
+"total"
+msgstr "{{pages}}的{{page}}页面，显示{{count}}个{{current}}个记录"
+
+#: Template/Documents/my_favorites.ctp:40 Template/Documents/my_work.ctp:55
+#: Template/Documents/view.ctp:66 Template/Documents/view_all_documents.ctp:57
+#: Template/Users/view.ctp:83
+msgid "Yes"
+msgstr "是"
+
+#: Template/Documents/my_favorites.ctp:40 Template/Documents/my_work.ctp:55
+#: Template/Documents/view.ctp:66 Template/Documents/view_all_documents.ctp:57
+#: Template/Users/view.ctp:83
+msgid "No"
+msgstr "没有"
+
+#: Template/Documents/my_work.ctp:10
+msgid "New {0} document"
+msgstr "新的{0}文档"
+
+#: Template/Documents/my_work.ctp:58
+#: Template/Documents/view_all_documents.ctp:61
+#: Template/TextDocuments/index.ctp:28 Template/Users/index.ctp:44
+#: Template/Users/view.ctp:88
+msgid "Edit"
+msgstr "编辑"
+
+#: Template/Documents/view.ctp:12
+msgid "Delete Document"
+msgstr "删除文件"
+
+#: Template/Documents/view.ctp:37
+msgid "Document Type"
+msgstr "文件类型"
+
+#: Template/Documents/view.ctp:41
+msgid "Author"
+msgstr "作者"
+
+#: Template/Documents/view.ctp:45 Template/Pages/about.ctp:7
+#: Template/Users/view.ctp:48
+msgid "Name"
+msgstr "名称"
+
+#: Template/Documents/view.ctp:49 Template/Users/view.ctp:49
+msgid "Description"
+msgstr "描述"
+
+#: Template/Documents/view.ctp:53 Template/Users/view.ctp:50
+msgid "Other Details"
+msgstr "其他详情"
+
+#: Template/Documents/view.ctp:57 Template/Users/view.ctp:37;53
+msgid "Created"
+msgstr "创建"
+
+#: Template/Documents/view.ctp:61 Template/Users/view.ctp:54
+msgid "Modified"
+msgstr "改性"
+
+#: Template/Documents/view.ctp:65
+msgid "Published"
+msgstr "发布时间"
+
+#: Template/Documents/view.ctp:86
+msgid "Viewed {0} times"
+msgstr "浏览次数{0}次"
+
+#: Template/Documents/view.ctp:90
+msgid "Favorite"
+msgstr "喜爱"
+
+#: Template/EmailVerifications/verify_query.ctp:13
+msgid "Send me another email"
+msgstr "发给我另一封电子邮件"
+
+#: Template/Layout/default.ctp:43
+msgid "Home"
+msgstr "家"
+
+#: Template/Layout/default.ctp:53
+msgid "Resend a verification email"
+msgstr "重新发送验证邮件"
+
+#: Template/Layout/default.ctp:55
+msgid "My favorites"
+msgstr "我最喜欢的"
+
+#: Template/Layout/default.ctp:56
+msgid "{0} {1}"
+msgstr "{0} {1}"
+
+#: Template/Layout/default.ctp:61
+msgid "Log in"
+msgstr "登录"
+
+#: Template/Layout/default.ctp:62
+msgid "sign up"
+msgstr "注册"
+
+#: Template/Layout/default.ctp:66
+msgid "About"
+msgstr "关于"
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr "错误"
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr "背部"
+
+#: Template/Pages/about.ctp:4
+msgid "About this web site"
+msgstr "关于本网站"
+
+#: Template/Pages/about.ctp:8
+msgid "Justin"
+msgstr "贾斯汀"
+
+#: Template/Pages/about.ctp:11
+msgid "Course"
+msgstr "课程"
+
+#: Template/Pages/about.ctp:12
+msgid ""
+"420-5b7 MO Applications internet.<br>Automn of 2018, Collège Montmorency."
+msgstr "420-5b7 MO应用程序互联网。<br> Automn of 2018，CollègeMontmorency。"
+
+#: Template/Pages/about.ctp:15
+msgid "Steps"
+msgstr "脚步"
+
+#: Template/Pages/about.ctp:16
+msgid ""
+"Ragarde la page d'acceuil pour voir les documents intéreessant. Allez voir "
+"tous les document. Création d'un compte pour pouvoir ajouter des document à "
+"sa liste de favoris. Activer son compte pour pouvoir ajouter des document"
+msgstr "查看主页以查看有趣的文档。 去看看所有的文件。 创建一个帐户以将文档添加到收藏夹列表。 激活他的帐户以添加文档。"
+
+#: Template/Pages/about.ctp:19
+msgid "Database diagram"
+msgstr "数据库图"
+
+#: Template/Pages/about.ctp:23
+msgid "link to database diagram"
+msgstr "链接到数据库图表"
+
+#: Template/Pages/about.ctp:27
+msgid "Github repository"
+msgstr "Github存储库"
+
+#: Template/Pages/myhome.ctp:7
+msgid ""
+"Story city is a site where you can create original content publish it for "
+"the world to enjoy."
+msgstr "故事城是一个网站，您可以在其中创建原创内容发布，供全世界欣赏。"
+
+#: Template/Pages/myhome.ctp:9
+msgid "New stories"
+msgstr "新故事"
+
+#: Template/Pages/myhome.ctp:15
+msgid ""
+"<span style=\"font-size: 1.3em\">{0}</span> <span style=\"color: grey\">by "
+"{1}</span>"
+msgstr "<span style=\"font-size: 1.3em\">{0}</span> <span style=\"color: grey\">的 {1}</span>"
+
+#: Template/Pages/myhome.ctp:20
+msgid "see all published stories"
+msgstr "看所有发表的故事"
+
+#: Template/Pages/myhome.ctp:26
+msgid "All stories"
+msgstr "所有的故事"
+
+#: Template/Pages/myhome.ctp:32
+msgid "Most viewed stories"
+msgstr "最受欢迎的故事"
+
+#: Template/Pages/myhome.ctp:39
+msgid ""
+"<span style=\"font-size: 1.3em\">{0}</span> <span style=\"color: grey\">by "
+"{1} with {2} views</span>"
+msgstr "<span style=\"font-size: 1.3em\">{0}</span><span style=\"color: grey\">的{1}{2}次观看次数</span>"
+
+#: Template/TextDocuments/add.ctp:10 Template/TextDocuments/edit.ctp:16
+#: Template/TextDocuments/view.ctp:12
+msgid "List Text Documents"
+msgstr "列出文本文档"
+
+#: Template/TextDocuments/add.ctp:16
+msgid "Add Text Document"
+msgstr "添加文本文档"
+
+#: Template/TextDocuments/edit.ctp:22 Template/TextDocuments/view.ctp:10
+msgid "Edit Text Document"
+msgstr "编辑文本文档"
+
+#: Template/TextDocuments/index.ctp:10 Template/TextDocuments/view.ctp:13
+msgid "New Text Document"
+msgstr "新文本文件"
+
+#: Template/TextDocuments/index.ctp:14
+msgid "Text Documents"
+msgstr "文本文档"
+
+#: Template/TextDocuments/view.ctp:11
+msgid "Delete Text Document"
+msgstr "删除文本文档"
+
+#: Template/TextDocuments/view.ctp:20
+msgid "Id"
+msgstr "Id"
+
+#: Template/TextDocuments/view.ctp:25
+msgid "Text"
+msgstr "文本"
+
+#: Template/Users/add.ctp:20
+msgid "Add User"
+msgstr "添加用户"
+
+#: Template/Users/edit.ctp:26 Template/Users/view.ctp:10
+msgid "Edit User"
+msgstr "编辑用户"
+
+#: Template/Users/index.ctp:18
+msgid "Users"
+msgstr "用户"
+
+#: Template/Users/login.ctp:14
+msgid "Please enter your username and password."
+msgstr "请输入您的用户名和密码。"
+
+#: Template/Users/login.ctp:18
+msgid "Login"
+msgstr "登录"
+
+#: Template/Users/view.ctp:11
+msgid "Delete User"
+msgstr "删除用户"
+
+#: Template/Users/view.ctp:25
+msgid "Username"
+msgstr "用户名"
+
+#: Template/Users/view.ctp:29
+msgid "Email"
+msgstr "电子邮件"
+
+#: Template/Users/view.ctp:33
+msgid "Role"
+msgstr "角色"
+
+#: Template/Users/view.ctp:42
+msgid "Related Documents"
+msgstr "相关文件"
+
+#: Template/Users/view.ctp:46
+msgid "Type"
+msgstr "类型"
+
+#: Template/Users/view.ctp:47
+msgid "User"
+msgstr "用户"
+
+#: Template/Users/view.ctp:51
+msgid "Document Cover"
+msgstr "文件封面"
+

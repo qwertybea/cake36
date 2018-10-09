@@ -18,6 +18,7 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
+use Cake\I18n\I18n;
 
 /**
  * Application Controller
@@ -79,10 +80,23 @@ class AppController extends Controller
              // Si pas autorisé, on renvoit sur la page précédente
             'unauthorizedRedirect' => $this->referer()
         ]);
+
+        $this->setLoc();
     }
 
     public function isAuthorized($user) {
         return false;
+    }
+
+    public function changeLang($lang = 'en_US') {
+        I18n::setLocale($lang);
+        $this->request->session()->write('Config.language', $lang);
+        return $this->redirect($this->request->referer());
+    }
+
+    public function setLoc()
+    {
+        I18n::setLocale($this->request->session()->read('Config.language'));
     }
 
     public static function array_on_key($array, $key)

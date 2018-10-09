@@ -13,6 +13,11 @@ use Cake\Event\Event;
  */
 class TextDocumentsController extends AppController
 {
+    public function initialize()
+    { 
+        parent::initialize();
+        // $this->setLoc();
+    }
 
     public function beforeFilter(Event $event)
     {

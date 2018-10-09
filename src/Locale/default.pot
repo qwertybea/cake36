@@ -1,0 +1,633 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2018-10-09 18:44+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/AppController.php:139
+msgid "File has been uploaded and inserted successfully."
+msgstr ""
+
+#: Controller/AppController.php:141
+msgid "Unable to upload file, please try again."
+msgstr ""
+
+#: Controller/AppController.php:144
+msgid "Unable to save file, please try again."
+msgstr ""
+
+#: Controller/AppController.php:147
+msgid "Please choose a file to upload."
+msgstr ""
+
+#: Controller/AppController.php:158
+msgid "The file has been deleted."
+msgstr ""
+
+#: Controller/AppController.php:160
+msgid "The file could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/AppController.php:183
+msgid "localhost{0}EmailVerifications/verification?uid={1}&code={2}"
+msgstr ""
+
+#: Controller/AppController.php:185
+msgid "<a href=\"{0}\">Verify my email</a>"
+msgstr ""
+
+#: Controller/AppController.php:187
+msgid "Welcome to Story city in order to get access to all our functionalities please verify your email by clicking the link bellow. <br><br>{0}"
+msgstr ""
+
+#: Controller/AppController.php:193
+msgid "You have been sent an email to verify your account."
+msgstr ""
+
+#: Controller/AppController.php:196
+msgid "You must be logged in to send a verification email."
+msgstr ""
+
+#: Controller/DocumentsController.php:132
+msgid "You do not have the right to view this document."
+msgstr ""
+
+#: Controller/DocumentsController.php:164;230
+msgid "The document has been saved."
+msgstr ""
+
+#: Controller/DocumentsController.php:179;234
+msgid "The document could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/DocumentsController.php:185;364
+msgid "You're account is not verified."
+msgstr ""
+
+#: Controller/DocumentsController.php:243;278
+msgid "No such document exists."
+msgstr ""
+
+#: Controller/DocumentsController.php:247
+msgid "You do not have the right to edit this document."
+msgstr ""
+
+#: Controller/DocumentsController.php:271
+msgid "The document has been deleted."
+msgstr ""
+
+#: Controller/DocumentsController.php:273
+msgid "The document could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/DocumentsController.php:284
+msgid "You do not have the right to delete this document."
+msgstr ""
+
+#: Controller/DocumentsController.php:486
+msgid "Login to favorite documents."
+msgstr ""
+
+#: Controller/EmailVerificationsController.php:62
+msgid "Your account has been verified."
+msgstr ""
+
+#: Controller/EmailVerificationsController.php:64
+msgid "The account has failed to be verified."
+msgstr ""
+
+#: Controller/EmailVerificationsController.php:67
+msgid "Wrong verification information."
+msgstr ""
+
+#: Controller/TextDocumentsController.php:74;98
+msgid "The text document has been saved."
+msgstr ""
+
+#: Controller/TextDocumentsController.php:78;102
+msgid "The text document could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/TextDocumentsController.php:119
+msgid "The text document has been deleted."
+msgstr ""
+
+#: Controller/TextDocumentsController.php:121
+msgid "The text document could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:84;121
+msgid "The user has been saved."
+msgstr ""
+
+#: Controller/UsersController.php:100;125
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:142
+msgid "The user has been deleted."
+msgstr ""
+
+#: Controller/UsersController.php:144
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:158
+#: Template/EmailVerifications/verify_query.ctp:10
+msgid "Your account has not been verified yet. You will not be able to create new content."
+msgstr ""
+
+#: Controller/UsersController.php:164
+msgid "Invalid username or password, try again"
+msgstr ""
+
+#: Template/Documents/add.ctp:9
+#: Template/Documents/edit.ctp:10
+#: Template/Documents/index.ctp:9;34
+#: Template/Documents/my_favorites.ctp:15
+#: Template/Documents/my_work.ctp:6;27
+#: Template/Documents/view.ctp:10
+#: Template/Documents/view_all_documents.ctp:9;32
+#: Template/TextDocuments/add.ctp:9
+#: Template/TextDocuments/edit.ctp:9
+#: Template/TextDocuments/index.ctp:9;19
+#: Template/TextDocuments/view.ctp:9
+#: Template/Users/add.ctp:9
+#: Template/Users/edit.ctp:9
+#: Template/Users/index.ctp:9;29
+#: Template/Users/view.ctp:9;55
+msgid "Actions"
+msgstr ""
+
+#: Template/Documents/add.ctp:10
+#: Template/Documents/view.ctp:13
+#: Template/Users/add.ctp:11
+#: Template/Users/edit.ctp:17
+#: Template/Users/index.ctp:11
+#: Template/Users/view.ctp:14
+msgid "List Documents"
+msgstr ""
+
+#: Template/Documents/add.ctp:11
+#: Template/Documents/index.ctp:11
+#: Template/Documents/view.ctp:15
+#: Template/Documents/view_all_documents.ctp:11
+msgid "List Document Types"
+msgstr ""
+
+#: Template/Documents/add.ctp:12
+#: Template/Documents/index.ctp:12
+#: Template/Documents/view.ctp:16
+#: Template/Documents/view_all_documents.ctp:12
+msgid "New Document Type"
+msgstr ""
+
+#: Template/Documents/add.ctp:13
+#: Template/Documents/index.ctp:13
+#: Template/Documents/view.ctp:17
+#: Template/Documents/view_all_documents.ctp:13
+#: Template/Users/add.ctp:10
+#: Template/Users/edit.ctp:16
+#: Template/Users/view.ctp:12
+msgid "List Users"
+msgstr ""
+
+#: Template/Documents/add.ctp:14
+#: Template/Documents/index.ctp:14
+#: Template/Documents/view.ctp:18
+#: Template/Documents/view_all_documents.ctp:14
+#: Template/Users/index.ctp:10
+#: Template/Users/view.ctp:13
+msgid "New User"
+msgstr ""
+
+#: Template/Documents/add.ctp:15
+#: Template/Documents/index.ctp:15
+#: Template/Documents/view.ctp:19
+#: Template/Documents/view_all_documents.ctp:15
+#: Template/Users/add.ctp:13
+#: Template/Users/edit.ctp:19
+#: Template/Users/index.ctp:13
+#: Template/Users/view.ctp:16
+msgid "List Interactions"
+msgstr ""
+
+#: Template/Documents/add.ctp:16
+#: Template/Documents/index.ctp:16
+#: Template/Documents/view.ctp:20
+#: Template/Documents/view_all_documents.ctp:16
+#: Template/Users/add.ctp:14
+#: Template/Users/edit.ctp:20
+#: Template/Users/index.ctp:14
+#: Template/Users/view.ctp:17
+msgid "New Interaction"
+msgstr ""
+
+#: Template/Documents/add.ctp:22
+msgid "Add Document"
+msgstr ""
+
+#: Template/Documents/add.ctp:34
+#: Template/Documents/edit.ctp:41
+#: Template/EmailVerifications/verify_query.ctp:18
+#: Template/TextDocuments/add.ctp:21
+#: Template/TextDocuments/edit.ctp:27
+#: Template/Users/add.ctp:28
+#: Template/Users/edit.ctp:34
+msgid "Submit"
+msgstr ""
+
+#: Template/Documents/edit.ctp:12
+#: Template/Documents/my_work.ctp:59
+#: Template/Documents/view_all_documents.ctp:62
+#: Template/TextDocuments/edit.ctp:11
+#: Template/TextDocuments/index.ctp:29
+#: Template/Users/edit.ctp:11
+#: Template/Users/index.ctp:45
+#: Template/Users/view.ctp:89
+msgid "Delete"
+msgstr ""
+
+#: Template/Documents/edit.ctp:14
+#: Template/Documents/my_work.ctp:59
+#: Template/Documents/view.ctp:12
+#: Template/Documents/view_all_documents.ctp:62
+#: Template/TextDocuments/edit.ctp:13
+#: Template/TextDocuments/index.ctp:29
+#: Template/TextDocuments/view.ctp:11
+#: Template/Users/edit.ctp:13
+#: Template/Users/index.ctp:45
+#: Template/Users/view.ctp:11;89
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Template/Documents/edit.ctp:17
+msgid "List my documents"
+msgstr ""
+
+#: Template/Documents/edit.ctp:23
+#: Template/Documents/view.ctp:11
+msgid "Edit Document"
+msgstr ""
+
+#: Template/Documents/index.ctp:10
+#: Template/Documents/view.ctp:14
+#: Template/Documents/view_all_documents.ctp:10
+#: Template/Users/add.ctp:12
+#: Template/Users/edit.ctp:18
+#: Template/Users/index.ctp:12
+#: Template/Users/view.ctp:15
+msgid "New Document"
+msgstr ""
+
+#: Template/Documents/index.ctp:20
+#: Template/Documents/my_favorites.ctp:4
+#: Template/Documents/my_work.ctp:16
+#: Template/Documents/view_all_documents.ctp:20
+msgid "Documents"
+msgstr ""
+
+#: Template/Documents/index.ctp:56
+#: Template/Documents/my_favorites.ctp:36
+#: Template/Documents/my_work.ctp:50
+#: Template/Documents/view_all_documents.ctp:53
+#: Template/Users/view.ctp:78;115
+msgid "No cover"
+msgstr ""
+
+#: Template/Documents/index.ctp:66
+#: Template/Documents/my_favorites.ctp:42
+#: Template/Documents/my_work.ctp:57
+#: Template/Documents/view_all_documents.ctp:60
+#: Template/TextDocuments/index.ctp:27
+#: Template/Users/index.ctp:43
+#: Template/Users/view.ctp:87;123
+msgid "View"
+msgstr ""
+
+#: Template/Documents/index.ctp:74
+#: Template/Documents/my_favorites.ctp:50
+#: Template/Documents/my_work.ctp:67
+#: Template/Documents/view_all_documents.ctp:70
+#: Template/TextDocuments/index.ctp:37
+#: Template/Users/index.ctp:53
+msgid "first"
+msgstr ""
+
+#: Template/Documents/index.ctp:75
+#: Template/Documents/my_favorites.ctp:51
+#: Template/Documents/my_work.ctp:68
+#: Template/Documents/view_all_documents.ctp:71
+#: Template/TextDocuments/index.ctp:38
+#: Template/Users/index.ctp:54
+msgid "previous"
+msgstr ""
+
+#: Template/Documents/index.ctp:77
+#: Template/Documents/my_favorites.ctp:53
+#: Template/Documents/my_work.ctp:70
+#: Template/Documents/view_all_documents.ctp:73
+#: Template/TextDocuments/index.ctp:40
+#: Template/Users/index.ctp:56
+msgid "next"
+msgstr ""
+
+#: Template/Documents/index.ctp:78
+#: Template/Documents/my_favorites.ctp:54
+#: Template/Documents/my_work.ctp:71
+#: Template/Documents/view_all_documents.ctp:74
+#: Template/TextDocuments/index.ctp:41
+#: Template/Users/index.ctp:57
+msgid "last"
+msgstr ""
+
+#: Template/Documents/index.ctp:80
+#: Template/Documents/my_favorites.ctp:56
+#: Template/Documents/my_work.ctp:73
+#: Template/Documents/view_all_documents.ctp:76
+#: Template/TextDocuments/index.ctp:43
+#: Template/Users/index.ctp:59
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+
+#: Template/Documents/my_favorites.ctp:40
+#: Template/Documents/my_work.ctp:55
+#: Template/Documents/view.ctp:66
+#: Template/Documents/view_all_documents.ctp:57
+#: Template/Users/view.ctp:83
+msgid "Yes"
+msgstr ""
+
+#: Template/Documents/my_favorites.ctp:40
+#: Template/Documents/my_work.ctp:55
+#: Template/Documents/view.ctp:66
+#: Template/Documents/view_all_documents.ctp:57
+#: Template/Users/view.ctp:83
+msgid "No"
+msgstr ""
+
+#: Template/Documents/my_work.ctp:10
+msgid "New {0} document"
+msgstr ""
+
+#: Template/Documents/my_work.ctp:58
+#: Template/Documents/view_all_documents.ctp:61
+#: Template/TextDocuments/index.ctp:28
+#: Template/Users/index.ctp:44
+#: Template/Users/view.ctp:88
+msgid "Edit"
+msgstr ""
+
+#: Template/Documents/view.ctp:12
+msgid "Delete Document"
+msgstr ""
+
+#: Template/Documents/view.ctp:37
+msgid "Document Type"
+msgstr ""
+
+#: Template/Documents/view.ctp:41
+msgid "Author"
+msgstr ""
+
+#: Template/Documents/view.ctp:45
+#: Template/Pages/about.ctp:7
+#: Template/Users/view.ctp:48
+msgid "Name"
+msgstr ""
+
+#: Template/Documents/view.ctp:49
+#: Template/Users/view.ctp:49
+msgid "Description"
+msgstr ""
+
+#: Template/Documents/view.ctp:53
+#: Template/Users/view.ctp:50
+msgid "Other Details"
+msgstr ""
+
+#: Template/Documents/view.ctp:57
+#: Template/Users/view.ctp:37;53
+msgid "Created"
+msgstr ""
+
+#: Template/Documents/view.ctp:61
+#: Template/Users/view.ctp:54
+msgid "Modified"
+msgstr ""
+
+#: Template/Documents/view.ctp:65
+msgid "Published"
+msgstr ""
+
+#: Template/Documents/view.ctp:86
+msgid "Viewed {0} times"
+msgstr ""
+
+#: Template/Documents/view.ctp:90
+msgid "Favorite"
+msgstr ""
+
+#: Template/EmailVerifications/verify_query.ctp:13
+msgid "Send me another email"
+msgstr ""
+
+#: Template/Layout/default.ctp:43
+msgid "Home"
+msgstr ""
+
+#: Template/Layout/default.ctp:53
+msgid "Resend a verification email"
+msgstr ""
+
+#: Template/Layout/default.ctp:55
+msgid "My favorites"
+msgstr ""
+
+#: Template/Layout/default.ctp:56
+msgid "{0} {1}"
+msgstr ""
+
+#: Template/Layout/default.ctp:61
+msgid "Log in"
+msgstr ""
+
+#: Template/Layout/default.ctp:62
+msgid "sign up"
+msgstr ""
+
+#: Template/Layout/default.ctp:66
+msgid "About"
+msgstr ""
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr ""
+
+#: Template/Pages/about.ctp:4
+msgid "About this web site"
+msgstr ""
+
+#: Template/Pages/about.ctp:8
+msgid "Justin"
+msgstr ""
+
+#: Template/Pages/about.ctp:11
+msgid "Course"
+msgstr ""
+
+#: Template/Pages/about.ctp:12
+msgid "420-5b7 MO Applications internet.<br>Automn of 2018, Collège Montmorency."
+msgstr ""
+
+#: Template/Pages/about.ctp:15
+msgid "Steps"
+msgstr ""
+
+#: Template/Pages/about.ctp:16
+msgid "Ragarde la page d'acceuil pour voir les documents intéreessant. Allez voir tous les document. Création d'un compte pour pouvoir ajouter des document à sa liste de favoris. Activer son compte pour pouvoir ajouter des document"
+msgstr ""
+
+#: Template/Pages/about.ctp:19
+msgid "Database diagram"
+msgstr ""
+
+#: Template/Pages/about.ctp:23
+msgid "link to database diagram"
+msgstr ""
+
+#: Template/Pages/about.ctp:27
+msgid "Github repository"
+msgstr ""
+
+#: Template/Pages/myhome.ctp:7
+msgid "Story city is a site where you can create original content publish it for the world to enjoy."
+msgstr ""
+
+#: Template/Pages/myhome.ctp:9
+msgid "New stories"
+msgstr ""
+
+#: Template/Pages/myhome.ctp:15
+msgid "<span style=\"font-size: 1.3em\">{0}</span> <span style=\"color: grey\">by {1}</span>"
+msgstr ""
+
+#: Template/Pages/myhome.ctp:20
+msgid "see all published stories"
+msgstr ""
+
+#: Template/Pages/myhome.ctp:26
+msgid "All stories"
+msgstr ""
+
+#: Template/Pages/myhome.ctp:32
+msgid "Most viewed stories"
+msgstr ""
+
+#: Template/Pages/myhome.ctp:39
+msgid "<span style=\"font-size: 1.3em\">{0}</span> <span style=\"color: grey\">by {1} with {2} views</span>"
+msgstr ""
+
+#: Template/TextDocuments/add.ctp:10
+#: Template/TextDocuments/edit.ctp:16
+#: Template/TextDocuments/view.ctp:12
+msgid "List Text Documents"
+msgstr ""
+
+#: Template/TextDocuments/add.ctp:16
+msgid "Add Text Document"
+msgstr ""
+
+#: Template/TextDocuments/edit.ctp:22
+#: Template/TextDocuments/view.ctp:10
+msgid "Edit Text Document"
+msgstr ""
+
+#: Template/TextDocuments/index.ctp:10
+#: Template/TextDocuments/view.ctp:13
+msgid "New Text Document"
+msgstr ""
+
+#: Template/TextDocuments/index.ctp:14
+msgid "Text Documents"
+msgstr ""
+
+#: Template/TextDocuments/view.ctp:11
+msgid "Delete Text Document"
+msgstr ""
+
+#: Template/TextDocuments/view.ctp:20
+msgid "Id"
+msgstr ""
+
+#: Template/TextDocuments/view.ctp:25
+msgid "Text"
+msgstr ""
+
+#: Template/Users/add.ctp:20
+msgid "Add User"
+msgstr ""
+
+#: Template/Users/edit.ctp:26
+#: Template/Users/view.ctp:10
+msgid "Edit User"
+msgstr ""
+
+#: Template/Users/index.ctp:18
+msgid "Users"
+msgstr ""
+
+#: Template/Users/login.ctp:14
+msgid "Please enter your username and password."
+msgstr ""
+
+#: Template/Users/login.ctp:18
+msgid "Login"
+msgstr ""
+
+#: Template/Users/view.ctp:11
+msgid "Delete User"
+msgstr ""
+
+#: Template/Users/view.ctp:25
+msgid "Username"
+msgstr ""
+
+#: Template/Users/view.ctp:29
+msgid "Email"
+msgstr ""
+
+#: Template/Users/view.ctp:33
+msgid "Role"
+msgstr ""
+
+#: Template/Users/view.ctp:42
+msgid "Related Documents"
+msgstr ""
+
+#: Template/Users/view.ctp:46
+msgid "Type"
+msgstr ""
+
+#: Template/Users/view.ctp:47
+msgid "User"
+msgstr ""
+
+#: Template/Users/view.ctp:51
+msgid "Document Cover"
+msgstr ""
+

@@ -30,12 +30,17 @@ use Cake\ORM\TableRegistry;
  */
 class PagesController extends AppController
 {
+    public function initialize()
+    { 
+        parent::initialize();
+        // $this->setLoc();
+    }
 
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         
-        $this->Auth->allow(['myhome', 'about']);
+        $this->Auth->allow(['myhome', 'about', 'changeLang']);
     }
 
     /**
@@ -120,5 +125,11 @@ class PagesController extends AppController
     public function about()
     {
         
+    }
+
+    public function changeLang($lang = 'en_US')
+    {
+        parent::changeLang($lang);
+        return $this->redirect($this->request->referer());
     }
 }
