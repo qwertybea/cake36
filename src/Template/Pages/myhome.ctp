@@ -3,8 +3,8 @@
 ?>
 
 <div class="row">
-	<h2>Stroy city</h2>
-    <p>Story city is a site where you can create original content such as stories and publish them for the world to enjoy.</p>
+	<h2>Story city</h2>
+    <p>Story city is a site where you can create original content publish it for the world to enjoy.</p>
     <div class="columns large-6">
         <h4>New stories</h4>
         <ul>

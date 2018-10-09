@@ -197,7 +197,7 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => 'Cake\Mailer\Transport\MailTransport',
+            'className' => 'Mail',
             /*
              * The following keys are used in SMTP transports:
              */
@@ -210,6 +210,13 @@ return [
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
+        'gmail' => [
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => 465,
+            'username' => 'story.city.justin@gmail.com',
+            'password' => 'lfyrzwgdwqlydwos',
+            'className' => 'Smtp'
+        ]
     ],
 
     /**
@@ -223,8 +230,8 @@ return [
      */
     'Email' => [
         'default' => [
-            'transport' => 'default',
-            'from' => 'you@localhost',
+            'transport' => 'gmail',
+            'from' => 'story.city.justin@gmail.com',
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],

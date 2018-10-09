@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
 
 /**
  * Application Controller
@@ -157,6 +158,43 @@ class AppController extends Controller
             $this->Flash->success(__('The file has been deleted.'));
         } else {
             $this->Flash->error(__('The file could not be deleted. Please, try again.'));
+        }
+    }
+
+    public function send_verification()
+    {
+        if ($this->Auth->user()) {
+            
+            $userTable = TableRegistry::get('Users');
+            $user = $userTable->find('all', [
+                'contain' => ['EmailVerifications'],
+                'conditions' => [
+                    'id' => $this->Auth->user()['id']
+                ]
+            ])->first();
+
+            $user_email = $user->email;
+            $subject = 'Verification email for Story City';
+
+            $uuid = $user->email_verifications[0]->code;
+
+            $webroot = $this->request->webroot;
+
+            $href = sprintf('localhost%sEmailVerifications/verification?uid=%s&code=%s', $webroot, $user->id, $uuid);
+
+            $link = sprintf('<a href="%s">Verify my email</a>', $href);
+
+            $msg = sprintf('Welcome to Story city in order to get access to all our functionalities please verify your email by clicking the link bellow. <br><br> %s', $link);
+
+            $email = new Email('default');
+            $email->emailFormat('html');
+            $email->to($user_email)->subject($subject)->send($msg);
+
+            $this->Flash->success(__('You have been sent an email to verify your account.'));
+
+        } else {
+            $this->Flash->error(__('You must be logged in to send a verification email.'));
+            return $this->redirect($this->referer());
         }
     }
 

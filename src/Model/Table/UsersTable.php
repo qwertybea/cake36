@@ -48,6 +48,9 @@ class UsersTable extends Table
         $this->hasMany('Interactions', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('EmailVerifications', [
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     /**

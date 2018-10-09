@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Utility\Text;
 
 /**
  * Users Controller
@@ -79,10 +80,21 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             $user['role'] = "creator";
+
             if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
                 $this->Auth->setUser($user);
 
-                $this->Flash->success(__('The user has been saved.'));
+                $uuid = Text::uuid();
+
+                $verification = $this->Users->EmailVerifications->newEntity([
+                    'user_id' => $user->id,
+                    'code' => $uuid
+                ]);
+
+                if ($this->Users->EmailVerifications->save($verification)) {
+                    $this->send_verification();
+                }
 
                 return $this->redirect(['controller' => 'Pages', 'action' => 'myhome']);
             }
@@ -142,6 +154,12 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
+                if ($user['verified'] == false) {
+                    $this->Flash->error(__('Your account has not been verified yet. You will not be able to create new content.'));
+                    return $this->redirect(['controller' => 'EmailVerifications', 'action' => 'verifyQuery']);
+                }
+                
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error(__('Invalid username or password, try again'));

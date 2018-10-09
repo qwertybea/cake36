@@ -27,7 +27,7 @@
             echo $this->Form->control('other_details');
 
             echo '<hr>';
-            echo $this->Form->control('document_cover_tmp', ['type' => 'file']);
+            echo $this->Form->control('document_cover_tmp', ['label' => 'Document Cover', 'type' => 'file']);
             echo $this->Form->control('remove_cover', ['type' => 'checkbox']);
             echo '<hr>';
 
