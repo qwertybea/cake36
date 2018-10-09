@@ -51,6 +51,10 @@ class DocumentsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Files', [
+            'foreignKey' => 'document_cover',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Interactions', [
             'foreignKey' => 'document_id'
         ]);

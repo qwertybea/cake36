@@ -23,6 +23,15 @@
 <?php } ?>
 <div class="documents view large-9 medium-8 columns content">
     <h3><?= h($document->name) ?></h3>
+    <?php
+    if ($document->file->status) {
+        echo $this->Html->image($document->file->path . $document->file->name, [
+            "alt" => $document->file->name,
+            "width" => "600px",
+            "height" => "600px",
+        ]);
+    }
+    ?>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Document Type') ?></th>
@@ -43,10 +52,6 @@
         <tr>
             <th scope="row"><?= __('Other Details') ?></th>
             <td><?= h($document->other_details) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Document Cover') ?></th>
-            <td><?= h($document->document_cover) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

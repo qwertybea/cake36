@@ -49,7 +49,7 @@ class DocumentsController extends AppController
     {
 
         $this->paginate = [
-            'contain' => ['DocumentTypes', 'Users'],
+            'contain' => ['DocumentTypes', 'Users', 'Files'],
             'conditions' => [
                 'Documents.published' => 1,
                 'Documents.deleted' => 0
@@ -63,7 +63,7 @@ class DocumentsController extends AppController
     public function viewAllDocuments($value='')
     {
         $this->paginate = [
-            'contain' => ['DocumentTypes', 'Users'],
+            'contain' => ['DocumentTypes', 'Users', 'Files'],
             'conditions' => [
                 'Documents.deleted' => 0
             ],
@@ -84,7 +84,7 @@ class DocumentsController extends AppController
     {
         if ($this->canView($id)) {
             $document = $this->Documents->get($id, [
-                'contain' => ['DocumentTypes', 'Users', 'Interactions', 'TextDocuments']
+                'contain' => ['DocumentTypes', 'Users', 'Interactions', 'TextDocuments', 'Files']
             ]);
 
             $view_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
@@ -150,6 +150,15 @@ class DocumentsController extends AppController
         if ($type != null) {
             $document['type_id'] = $type['id'];
             $document['user_id'] = $this->Auth->user()['id'];
+
+            $no_cover = $this->Documents->Files->find('all', [
+                'conditions' => [
+                    'Files.status' => false
+                ]
+            ])->first();
+
+            $document['document_cover'] = $no_cover['id'];
+
             if ($this->Documents->save($document)) {
                 $this->Flash->success(__('The document has been saved.'));
                 // $type_name = Inflector::camelize($type['type']);
@@ -184,7 +193,7 @@ class DocumentsController extends AppController
     {
         if ($this->hasRights($id)) {
             $document = $this->Documents->find('all', [
-                'contain' => [],
+                'contain' => ['Files'],
                 'conditions' => [
                     'Documents.id' => $id
                 ]
@@ -192,6 +201,12 @@ class DocumentsController extends AppController
             if ($document) {
                 if ($this->request->is(['patch', 'post', 'put'])) {
                     $document = $this->Documents->patchEntity($document, $this->request->getData());
+
+                    $file_data = $this->request->getData()['document_cover_tmp'];
+                    $remove_cover = $this->request->getData()['remove_cover'];
+
+                    $this->update_cover($document, $file_data, $remove_cover);
+
                     if ($this->Documents->save($document)) {
                         $text = $this->request->getData()['content'];
 
@@ -202,7 +217,8 @@ class DocumentsController extends AppController
                                 'document_id' => $document['id']
                             ]
                         ])->first();
-                        debug($textDoc);
+
+                        //debug($textDoc);
                         $textDoc['text'] = $text;
                         $textTable->save($textDoc);
 
@@ -268,7 +284,7 @@ class DocumentsController extends AppController
     public function myWork()
     {
         $this->paginate = [
-            'contain' => ['DocumentTypes', 'Users'],
+            'contain' => ['DocumentTypes', 'Users', 'Files'],
             'conditions' => [
                 'Documents.user_id' => $this->Auth->user()['id'],
                 'Documents.deleted' => 0
@@ -279,7 +295,7 @@ class DocumentsController extends AppController
         $documentTypes = $this->Documents->DocumentTypes
             ->find();
 
-        $this->set(compact('user', 'documents', 'documentTypes'));
+        $this->set(compact('documents', 'documentTypes'));
     }
 
     public function myFavorites()
@@ -309,7 +325,8 @@ class DocumentsController extends AppController
         $this->paginate = [
             'contain' => [
                 'DocumentTypes',
-                'Users'
+                'Users',
+                'Files'
             ],
             'conditions' => $conditions,
         ];

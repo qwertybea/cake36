@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -94,4 +95,69 @@ class AppController extends Controller
         }
         return $result;
     }
+
+    public function update_cover($document=null, $file=null, $remove_cover=null)
+    {
+        if ($document) {
+
+            if ($document->file->status) {
+                if ($remove_cover) {
+                    $this->delete_file($document->file->id);
+                } elseif ($file['name']) {
+                    $this->delete_file($document->file->id);
+                    $file = $this->add_file($file);
+                    $document->document_cover = $file['id'];
+                }
+            } else {
+                if ($file['name'] && !$remove_cover) {
+                    $file = $this->add_file($file);
+                    $document->document_cover = $file['id'];
+                }
+            }
+        }
+
+        return $document;
+    }
+
+    // Some special characters get changed when saved to the computer
+    // we are thus unable to retrive them afterwards
+    public function add_file($file_data)
+    {
+        $fileTable = TableRegistry::get('files');
+        $file = $fileTable->newEntity();
+
+        if (!empty($file_data['name'])) {
+            $fileName = $file_data['name'];
+            $uploadPath = 'Files/';
+            $uploadFile = $uploadPath . $fileName;
+            if (move_uploaded_file($file_data['tmp_name'], 'img/' . $uploadFile)) {
+                //$file = $fileTable->patchEntity($file, $this->request->getData());
+                $file->name = $fileName;
+                $file->path = $uploadPath;
+                if ($fileTable->save($file)) {
+                    $this->Flash->success(__('File has been uploaded and inserted successfully.'));
+                } else {
+                    $this->Flash->error(__('Unable to upload file, please try again.'));
+                }
+            } else {
+                $this->Flash->error(__('Unable to save file, please try again.'));
+            }
+        } else {
+            $this->Flash->error(__('Please choose a file to upload.'));
+        }
+        return $file;
+    }
+
+    public function delete_file($file_id=null)
+    {
+        $fileTable = TableRegistry::get('files');
+        $file = $fileTable->get($file_id);
+        $file->status = 0;
+        if ($fileTable->save($file)) {
+            $this->Flash->success(__('The file has been deleted.'));
+        } else {
+            $this->Flash->error(__('The file could not be deleted. Please, try again.'));
+        }
+    }
+
 }

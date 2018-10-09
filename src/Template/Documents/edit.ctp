@@ -18,14 +18,20 @@
     </ul>
 </nav>
 <div class="documents form large-9 medium-8 columns content">
-    <?= $this->Form->create($document) ?>
+    <?= $this->Form->create($document, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Edit Document') ?></legend>
         <?php
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('other_details');
-            echo $this->Form->control('document_cover');
+
+            echo '<hr>';
+            echo $this->Form->control('document_cover_tmp', ['type' => 'file']);
+            echo $this->Form->control('remove_cover', ['type' => 'checkbox']);
+            echo '<hr>';
+
+
             echo $this->Form->control('published');
             //echo $this->Form->control('deleted');
 

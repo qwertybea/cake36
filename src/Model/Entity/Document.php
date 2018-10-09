@@ -37,16 +37,17 @@ class Document extends Entity
     protected $_accessible = [
         'type_id' => true,
         'user_id' => true,
+        'document_cover' => true,
         'name' => true,
         'description' => true,
         'other_details' => true,
-        'document_cover' => true,
         'published' => true,
         'deleted' => true,
         'created' => true,
         'modified' => true,
         'document_type' => true,
         'user' => true,
+        'file' => true,
         'interactions' => true
     ];
 }

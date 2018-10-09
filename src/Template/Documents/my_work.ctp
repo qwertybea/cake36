@@ -1,5 +1,5 @@
 <?php 
-
+// debug($documents);
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -21,7 +21,7 @@
                 <th scope="col"><?= $this->Paginator->sort('user_id', 'Author') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('other_details') ?></th>
+                <!-- <th scope="col"><?= $this->Paginator->sort('other_details') ?></th> -->
                 <th scope="col"><?= $this->Paginator->sort('document_cover') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('published') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -29,13 +29,29 @@
         </thead>
         <tbody>
             <?php foreach ($documents as $document): ?>
+            <!-- <?php debug($document); ?> -->
             <tr>
                 <td><?= $document->has('document_type') ? $document->document_type->type : '' ?></td>
                 <td><?= $document->has('user') ? $this->Html->link($document->user->username, ['controller' => 'Users', 'action' => 'view', $document->user->id]) : '' ?></td>
                 <td><?= h($document->name) ?></td>
                 <td><?= h($document->description) ?></td>
-                <td><?= h($document->other_details) ?></td>
-                <td><?= h($document->document_cover) ?></td>
+                <!-- <td><?= h($document->other_details) ?></td> -->
+                <td>
+
+                    <?php
+                    if ($document->file->status) {
+                        echo $this->Html->image($document->file->path . $document->file->name, [
+                            "alt" => $document->file->name,
+                            "width" => "220px",
+                            "height" => "150px",
+                            'url' => ['controller' => 'Documents', 'action' => 'view', $document->id]
+                        ]);
+                    } else {
+                        echo 'No cover';
+                    }
+                    ?>
+
+                </td>
                 <td><?= $document->published ? __('Yes') : __('No'); ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $document->id]) ?>
