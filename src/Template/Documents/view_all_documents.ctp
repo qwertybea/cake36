@@ -50,7 +50,7 @@
                             'url' => ['controller' => 'Documents', 'action' => 'view', $document->id]
                         ]);
                     } else {
-                        echo 'No cover';
+                        echo __('No cover');
                     }
                     ?>
                 </td>

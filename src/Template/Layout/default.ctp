@@ -40,7 +40,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><?= $this->Html->link('Home', array('controller' => 'Pages', 'action' => 'myhome')) ?></h1>
+                <h1><?= $this->Html->link(__('Home'), array('controller' => 'Pages', 'action' => 'myhome')) ?></h1>
             </li>
         </ul>
         <div class="top-bar-section">
@@ -50,16 +50,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 if($loguser) {
                    // user is logged in, show logout..user menu etc
                     if ($loguser['verified'] != true) {
-                        echo '<li>'.$this->Html->link('Resend a verification email', array('controller' => 'EmailVerifications', 'action' => 'verifyQuery')).'</li>';
+                        echo '<li>'.$this->Html->link(__('Resend a verification email'), array('controller' => 'EmailVerifications', 'action' => 'verifyQuery')).'</li>';
                     }
-                   echo '<li>'.$this->Html->link('My favorites', array('controller' => 'Documents', 'action' => 'myFavorites')).'</li>';
-                   $my_menu_text = sprintf('%s %s', $loguser['role'], $loguser['username']);
+                   echo '<li>'.$this->Html->link(__('My favorites'), array('controller' => 'Documents', 'action' => 'myFavorites')).'</li>';
+                   $my_menu_text = __('{0} {1}', $loguser['role'], $loguser['username']);
                    echo '<li>'.$this->Html->link($my_menu_text, array('controller' => 'Documents', 'action' => 'myWork')).'</li>';
                    echo '<li>'.$this->Html->link($loguser['email'] . ' Logout', array('controller' => 'users', 'action' => 'logout')).'</li>';
                 } else {
                    // the user is not logged in
-                   echo '<li>'.$this->Html->link('Log in', array('controller' => 'users', 'action' => 'login')).'</li>';
-                   echo '<li>'.$this->Html->link('sign up', array('controller' => 'users', 'action' => 'add')).'</li>';
+                   echo '<li>'.$this->Html->link(__('Log in'), array('controller' => 'users', 'action' => 'login')).'</li>';
+                   echo '<li>'.$this->Html->link(__('sign up'), array('controller' => 'users', 'action' => 'add')).'</li>';
                 }
                 ?>
                 <li>

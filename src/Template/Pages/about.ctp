@@ -13,10 +13,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Steps') ?></th>
-            <td><?= __('Une description sommaires des étapes d\'utilisation typiques permettant de vérifier le bon fonctionnement de votre application web:
-Vous devez indiquer clairement comment et avec quels éléments de vos pages interagir:
-Vous devez aussi indiquer le résultat qui est attendu et éventuellement si cela ne fonctionne pas complètement.
-Ces étapes doivent permettre de vérifier les exigences du TP1.') ?></td>
+            <td><?= __('Ragarde la page d\'acceuil pour voir les documents intéreessant. Allez voir tous les document. Création d\'un compte pour pouvoir ajouter des document à sa liste de favoris. Activer son compte pour pouvoir ajouter des document') ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Database diagram') ?></th>

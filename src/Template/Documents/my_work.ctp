@@ -7,7 +7,7 @@
         
         <?php foreach ($documentTypes as $type): ?>
             <li>
-                <?= $this->Html->link(__('New '.$type['type'].' document'), ['controller' => 'Documents', 'action' => 'add', $type->id]) ?>
+                <?= $this->Html->link(__('New {0} document', $type['type']), ['controller' => 'Documents', 'action' => 'add', $type->id]) ?>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -47,7 +47,7 @@
                             'url' => ['controller' => 'Documents', 'action' => 'view', $document->id]
                         ]);
                     } else {
-                        echo 'No cover';
+                        echo __('No cover');
                     }
                     ?>
 

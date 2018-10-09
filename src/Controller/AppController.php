@@ -180,11 +180,11 @@ class AppController extends Controller
 
             $webroot = $this->request->webroot;
 
-            $href = sprintf('localhost%sEmailVerifications/verification?uid=%s&code=%s', $webroot, $user->id, $uuid);
+            $href = __('localhost{0}EmailVerifications/verification?uid={1}&code={2}', $webroot, $user->id, $uuid);
 
-            $link = sprintf('<a href="%s">Verify my email</a>', $href);
+            $link = __('<a href="{0}">Verify my email</a>', $href);
 
-            $msg = sprintf('Welcome to Story city in order to get access to all our functionalities please verify your email by clicking the link bellow. <br><br> %s', $link);
+            $msg = __('Welcome to Story city in order to get access to all our functionalities please verify your email by clicking the link bellow. <br><br>{0}', $link);
 
             $email = new Email('default');
             $email->emailFormat('html');
