@@ -57,9 +57,8 @@ class EmailVerificationsController extends AppController
 
                 $user->verified = true;
 
-                $this->Auth->setUser($user);
-
                 if ($this->EmailVerifications->Users->save($user)) {
+                    $this->Auth->setUser($user);
                     $this->Flash->success(__('Your account has been verified.'));
                 } else {
                     $this->Flash->error(__('The account has failed to be verified.'));

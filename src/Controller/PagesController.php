@@ -91,16 +91,21 @@ class PagesController extends AppController
         ->contain(['Users'])
         ->order(['Documents.created' => 'DESC']);
 
-
         $query = $int_table->find();
 
-        $popular_docs = $int_table->find('all')
+        $popular_docs = $int_table->find('all', [
+            'contain' => [
+                'InteractiveMethods',
+                'Documents' => [
+                    'Users'
+                ]
+            ]
+        ])
         ->select(['views' => $query->func()->count('Interactions.id')])
-        ->contain(['InteractiveMethods', 'Documents', 'Users'])
         ->where([
             'InteractiveMethods.method' => 'view',
-             'Documents.published' => 1,
-             'Documents.deleted' => 0
+            'Documents.published' => 1,
+            'Documents.deleted' => 0
         ])
         ->group(['document_id'])
         ->order(['count(Interactions.id)' => 'DESC'])
@@ -108,7 +113,6 @@ class PagesController extends AppController
         // get all the other fields too (not just the select)
         ->enableAutoFields(true)
         ->toList();
-        //debug($popular_docs_list);
 
         $this->set(compact('new_docs', 'popular_docs'));
     }

@@ -141,43 +141,48 @@ class DocumentsController extends AppController
      */
     public function add($type_id = null)
     {
-        $document = $this->Documents->newEntity();
-        $type = $this->Documents->DocumentTypes
-            ->find()
-            ->where(['id' => $type_id])
-            ->first();
+        if ($user['verified']) {
+            $document = $this->Documents->newEntity();
+            $type = $this->Documents->DocumentTypes
+                ->find()
+                ->where(['id' => $type_id])
+                ->first();
 
-        if ($type != null) {
-            $document['type_id'] = $type['id'];
-            $document['user_id'] = $this->Auth->user()['id'];
+            if ($type != null) {
+                $document['type_id'] = $type['id'];
+                $document['user_id'] = $this->Auth->user()['id'];
 
-            $no_cover = $this->Documents->Files->find('all', [
-                'conditions' => [
-                    'Files.status' => false
-                ]
-            ])->first();
+                $no_cover = $this->Documents->Files->find('all', [
+                    'conditions' => [
+                        'Files.status' => false
+                    ]
+                ])->first();
 
-            $document['document_cover'] = $no_cover['id'];
+                $document['document_cover'] = $no_cover['id'];
 
-            if ($this->Documents->save($document)) {
-                $this->Flash->success(__('The document has been saved.'));
-                // $type_name = Inflector::camelize($type['type']);
-                // redirect to a specific controller
-                // will add after we have many types
-                // return $this->redirect(['controller' => $type_name.'Documents', 'action' => 'edit', $document['id']]);
+                if ($this->Documents->save($document)) {
+                    $this->Flash->success(__('The document has been saved.'));
+                    // $type_name = Inflector::camelize($type['type']);
+                    // redirect to a specific controller
+                    // will add after we have many types
+                    // return $this->redirect(['controller' => $type_name.'Documents', 'action' => 'edit', $document['id']]);
 
-                // TEMP
-                $textTable = TableRegistry::get('TextDocuments');
-                $textDoc = $textTable->newEntity([
-                    'document_id' => $document['id']
-                ]);
-                $textTable->save($textDoc);
+                    // TEMP
+                    $textTable = TableRegistry::get('TextDocuments');
+                    $textDoc = $textTable->newEntity([
+                        'document_id' => $document['id']
+                    ]);
+                    $textTable->save($textDoc);
 
-                return $this->redirect(['controller' => 'Documents', 'action' => 'edit', $document['id']]);
+                    return $this->redirect(['controller' => 'Documents', 'action' => 'edit', $document['id']]);
+                }
+                $this->Flash->error(__('The document could not be saved. Please, try again.'));
+                $this->redirect($this->referer());
+            } else {
+                $this->redirect($this->referer());
             }
-            $this->Flash->error(__('The document could not be saved. Please, try again.'));
-            $this->redirect($this->referer());
         } else {
+            $this->Flash->error(__('You\'re account is not verified.'));
             $this->redirect($this->referer());
         }
     }
@@ -344,14 +349,20 @@ class DocumentsController extends AppController
                 if ($user['role'] == 'admin') {
                     $has_rights = true;
                 } elseif ($user['role'] == 'creator') {
-                    $doc = $this->Documents->find('all', [
-                        'conditions' => [
-                            'Documents.id' => $doc_id,
-                            'Documents.user_id' => $user['id']
-                        ]
-                    ])->first();
-                    if ($doc) {
-                        $has_rights = true;
+                    if ($user['verified']) {
+                        $doc = $this->Documents->find('all', [
+                            'conditions' => [
+                                'Documents.id' => $doc_id,
+                                'Documents.user_id' => $user['id']
+                            ]
+                        ])->first();
+                        if ($doc) {
+                            $has_rights = true;
+                        }
+                    } else {
+                        if ($this->request->getParam('action') != 'view') {
+                            $this->Flash->error(__('You\'re account is not verified.'));
+                        }
                     }
                 }
             }
