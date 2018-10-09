@@ -42,6 +42,7 @@ class DocumentsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Translate', ['fields' => ['name']]);
 
         $this->belongsTo('DocumentTypes', [
             'foreignKey' => 'type_id',

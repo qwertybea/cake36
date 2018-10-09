@@ -17,11 +17,19 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Database diagram') ?></th>
-            <td></td>
+            <td>
+            <?php 
+                echo $this->Html->image("db_diagram.PNG", [
+                    "alt" => "db_diagram",
+                    "width" => "800px",
+                    "height" => "800px"
+                ]);
+            ?>
+            </td>
         </tr>
         <tr>
             <th scope="row"><?= __('link to database diagram') ?></th>
-            <td></td>
+            <td><?= $this->Html->link(__('DB'), '/img/db_diagram.PNG') ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Github repository') ?></th>

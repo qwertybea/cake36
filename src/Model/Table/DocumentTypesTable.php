@@ -34,6 +34,8 @@ class DocumentTypesTable extends Table
         $this->setTable('document_types');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->addBehavior('Translate', ['fields' => ['type']]);
     }
 
     /**
