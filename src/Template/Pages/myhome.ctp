@@ -10,6 +10,7 @@
         <ul>
             <?php
             foreach ($new_docs as $doc) {
+                // debug($doc->translation("fr_ca"));
                 $doc_name = ($doc['name']) ? mb_strimwidth($doc['name'], 0, 15, "...") : 'Untitled';
                 $user_name = mb_strimwidth($doc->user['username'], 0, 15, "...");
                 echo $this->Html->link(__('<span style="font-size: 1.3em">{0}</span> <span style="color: grey">by {1}</span>', $doc_name, $user_name), array('controller' => 'Documents', 'action' => 'view', $doc['id']), array('escape' => false));

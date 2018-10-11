@@ -13,7 +13,32 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Steps') ?></th>
-            <td><?= __('Ragarde la page d\'acceuil pour voir les documents intéreessant. Allez voir tous les document. Création d\'un compte pour pouvoir ajouter des document à sa liste de favoris. Activer son compte pour pouvoir ajouter des document') ?></td>
+            <td>
+                <h4><?= __('Visiteur') ?></h4>
+                <ul>
+                    <li><?= __('Regarder les documents') ?></li>
+                    <li><?= __('Regarder les profiles des créateurs') ?></li>
+                    <li><?= __('Créer un compte créateur') ?></li>
+                </ul>
+                
+                <h4><?= __('créateur non vérifier') ?></h4>
+                <ul>
+                    <li><?= __('Comme visiteur moins la création d\'un compte') ?></li>
+                    <li><?= __('Ajouter un document à ses favoris.') ?></li>
+                    <li><?= __('Vérifier son compte.') ?></li>
+                </ul>
+                <h4><?= __('créateur') ?></h4>
+                <ul>
+                    <li><?= __('Comme créateur non vérifier') ?></li>
+                    <li><?= __('Ajouter/modifier/delete un document (juste ceux qui lui appartiennent).') ?></li>
+                </ul>
+                <h4><?= __('admin') ?></h4>
+                <ul>
+                    <li><?= __('Comme créateur') ?></li>
+                    <li><?= __('Peut modifier/delete les document de tous le monde') ?></li>
+                    <li><?= __('Peut voir les document non puplier de tous le monde') ?></li>
+                </ul>
+            </td>
         </tr>
         <tr>
             <th scope="row"><?= __('Database diagram') ?></th>
