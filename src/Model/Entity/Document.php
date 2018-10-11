@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-
+use Cake\ORM\Behavior\Translate\TranslateTrait;
 /**
  * Document Entity
  *
@@ -25,6 +25,7 @@ use Cake\ORM\Entity;
 class Document extends Entity
 {
 
+    use TranslateTrait;
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

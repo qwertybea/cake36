@@ -60,5 +60,12 @@
             <th scope="row"><?= __('Github repository') ?></th>
             <td><a href="https://github.com/qwertybea/cake36">https://github.com/qwertybea/cake36</a></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Problèmes') ?></th>
+            <td>
+                <p>La traduction des bases de données marchait avec MySql mais pas avec Sqlite.</p>
+                <p>Les mots de passes des utilisateur déja présent devrait être '123'.</p>
+            </td>
+        </tr>
     </table>
 </div>
