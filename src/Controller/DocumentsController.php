@@ -146,6 +146,7 @@ class DocumentsController extends AppController
      */
     public function add($type_id = null)
     {
+        $user = $this->Auth->user();
         if ($user['verified']) {
             $document = $this->Documents->newEntity();
             $type = $this->Documents->DocumentTypes
