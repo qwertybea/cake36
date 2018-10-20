@@ -61,6 +61,9 @@ class AppController extends Controller
                     'fields' => [
                         'username' => 'username',
                         'password' => 'password'
+                    ],
+                    'contain' => [
+                        'Roles'
                     ]
                 ]
             ],
@@ -200,9 +203,10 @@ class AppController extends Controller
 
             $msg = __('Welcome to Story city in order to get access to all our functionalities please verify your email by clicking the link bellow. <br><br>{0}', $link);
 
-            $email = new Email('default');
-            $email->emailFormat('html');
-            $email->to($user_email)->subject($subject)->send($msg);
+            // TODO: REMOVE COMMENT TO SEND EMAIL
+            // $email = new Email('default');
+            // $email->emailFormat('html');
+            // $email->to($user_email)->subject($subject)->send($msg);
 
             $this->Flash->success(__('You have been sent an email to verify your account.'));
 

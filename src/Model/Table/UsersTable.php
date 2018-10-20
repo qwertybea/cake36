@@ -42,6 +42,11 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Roles', [
+            'foreignKey' => 'role_id',
+            'joinType' => 'INNER'
+        ]);
+
         $this->hasMany('Documents', [
             'foreignKey' => 'user_id'
         ]);
@@ -65,11 +70,11 @@ class UsersTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->scalar('role')
-            ->maxLength('role', 255)
-            ->requirePresence('role', 'create')
-            ->notEmpty('role');
+        // $validator
+        //     ->integer('role_id')
+        //     ->maxLength('role_id', 255)
+        //     ->requirePresence('role_id', 'create')
+        //     ->notEmpty('role_id');
 
         $validator
             ->scalar('username')

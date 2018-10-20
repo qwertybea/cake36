@@ -53,7 +53,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         echo '<li>'.$this->Html->link(__('Resend a verification email'), array('controller' => 'EmailVerifications', 'action' => 'verifyQuery')).'</li>';
                     }
                    echo '<li>'.$this->Html->link(__('My favorites'), array('controller' => 'Documents', 'action' => 'myFavorites')).'</li>';
-                   $my_menu_text = __('{0} {1}', $loguser['role'], $loguser['username']);
+                   $my_menu_text = __('{0} {1}', $loguser['role']['role'], $loguser['username']);
                    echo '<li>'.$this->Html->link($my_menu_text, array('controller' => 'Documents', 'action' => 'myWork')).'</li>';
                    echo '<li>'.$this->Html->link($loguser['email'] . ' Logout', array('controller' => 'users', 'action' => 'logout')).'</li>';
                 } else {

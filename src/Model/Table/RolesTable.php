@@ -18,7 +18,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\DocumentType[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\DocumentType findOrCreate($search, callable $callback = null, $options = [])
  */
-class DocumentTypesTable extends Table
+class RolesTable extends Table
 {
 
     /**
@@ -31,14 +31,12 @@ class DocumentTypesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('document_types');
+        $this->setTable('roles');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->addBehavior('Translate', ['fields' => ['type']]);
-
-        $this->hasMany('Documents', [
-            'foreignKey' => 'type_id'
+        $this->hasMany('Docuemnts', [
+            'foreignKey' => 'role_id'
         ]);
     }
 
@@ -55,10 +53,10 @@ class DocumentTypesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('type')
-            ->maxLength('type', 255)
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
+            ->scalar('role')
+            ->maxLength('role', 255)
+            ->requirePresence('role', 'create')
+            ->notEmpty('role');
 
         return $validator;
     }

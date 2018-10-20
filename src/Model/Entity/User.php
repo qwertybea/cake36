@@ -31,13 +31,14 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
-        'role' => true,
+        'role_id' => true,
         'username' => true,
         'email' => true,
         'password' => true,
         'verified' => true,
         'created' => true,
         'modified' => true,
+        'role' => true,
         'documents' => true,
         'interactions' => true
     ];

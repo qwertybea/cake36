@@ -26,7 +26,7 @@ class DocumentsController extends AppController
         parent::beforeFilter($event);
         $user = $this->Auth->user();
         if ($user) {
-           switch ($user['role']) {
+           switch ($user['role']['role']) {
             case 'creator':
                 $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
                         // temp permissions
@@ -89,7 +89,11 @@ class DocumentsController extends AppController
     {
         if ($this->canView($id)) {
             $document = $this->Documents->get($id, [
-                'contain' => ['DocumentTypes', 'Users', 'Interactions', 'TextDocuments', 'Files']
+                'contain' => ['DocumentTypes', 
+                'Users' => 'Roles', 
+                'Interactions', 
+                'TextDocuments', 
+                'Files']
             ]);
 
             $view_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
@@ -129,7 +133,6 @@ class DocumentsController extends AppController
 
             $has_rights = $this->hasRights($id);
 
-
             $this->handleViewInteraction($id);
 
             $this->set(compact('document', 'view_count', 'favorited', 'has_rights'));
@@ -163,6 +166,16 @@ class DocumentsController extends AppController
                         'Files.status' => false
                     ]
                 ])->first();
+
+                if(!$no_cover) {
+
+                    $no_cover = $this->Documents->Files->newEntity([
+                        'status' => 0
+                    ]);
+
+                    $this->Documents->Files->save($no_cover);
+
+                }
 
                 $document['document_cover'] = $no_cover['id'];
 
@@ -352,9 +365,9 @@ class DocumentsController extends AppController
         if ($doc_id) {
             $user = $this->Auth->user();
             if ($user) {
-                if ($user['role'] == 'admin') {
+                if ($user['role']['role'] == 'admin') {
                     $has_rights = true;
-                } elseif ($user['role'] == 'creator') {
+                } elseif ($user['role']['role'] == 'creator') {
                     if ($user['verified']) {
                         $doc = $this->Documents->find('all', [
                             'conditions' => [
@@ -423,8 +436,9 @@ class DocumentsController extends AppController
     {
         $user = $this->Auth->user();
         $visitor_id = $this->Documents->Users->find('all', [
+            'contain' => 'Roles',
             'conditions' => [
-                'Users.role' => 'visitor'
+                'Roles.role' => 'visitor'
             ]
         ])->first()['id'];
 

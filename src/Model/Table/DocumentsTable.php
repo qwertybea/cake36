@@ -91,10 +91,10 @@ class DocumentsTable extends Table
             ->maxLength('other_details', 255)
             ->allowEmpty('other_details');
 
-        $validator
-            ->scalar('document_cover')
-            ->maxLength('document_cover', 255)
-            ->allowEmpty('document_cover');
+        // $validator
+        //     ->scalar('document_cover')
+        //     ->maxLength('document_cover', 255)
+        //     ->allowEmpty('document_cover');
 
         $validator
             ->boolean('published')

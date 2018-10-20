@@ -25,12 +25,15 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         $user = $this->Auth->user();
         if ($user) {
-           switch ($user['role']) {
+           switch ($user['role']['role']) {
             case 'creator':
                 $this->Auth->allow(['logout', 'view']);
                 break;
             case 'admin':
                 $this->Auth->allow(['logout', 'view']);
+                break;
+            default :
+                $this->Auth->allow(['logout']);
                 break;
             }
         } else {
@@ -83,10 +86,22 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            $user['role'] = "creator";
+
+            $creator_id = $this->Users->Roles->find('all', [
+                'conditions' => [
+                    'Roles.role' => 'creator'
+                ]
+            ])->first()['id'];
+            $user['role_id'] = $creator_id;
 
             if ($this->Users->save($user)) {
+
                 $this->Flash->success(__('The user has been saved.'));
+
+                $user = $this->Users->get($user['id'], [
+                    'contain' => ['Roles']
+                ]);
+
                 $this->Auth->setUser($user);
 
                 $uuid = Text::uuid();
@@ -182,7 +197,7 @@ class UsersController extends AppController
         if ($user_id) {
             $user = $this->Auth->user();
             if ($user) {
-                if ($user['role'] == 'admin') {
+                if ($user['role']['role'] == 'admin') {
                     $has_rights = true;
                 } elseif ($user['id'] == $user_id) {
                     $has_rights = true;

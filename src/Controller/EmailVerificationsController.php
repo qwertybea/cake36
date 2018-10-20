@@ -22,7 +22,7 @@ class EmailVerificationsController extends AppController
         $func = array();
 
         if ($user) {
-           switch ($user['role']) {
+           switch ($user['role']['role']) {
             case 'creator':
                 if (!$user['verified']) {
                     array_push($func, 'verification', 'send_verification', 'verifyQuery');
