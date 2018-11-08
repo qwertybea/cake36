@@ -25,23 +25,34 @@ class DocumentsController extends AppController
     {
         parent::beforeFilter($event);
         $user = $this->Auth->user();
+
+        $auths = array();
+
+        array_push($auths, 'findDocuments', 'index', 'view', 'canView', 'handleFavorite');
+
         if ($user) {
            switch ($user['role']) {
             case 'creator':
-                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
+                array_push($auths, 'add', 'delete', 'myWork', 'hasRights', 'myFavorites'
                         // temp permissions
                         ,'edit'
-                    ]);
+                    );
                 break;
             case 'admin':
-                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
+                array_push($auths, 'index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'myFavorites'
                     // temp permissions
                         ,'edit'
-                    ]);
+                    );
                 break;
             }
         } else {
-            $this->Auth->allow(['index', 'view', 'has_rights', 'canView', 'handleFavorite']);
+            
+        }
+
+        if ($auths) {
+            $this->Auth->allow($auths);
+        } else {
+            $this->Auth->deny();
         }
     }
 
@@ -493,6 +504,29 @@ class DocumentsController extends AppController
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
         
+    }
+
+    public function findDocuments()
+    {
+        if ($this->request->is('ajax')) {
+
+            $this->autoRender = false;
+            $term = $this->request->query['term'];
+
+            // TODO make it multilingual by searching for their value in i18n
+
+            $results = $this->Documents->find('all', array(
+                'conditions' => array('Documents.name LIKE ' => '%' . $term . '%')
+            ));
+
+            $resultArr = array();
+            foreach ($results as $result) {
+                $resultArr[] = array('label' => $result['name'], 'value' => $result['name']);
+            }
+            echo json_encode($resultArr);
+        } else {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'myhome']);
+        }
     }
 
 }

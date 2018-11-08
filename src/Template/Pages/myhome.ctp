@@ -1,10 +1,19 @@
 <?php
-
+$urlToCarsAutocompletedemoJson = $this->Url->build([
+    "controller" => "Documents",
+    "action" => "findDocuments",
+    "_ext" => "json"
+        ]);
+echo $this->Html->scriptBlock('var urlToAutocompleteAction = "' . $urlToCarsAutocompletedemoJson . '";', ['block' => true]);
+echo $this->Html->script('Documents/autocompletebyname', ['block' => 'scriptBottom']);
 ?>
 
 <div class="row">
     <h2>Story city</h2>
     <p><?= __('Story city is a site where you can create original content publish it for the world to enjoy.'); ?></p>
+
+    <input type="text" id="autocomplete" name="search_bar" placeholder="<?=__('search a document')?>">
+
     <div class="columns large-6">
         <h4><?= __('New stories'); ?></h4>
         <ul>
