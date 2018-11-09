@@ -66,8 +66,9 @@ class UsersController extends AppController
             'contain' => [
                 'Documents' => [
                     'DocumentTypes',
-                    'Files'
-                ]
+                    'Files',
+                ],
+                'Roles'
             ]
         ]);
 

@@ -24,7 +24,7 @@ class TextDocumentsController extends AppController
         parent::beforeFilter($event);
         $user = $this->Auth->user();
         if ($user) {
-           switch ($user['role']) {
+           switch ($user['role']['role']) {
             case 'creator':
                 $this->Auth->allow(['index', 'view', 'add', 'edit', 'myWork', 'has_rights']);
                 break;

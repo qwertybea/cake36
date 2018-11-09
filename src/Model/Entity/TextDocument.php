@@ -24,6 +24,7 @@ class TextDocument extends Entity
      */
     protected $_accessible = [
         'document_id' => true,
-        'text' => true
+        'text' => true,
+        'document' => true,
     ];
 }

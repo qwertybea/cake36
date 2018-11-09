@@ -25,24 +25,35 @@ class DocumentsController extends AppController
     {
         parent::beforeFilter($event);
         $user = $this->Auth->user();
+
+        $auths = array();
+
+        array_push($auths, 'findDocuments', 'search', 'index', 'view', 'canView', 'handleFavorite');
+
         if ($user) {
            switch ($user['role']['role']) {
             case 'creator':
-                $this->Auth->allow(['index', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
+                array_push($auths, 'add', 'delete', 'myWork', 'hasRights', 'myFavorites'
                         // temp permissions
                         ,'edit'
-                    ]);
+                    );
                 break;
             case 'admin':
-                $this->Auth->allow(['index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'hasRights', 'canView', 'handleFavorite', 'myFavorites'
+                array_push($auths, 'index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'myFavorites'
                     // temp permissions
                         ,'edit'
-                    ]);
+                    );
                 break;
             }
         } else {
-            $this->Auth->allow(['index', 'view', 'has_rights', 'canView', 'handleFavorite']);
         }
+
+        if ($auths) {
+            $this->Auth->allow($auths);
+        } else {
+            $this->Auth->deny();
+        }
+
     }
 
     /**
@@ -90,10 +101,11 @@ class DocumentsController extends AppController
         if ($this->canView($id)) {
             $document = $this->Documents->get($id, [
                 'contain' => ['DocumentTypes', 
-                'Users' => 'Roles', 
-                'Interactions', 
-                'TextDocuments', 
-                'Files']
+                    'Users' => 'Roles', 
+                    'Interactions', 
+                    'TextDocuments', 
+                    'Files'
+                ]
             ]);
 
             $view_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
@@ -154,7 +166,7 @@ class DocumentsController extends AppController
             $document = $this->Documents->newEntity();
             $type = $this->Documents->DocumentTypes
                 ->find()
-                ->where(['id' => $type_id])
+                ->where(['DocumentTypes.id' => $type_id])
                 ->first();
 
             if ($type != null) {
@@ -238,7 +250,7 @@ class DocumentsController extends AppController
                         $textTable = TableRegistry::get('TextDocuments');
                         $textDoc = $textTable->find('all', [
                             'conditions' => [
-                                'document_id' => $document['id']
+                                'TextDocuments.document_id' => $document['id']
                             ]
                         ])->first();
 
@@ -254,7 +266,7 @@ class DocumentsController extends AppController
                 }
                 $textDocument = $this->Documents->TextDocuments->find('all', [
                         'conditions' => [
-                            'document_id' => $document['id']
+                            'TextDocuments.document_id' => $document['id']
                         ]
                     ])->first();
                 $this->set(compact('document', 'textDocument'));
@@ -359,6 +371,37 @@ class DocumentsController extends AppController
         $this->set(compact('documents'));
     }
 
+    public function search()
+    {
+
+        $term = $this->request->query['search_term'];
+
+        if ($term != null) {
+            
+            // TODO make it multilingual by searching for their value in i18n
+            $documents_query = $this->Documents->find('all', array(
+                'conditions' => array('Documents.name LIKE ' => '%' . $term . '%')
+            ));
+
+            $this->paginate = [
+                'contain' => ['DocumentTypes', 'Users', 'Files'],
+                'conditions' => [
+                    'Documents.published' => 1,
+                    'Documents.deleted' => 0,
+                    'Documents.name LIKE ' => '%' . $term . '%'
+                ],
+            ];
+
+            $documents = $this->paginate($this->Documents);
+
+        } else {
+            return $this->redirect(['controller' => 'pages', 'action' => 'myhome']);
+        }
+
+        $this->set(compact('documents'));
+    
+    }
+
     public function hasRights($doc_id=null)
     {
         $has_rights = false;
@@ -394,21 +437,16 @@ class DocumentsController extends AppController
         $has_rights = false;
         if ($doc_id) {
 
-            $doc = $this->Documents->find('all', [
-                'conditions' => [
-                    'Documents.id' => $doc_id
-                ]
-            ])->first();
+            $doc = $this->Documents->get($doc_id);
 
             if($doc['deleted'] == false) {
                 if ($doc['published'] == true) {
                     $has_rights = true;
                 } else {
                     $user = $this->Auth->user();
-
                     if ($user) {
                         
-                        switch ($user['role']) {
+                        switch ($user['role']['role']) {
                             case 'creator':
                                 
                                 if ($doc['user_id'] == $user['id']) {
@@ -507,6 +545,25 @@ class DocumentsController extends AppController
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
         
+    }
+
+    public function findDocuments()
+    {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $term = $this->request->query['term'];
+            // TODO make it multilingual by searching for their value in i18n
+            $results = $this->Documents->find('all', array(
+                'conditions' => array('Documents.name LIKE ' => '%' . $term . '%')
+            ));
+            $resultArr = array();
+            foreach ($results as $result) {
+                $resultArr[] = array('label' => $result['name'], 'value' => $result['name']);
+            }
+            echo json_encode($resultArr);
+        } else {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'myhome']);
+        }
     }
 
 }

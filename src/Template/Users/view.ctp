@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Role') ?></th>
-            <td><?= h($user->role) ?></td>
+            <td><?= h($user->role->role) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

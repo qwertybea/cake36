@@ -1,10 +1,33 @@
 <?php
-
+$urlToDocumentsAutocomplete = $this->Url->build([
+    "controller" => "Documents",
+    "action" => "findDocuments",
+    "_ext" => "json"
+        ]);
+$searchUrl = $this->Url->build([
+    "controller" => "Documents",
+    "action" => "search",
+    "?" => ["term" => "_term_goes_here_"]
+        ]);
+echo $this->Html->scriptBlock('var urlToAutocompleteAction = "' . $urlToDocumentsAutocomplete . '";', ['block' => true]);
+echo $this->Html->scriptBlock('var searchUrl = "' . $searchUrl . '";', ['block' => true]);
+echo $this->Html->script(['Documents/autocompletebyname', 'Documents/searchbar'], ['block' => 'scriptBottom']);
 ?>
 
 <div class="row">
     <h2>Story city</h2>
     <p><?= __('Story city is a site where you can create original content publish it for the world to enjoy.'); ?></p>
+    
+
+    <?= $this->Form->create(null, ['type' => 'get', 'url' => ['controller' => 'documents','action' => 'search'], 'class' => 'search']) ?>
+    <fieldset>
+        <?php
+            echo $this->Form->control(null, ['name' => 'search_term', 'id' => 'autocomplete', 'placeholder' => __('search a document')]);
+        ?>
+        <?= $this->Form->button('<i class="fa fa-search"></i>', ['class' => 'button']) ?>
+    </fieldset>
+    <?= $this->Form->end() ?>
+    
     <div class="columns large-6">
         <h4><?= __('New stories'); ?></h4>
         <ul>

@@ -59,7 +59,7 @@ class DocumentsTable extends Table
         $this->hasMany('Interactions', [
             'foreignKey' => 'document_id'
         ]);
-        $this->hasMany('TextDocuments', [
+        $this->hasOne('TextDocuments', [
             'foreignKey' => 'document_id'
         ]);
     }

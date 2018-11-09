@@ -28,13 +28,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('my_style.css') ?>
 
     <!-- This is probably a bad way of doing it -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <?php
+        echo $this->Html->script([
+            'https://code.jquery.com/jquery-1.12.4.js',
+            'https://code.jquery.com/ui/1.12.1/jquery-ui.js'
+                ], ['block' => 'scriptLibraries']
+        );
+    ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -84,6 +91,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+        <?= $this->fetch('scriptLibraries') ?>
+        <?= $this->fetch('script'); ?>
+        <?= $this->fetch('scriptBottom') ?>
     </footer>
 </body>
 </html>

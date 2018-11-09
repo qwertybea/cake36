@@ -49,6 +49,7 @@ class Document extends Entity
         'document_type' => true,
         'user' => true,
         'file' => true,
-        'interactions' => true
+        'interactions' => true,
+        'text_document' => true,
     ];
 }
