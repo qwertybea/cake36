@@ -56,8 +56,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 $loguser = $this->request->session()->read('Auth.User');
                 if($loguser) {
                    // user is logged in, show logout..user menu etc
-                    if ($loguser['verified'] != true) {
-                        echo '<li>'.$this->Html->link(__('Resend a verification email'), array('controller' => 'EmailVerifications', 'action' => 'verifyQuery')).'</li>';
+                    if ($loguser['role']['role'] == 'creator') {
+                        if ($loguser['verified'] != true) {
+                            echo '<li>'.$this->Html->link(__('Resend a verification email'), array('controller' => 'EmailVerifications', 'action' => 'verifyQuery')).'</li>';
+                        }
                     }
                    echo '<li>'.$this->Html->link(__('My favorites'), array('controller' => 'Documents', 'action' => 'myFavorites')).'</li>';
                    $my_menu_text = __('{0} {1}', $loguser['role']['role'], $loguser['username']);

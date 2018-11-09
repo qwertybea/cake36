@@ -25,9 +25,9 @@ class InteractionsFixture extends TestFixture
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'precision' => null, 'comment' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'user_id_fk' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
-            'interactiveMethod_id_fk' => ['type' => 'foreign', 'columns' => ['interactiveMethod_id'], 'references' => ['interactive_methods', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
-            'document_id_fk' => ['type' => 'foreign', 'columns' => ['document_id'], 'references' => ['documents', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
+            'user_id_intera_fk' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
+            'interactiveMethod_id_intera_fk' => ['type' => 'foreign', 'columns' => ['interactiveMethod_id'], 'references' => ['interactive_methods', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
+            'document_id_intera_fk' => ['type' => 'foreign', 'columns' => ['document_id'], 'references' => ['documents', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -40,14 +40,14 @@ class InteractionsFixture extends TestFixture
     public function init()
     {
         $this->records = [
-            [
-                'id' => 1,
-                'document_id' => 1,
-                'user_id' => 1,
-                'interactiveMethod_id' => 1,
-                'created' => '2018-11-09 06:47:05',
-                'modified' => '2018-11-09 06:47:05'
-            ],
+            // [
+            //    'id' => 1,
+            //     'document_id' => 1,
+            //     'user_id' => 1,
+            //     'interactiveMethod_id' => 1,
+            //     'created' => '2018-11-09 06:47:05',
+            //     'modified' => '2018-11-09 06:47:05'
+            // ], 
         ];
         parent::init();
     }

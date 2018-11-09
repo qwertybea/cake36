@@ -88,8 +88,45 @@ class AppController extends Controller
     }
 
     public function isAuthorized($user) {
+        $controller = $this->request->getParam('controller');
+        $action = $this->request->getParam('action');
+        
+        if ($controller == 'Regions' AND $action == 'index') {
+            if ($user) {
+                if ($user['role']['role'] == 'admin') {
+                    return true;
+                } else if ($user['role']['role'] == 'creator' AND $user['verified'] == true) {
+                    return true;
+                }
+            }
+        }
+
         return false;
+        
     }
+
+    // http://www.bravo-kernel.com/2015/04/how-to-build-a-cakephp-3-rest-api-in-minutes#3-Enable-the-API
+    // 3.b) configure the api
+    use \Crud\Controller\ControllerTrait;
+    public $components = [
+        'RequestHandler',
+        'Crud.Crud' => [
+            'actions' => [
+                'Crud.Index',
+                'Crud.View',
+                'Crud.Add',
+                'Crud.Edit',
+                'Crud.Delete'
+            ],
+            'listeners' => [
+                'Crud.Api',
+                'Crud.ApiPagination',
+                'Crud.ApiQueryLog'
+            ]
+        ]
+    ];
+
+
 
     public function changeLang($lang = 'en_US') {
         I18n::setLocale($lang);

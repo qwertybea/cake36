@@ -59,6 +59,10 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/signup', ['controller' => 'Users', 'action' => 'add', 'Sign up']);
     $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout', 'Log out']);
 
+    // http://www.bravo-kernel.com/2015/04/how-to-build-a-cakephp-3-rest-api-in-minutes#3-Enable-the-API
+    // 3.a) expose one or more controllers
+    $routes->resources('Cocktails');
+
     /**
      * Connect catchall routes for all controllers.
      *

@@ -48,6 +48,7 @@ class DocumentsControllerTest extends IntegrationTestCase
                 'User' => [
                     'id' => 1,
                     'username' => 'admin',
+                    'email' => 'admin@admin.com',
                     'role' => [
                         'role' => 'admin',
                     ],
@@ -59,6 +60,7 @@ class DocumentsControllerTest extends IntegrationTestCase
                 'User' => [
                     'id' => 2,
                     'username' => 'creator',
+                    'email' => 'creator@creator.com',
                     'role' => [
                         'role' => 'creator',
                     ],
@@ -90,6 +92,7 @@ class DocumentsControllerTest extends IntegrationTestCase
         'app.users',
         'app.roles',
         'app.files',
+        'app.i18n',
         'app.interactions',
         'app.text_documents',
         'app.countries',
@@ -126,7 +129,7 @@ class DocumentsControllerTest extends IntegrationTestCase
         $this->session($this->authAdmin);
         $this->get('/documents');
         // $this->assertResponseContains('Story city');
-        echo $this->_response->getBody();
+        // echo $this->_response->getBody();
         $this->assertResponseOk();
     }
 
@@ -135,9 +138,11 @@ class DocumentsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testViewAllDocuments()
+    public function testViewAllDocumentsAsNotAdmin()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->session($this->authCreator);
+        $this->get('/documents/view-all-documents');
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login', 'redirect' => '/documents/view-all-documents']);
     }
 
     /**

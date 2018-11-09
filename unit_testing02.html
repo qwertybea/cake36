@@ -1,0 +1,104 @@
+PHPUnit 6.5.13 by Sebastian Bergmann and contributors.
+
+.                                                                   1 / 1 (100%)<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        CakePHP: the rapid development php framework:
+        Documents    </title>
+    <link href="/favicon.ico" type="image/x-icon" rel="icon"/><link href="/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    <link rel="stylesheet" href="/css/base.css"/>    <link rel="stylesheet" href="/css/style.css"/>    <link rel="stylesheet" href="/css/my_style.css"/>
+    <!-- This is probably a bad way of doing it -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            </head>
+<body>
+    <nav class="top-bar expanded" data-topbar role="navigation">
+        <ul class="title-area large-3 medium-4 columns">
+            <li class="name">
+                <h1><a href="/pages/myhome">Accueil</a></h1>
+            </li>
+        </ul>
+        <div class="top-bar-section">
+            <ul class="right">
+                <li><a href="/documents/my-favorites">Mes favoris</a></li><li><a href="/documents/my-work">admin admin</a></li><li><a href="/users/logout">admin@admin.com Logout</a></li>                <li>
+                    <a href="/pages/about">À propos</a>                </li>
+
+                <li>
+                    <a href="/pages/change-lang/fr_CA">Français</a>                </li>
+                <li>
+                    <a href="/pages/change-lang/en_US">English</a>                </li>
+                <li>
+                    <a href="/pages/change-lang/zh_CN">中文</a>                </li>
+
+            </ul>
+        </div>
+    </nav>
+        <div class="container clearfix">
+        <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading">actes</li>
+        <li><a href="/documents/add">Nouveau document</a></li>
+        <li><a href="/document-types">Liste des types de documents</a></li>
+        <li><a href="/document-types/add">Nouveau type de document</a></li>
+        <li><a href="/users">Liste des utilisateurs</a></li>
+        <li><a href="/users/add">Nouvel utilisateur</a></li>
+        <li><a href="/interactions">Liste des interactions</a></li>
+        <li><a href="/interactions/add">Nouvelle interaction</a></li>
+    </ul>
+</nav> -->
+<div class="documents index large-12 medium-8 columns content">
+    <h3>Les documents</h3>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col"><a href="/documents?direction=asc&amp;sort=type_id">Type</a></th>
+                <th scope="col"><a href="/documents?direction=asc&amp;sort=user_id">Author</a></th>
+                <th scope="col"><a href="/documents?direction=asc&amp;sort=name">prénom</a></th>
+                <th scope="col"><a href="/documents?direction=asc&amp;sort=description">La description</a></th>
+                <!-- <th scope="col"><a href="/documents?direction=asc&amp;sort=other_details">Autres détails</a></th> -->
+                <th scope="col"><a href="/documents?direction=asc&amp;sort=document_cover">Couverture de document</a></th>
+
+                <th scope="col"><a href="/documents?direction=asc&amp;sort=created">Créé</a></th>
+                <!-- <th scope="col"><a href="/documents?direction=asc&amp;sort=modified">Modifié</a></th> -->
+                
+                <th scope="col" class="actions">actes</th>
+            </tr>
+        </thead>
+        <tbody>
+                        <tr>
+                <td>Lorem ipsum dolor sit amet</td>
+                <td><a href="/users/view/1">admin</a></td>
+                <td>Lorem ipsum dolor sit amet</td>
+                <td>Lorem ipsum dolor sit amet</td>
+                <!-- <td>Lorem ipsum dolor sit amet</td> -->
+                <td>
+
+                    <a href="/documents/view/1"><img src="/img/Lorem%20ipsum%20dolor%20sit%20ametLorem%20ipsum%20dolor%20sit%20amet" alt="Lorem ipsum dolor sit amet" width="220px" height="150px"/></a>                    
+                </td>
+
+                <td>18-11-09 06:47</td>
+                <!-- <td>18-11-09 06:47</td> -->
+                
+                <td class="actions">
+                    <a href="/documents/view/1">Vue</a>                </td>
+            </tr>
+                    </tbody>
+    </table>
+    <div class="paginator">
+        <ul class="pagination">
+                        <li class="prev disabled"><a href="" onclick="return false;">&lt; précédent</a></li>                        <li class="next disabled"><a href="" onclick="return false;">prochain &gt;</a></li>                    </ul>
+        <p>Page 1 sur 1, affichant le  enregistrement (s) sur le  total</p>
+    </div>
+</div>
+    </div>
+    <footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script><script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>                    </footer>
+</body>
+</html>
+
+
+Time: 9.61 seconds, Memory: 14.00MB
+
+OK (1 test, 4 assertions)

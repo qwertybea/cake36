@@ -56,7 +56,7 @@ class DocumentsFixture extends TestFixture
                 'description' => 'Lorem ipsum dolor sit amet',
                 'other_details' => 'Lorem ipsum dolor sit amet',
                 'published' => 1,
-                'deleted' => 1,
+                'deleted' => 0,
                 'created' => '2018-11-09 06:47:05',
                 'modified' => '2018-11-09 06:47:05',
                 'country_id' => 1,
