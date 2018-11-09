@@ -10,7 +10,7 @@ class CountryRegions extends AbstractMigration
     {
 
         $this->table('countries')
-            ->addColumn('id', 'smallinteger', [
+            ->addColumn('id', 'integer', [
                 'default' => null,
                 'limit' => 5,
                 'null' => false,
@@ -54,7 +54,7 @@ class CountryRegions extends AbstractMigration
                 'limit' => 10,
                 'null' => false,
             ])
-            ->addColumn('country_id', 'smallinteger', [
+            ->addColumn('country_id', 'integer', [
                 'default' => null,
                 'limit' => 5,
                 'null' => false,
