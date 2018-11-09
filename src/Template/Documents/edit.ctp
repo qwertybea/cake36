@@ -28,7 +28,6 @@ echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
     <fieldset>
         <legend><?= __('Edit Document') ?></legend>
         <?php
-        debug($document);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('other_details');

@@ -305,12 +305,15 @@ return [
         'test' => [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
+            // 'driver' => 'Cake\Database\Driver\Sqlite',
+
             'persistent' => false,
             'host' => 'localhost',
             //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
+            'username' => 'root',
+            'password' => 'mysql',
+            'database' => 'story-city-test',
+            // 'database' => ROOT . DS . 'sqlite' . DS . 'test.sqlite',
             //'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

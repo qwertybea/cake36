@@ -93,13 +93,13 @@ class AppController extends Controller
 
     public function changeLang($lang = 'en_US') {
         I18n::setLocale($lang);
-        $this->request->session()->write('Config.language', $lang);
+        $this->request->getSession()->write('Config.language', $lang);
         return $this->redirect($this->request->referer());
     }
 
     public function setLoc()
     {
-        I18n::setLocale($this->request->session()->read('Config.language'));
+        I18n::setLocale($this->request->getSession()->read('Config.language'));
     }
 
     public static function array_on_key($array, $key)
