@@ -39,6 +39,8 @@ class Document extends Entity
         'type_id' => true,
         'user_id' => true,
         'document_cover' => true,
+        'country_id' => true,
+        'region_id' => true,
         'name' => true,
         'description' => true,
         'other_details' => true,
@@ -51,5 +53,7 @@ class Document extends Entity
         'file' => true,
         'interactions' => true,
         'text_document' => true,
+        'country' => true,
+        'region' => true,
     ];
 }

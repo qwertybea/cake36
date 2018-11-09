@@ -35,13 +35,13 @@ class DocumentsController extends AppController
             case 'creator':
                 array_push($auths, 'add', 'delete', 'myWork', 'hasRights', 'myFavorites'
                         // temp permissions
-                        ,'edit'
+                        ,'edit', 'getRegions'
                     );
                 break;
             case 'admin':
                 array_push($auths, 'index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'myFavorites'
                     // temp permissions
-                        ,'edit'
+                        ,'edit', 'getRegions'
                     );
                 break;
             }
@@ -104,7 +104,9 @@ class DocumentsController extends AppController
                     'Users' => 'Roles', 
                     'Interactions', 
                     'TextDocuments', 
-                    'Files'
+                    'Files',
+                    'Countries',
+                    'Regions',
                 ]
             ]);
 
@@ -191,6 +193,71 @@ class DocumentsController extends AppController
 
                 $document['document_cover'] = $no_cover['id'];
 
+                if (in_array($_SERVER['REMOTE_ADDR'], ["127.0.0.1", "::1"])) {
+
+                    $country = 'Canada';
+                    $region = 'Quebec';
+
+                } else {
+                    
+                    $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".$this->getRealIpAddr());
+
+                    debug($xml);
+                }
+
+                $country = 'Canada';
+                $region = 'Quebec';
+
+                $country = $this->Documents->Countries->find('all', [
+
+                    'conditions' => [
+
+                        'Countries.name' => $country
+
+                    ]
+
+                ])->first();
+
+
+                $region = $this->Documents->Regions->find('all', [
+
+                    'conditions' => [
+
+                        'Regions.name' => $region
+
+                    ]
+
+                ])->first();
+
+                if ($country == null or $region == null) {
+                    $country = 'Canada';
+                    $region = 'Quebec';
+
+                    $country = $this->Documents->Countries->find('all', [
+
+                    'conditions' => [
+
+                        'Countries.name' => $country
+
+                    ]
+
+                    ])->first();
+
+
+                    $region = $this->Documents->Regions->find('all', [
+
+                        'conditions' => [
+
+                            'Regions.name' => $region
+
+                        ]
+
+                    ])->first();
+                }
+
+                $document['country_id'] = $country->id;
+                $document['region_id'] = $region->id;
+
                 if ($this->Documents->save($document)) {
                     $this->Flash->success(__('The document has been saved.'));
                     // $type_name = Inflector::camelize($type['type']);
@@ -269,7 +336,15 @@ class DocumentsController extends AppController
                             'TextDocuments.document_id' => $document['id']
                         ]
                     ])->first();
-                $this->set(compact('document', 'textDocument'));
+
+
+
+                $countries = $this->Documents->Countries->find('list', ['limit' => 300]);
+                $regions = $this->Documents->Regions->find('list', [
+                    'conditions' => ['Regions.country_id' => $document->country_id],
+                ]);
+
+                $this->set(compact('document', 'textDocument', 'countries', 'regions'));
             } else {
                 $this->Flash->error(__('No such document exists.'));
                 return $this->redirect($this->referer());
@@ -354,8 +429,9 @@ class DocumentsController extends AppController
                 'Documents.deleted' => 0
             ];
         } else {
+            // this is skecth
             $conditions = [
-                'TRUE' => false
+                'Documents.id' => -1,
             ];
         }
         $this->paginate = [
@@ -564,6 +640,18 @@ class DocumentsController extends AppController
         } else {
             return $this->redirect(['controller' => 'Pages', 'action' => 'myhome']);
         }
+    }
+
+    public function getRegions()
+    {
+        $country_id = $this->request->query('country_id');
+
+        $regions = $this->Documents->Regions->find('all', [
+            'conditions' => ['Regions.country_id' => $country_id],
+        ]);
+
+        $this->set('regions', $regions);
+        $this->set('_serialize', ['regions']);
     }
 
 }

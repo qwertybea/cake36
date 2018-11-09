@@ -3,7 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Document $document
  */
-
+$urlToLinkedListFilter = $this->Url->build([
+    "controller" => "Documents",
+    "action" => "getRegions",
+    "_ext" => "json"
+        ]);
+echo $this->Html->scriptBlock('var urlToLinkedListFilter = "' . $urlToLinkedListFilter . '";', ['block' => true]);
+echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -22,6 +28,7 @@
     <fieldset>
         <legend><?= __('Edit Document') ?></legend>
         <?php
+        debug($document);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('other_details');
@@ -30,6 +37,10 @@
             echo $this->Form->control('document_cover_tmp', ['label' => 'Document Cover', 'type' => 'file']);
             echo $this->Form->control('remove_cover', ['type' => 'checkbox']);
             echo '<hr>';
+
+
+            echo $this->Form->control('country_id', ['options' => $countries]);
+            echo $this->Form->control('region_id', ['options' => $regions]);
 
 
             echo $this->Form->control('published');

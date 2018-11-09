@@ -62,6 +62,15 @@ class DocumentsTable extends Table
         $this->hasOne('TextDocuments', [
             'foreignKey' => 'document_id'
         ]);
+
+        $this->belongsTo('Countries', [
+            'foreignKey' => 'country_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Regions', [
+            'foreignKey' => 'region_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**

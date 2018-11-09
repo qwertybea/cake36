@@ -54,6 +54,14 @@
             <td><?= h($document->other_details) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Country') ?></th>
+            <td><?= h($document->country->name) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Region') ?></th>
+            <td><?= h($document->region->name) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($document->created) ?></td>
         </tr>
