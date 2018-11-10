@@ -7,10 +7,14 @@ $urlToGetCountries = $this->Url->build([
         ]);
 echo $this->Html->scriptBlock('var urlToRestApi = "' . $urlToRestApi . '";', ['block' => true]);
 echo $this->Html->scriptBlock('var urlToGetCountries = "' . $urlToGetCountries . '";', ['block' => true]);
+echo $this->Html->scriptBlock('var csrfToken = '.json_encode($this->request->getParam('_csrfToken')).';', ['block' => true]);
+
 echo $this->Html->script(['regions/index', 'back_to_top'], ['block' => 'scriptBottom']);
 ?>
 
 <button onclick="topFunction()" id="toTop" title="Go to top"><i class="fa fa-chevron-up"></i></button>
+
+<!-- <?= $this->form->control('csrfToken', ['type' => 'hidden', 'value' => $this->request->getParam('_csrfToken')]) ?> -->
 
 <div class="container">
     <div class="row">

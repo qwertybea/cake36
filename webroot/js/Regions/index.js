@@ -92,7 +92,8 @@ function regionAction(type, id) {
             type: requestType,
             headers: {
                 // 'X-CSRF-Token': $('[name="_csrfToken"]').val()
-                'X-CSRF-Token': '5da692bc8b92ebb16c42655af955600ecd1ef16af67442dd4669080be9abe2a0c1ed778ca779413e923bad8f392132e3affe18f6b705db9f5e2b98276a9a03c9'
+                'X-CSRF-Token': csrfToken
+                // 'X-CSRF-Token': $('#csrftoken').val()
             },
             url: ajaxUrl,
             dataType: "json",
