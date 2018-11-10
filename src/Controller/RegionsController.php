@@ -8,8 +8,10 @@ class RegionsController extends AppController {
 
     public $paginate = [
         'page' => 1,
-        'limit' => 100,
-        'maxLimit' => 150,
+        'limit' => 5000,
+        'maxLimit' => 5000,
+        'contain' => ['Countries'],
+        'conditions' => ['Regions.name !=' => ''],
 /*        'fields' => [
             'id', 'name', 'description'
         ],
@@ -17,5 +19,46 @@ class RegionsController extends AppController {
             'id', 'name', 'description'
         ]
     ];
+
+    public function initialize()
+    {
+        parent::initialize();
+        
+        $my_var = 123;
+
+        $this->set(compact('my_var'));
+
+    }
+
+    public function isAuthorized($user) {
+        $action = $this->request->getParam('action');
+
+        if ($action == 'index') {
+            if ($user) {
+                if ($user['role']['role'] == 'admin') {
+                    return true;
+                } else if ($user['role']['role'] == 'creator' AND $user['verified'] == true) {
+                    return true;
+                }
+            }
+        }
+
+        if ($user) {
+            if ($user['role']['role'] == 'admin') {
+                return true;
+            } else if ($user['role']['role'] == 'creator' AND $user['verified'] == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function beforeFilter(\Cake\Event\Event $event){
+        parent::beforeFilter($event);
+        if($this->request->param('action') === 'add'){
+            $this->eventManager()->off($this->Csrf);
+        }
+    }
 
 }

@@ -10,6 +10,9 @@
                 <?= $this->Html->link(__('New {0} document', $type['type']), ['controller' => 'Documents', 'action' => 'add', $type->id]) ?>
             </li>
         <?php endforeach; ?>
+        <li>
+            <?= $this->Html->link(__('Modify regions'), ['controller' => 'Regions', 'action' => 'index']) ?>
+        </li>
     </ul>
 </nav>
 <div class="documents index large-9 medium-8 columns content">

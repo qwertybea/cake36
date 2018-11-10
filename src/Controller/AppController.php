@@ -85,24 +85,15 @@ class AppController extends Controller
         ]);
 
         $this->setLoc();
+
+        // array_push($this->paginate['contain'], 'Countries');
+        // debug($this->paginate);
+        // die();
+
     }
 
     public function isAuthorized($user) {
-        $controller = $this->request->getParam('controller');
-        $action = $this->request->getParam('action');
-        
-        if ($controller == 'Regions' AND $action == 'index') {
-            if ($user) {
-                if ($user['role']['role'] == 'admin') {
-                    return true;
-                } else if ($user['role']['role'] == 'creator' AND $user['verified'] == true) {
-                    return true;
-                }
-            }
-        }
-
         return false;
-        
     }
 
     // http://www.bravo-kernel.com/2015/04/how-to-build-a-cakephp-3-rest-api-in-minutes#3-Enable-the-API

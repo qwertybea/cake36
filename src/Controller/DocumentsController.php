@@ -70,6 +70,7 @@ class DocumentsController extends AppController
                 'Documents.published' => 1,
                 'Documents.deleted' => 0
             ],
+            'order' => ['Documents.created' => 'DESC'],
         ];
         $documents = $this->paginate($this->Documents);
 
@@ -83,6 +84,7 @@ class DocumentsController extends AppController
             'conditions' => [
                 'Documents.deleted' => 0
             ],
+            'order' => ['Documents.created' => 'DESC'],
         ];
         $documents = $this->paginate($this->Documents);
 
@@ -100,7 +102,8 @@ class DocumentsController extends AppController
     {
         if ($this->canView($id)) {
             $document = $this->Documents->get($id, [
-                'contain' => ['DocumentTypes', 
+                'contain' => [
+                    'DocumentTypes', 
                     'Users' => 'Roles', 
                     'Interactions', 
                     'TextDocuments', 
@@ -341,7 +344,10 @@ class DocumentsController extends AppController
 
                 $countries = $this->Documents->Countries->find('list', ['limit' => 300]);
                 $regions = $this->Documents->Regions->find('list', [
-                    'conditions' => ['Regions.country_id' => $document->country_id],
+                    'conditions' => [
+                        'Regions.country_id' => $document->country_id,
+                        'Regions.name !=' => ''
+                    ],
                 ]);
 
                 $this->set(compact('document', 'textDocument', 'countries', 'regions'));
@@ -630,7 +636,11 @@ class DocumentsController extends AppController
             $term = $this->request->query['term'];
             // TODO make it multilingual by searching for their value in i18n
             $results = $this->Documents->find('all', array(
-                'conditions' => array('Documents.name LIKE ' => '%' . $term . '%')
+                'conditions' => array(
+                    'Documents.name LIKE ' => '%' . $term . '%',
+                    'Documents.published' => 1,
+                    'Documents.deleted' => 0,
+                )
             ));
             $resultArr = array();
             foreach ($results as $result) {
@@ -647,7 +657,10 @@ class DocumentsController extends AppController
         $country_id = $this->request->query('country_id');
 
         $regions = $this->Documents->Regions->find('all', [
-            'conditions' => ['Regions.country_id' => $country_id],
+            'conditions' => [
+                'Regions.country_id' => $country_id,
+                'Regions.name !=' => ''
+            ],
         ]);
 
         $this->set('regions', $regions);

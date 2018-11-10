@@ -48,6 +48,20 @@ Router::extensions(['json', 'xml']);
  */
 Router::defaultRouteClass(DashedRoute::class);
 
+Router::prefix('api', function ($routes) {
+    $routes->extensions(['json', 'xml']);
+    // http://www.bravo-kernel.com/2015/04/how-to-build-a-cakephp-3-rest-api-in-minutes#3-Enable-the-API
+    // 3.a) expose one or more controllers
+    $routes->resources('Regions');
+    $routes->resources('Users');
+    Router::connect('/api/users/register', ['controller' => 'Users', 'action' => 'add', 'prefix' => 'api']);
+    $routes->fallbacks('InflectedRoute');
+});
+
+Router::prefix('Admin', function ($routes) {
+    $routes->fallbacks('InflectedRoute');
+});
+
 Router::scope('/', function (RouteBuilder $routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -59,9 +73,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/signup', ['controller' => 'Users', 'action' => 'add', 'Sign up']);
     $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout', 'Log out']);
 
-    // http://www.bravo-kernel.com/2015/04/how-to-build-a-cakephp-3-rest-api-in-minutes#3-Enable-the-API
-    // 3.a) expose one or more controllers
-    $routes->resources('Cocktails');
+    
 
     /**
      * Connect catchall routes for all controllers.
@@ -81,3 +93,5 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->fallbacks(DashedRoute::class);
 });
+
+Plugin::routes();

@@ -26,19 +26,25 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-    <?= $this->Html->css('my_style.css') ?>
-
-    <!-- This is probably a bad way of doing it -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <?php 
+    echo $this->Html->css([
+            'base.css',
+            'style.css',
+            'my_style.css',
+            'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+            'Regions/basic',
+            'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+        ]);
+    ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?php
         echo $this->Html->script([
             'https://code.jquery.com/jquery-1.12.4.js',
-            'https://code.jquery.com/ui/1.12.1/jquery-ui.js'
+            'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
+            'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
                 ], ['block' => 'scriptLibraries']
         );
     ?>
