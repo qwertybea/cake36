@@ -73,7 +73,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/signup', ['controller' => 'Users', 'action' => 'add', 'Sign up']);
     $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout', 'Log out']);
 
-    
+    $routes->connect('/admin', ['controller' => 'regions', 'action' => 'index', 'home', 'prefix' => 'admin']);
 
     /**
      * Connect catchall routes for all controllers.

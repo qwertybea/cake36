@@ -50,6 +50,49 @@ class RegionsController extends AppController {
             $this->paginate['conditions']['Regions.name !='] = '';
             $this->paginate['conditions']['Countries.name !='] = '';
         });
+
+
+
+        $action = $this->request->getParam('action');
+        
+
+        if ($action == 'delete') {
+            
+            $id = $this->request->getParam('id');
+            $name = $this->request->getParam('name');
+
+            $region = $this->Regions->get($id, [
+
+                'contain' => ['Documents'],
+
+            ]);
+
+            if ($region['documents']) {
+                
+                // if documents are connected to the region we do not allow to delete it
+                // we then change the response code and content to tell the browser
+                // after that we kill the query to prevent deletion
+
+                $error = array(
+                    'error' => array(
+                        'msg' => 'This region is attached to documents so you cannot delete it.'
+                    )
+                );
+                // echo json_encode($error);
+
+                $this->response = $this->response->withStatus(409);
+                $this->response = $this->response->withType('json');
+                $this->response = $this->response->withStringBody(json_encode($error, JSON_PRETTY_PRINT));
+                // var_dump($response);
+                // var_dump($response);
+                $this->response->send();
+                // not necesseray put just making sure we end the process here
+                die();
+                // return $this->response;
+
+            }
+
+        }
     }
 
 }

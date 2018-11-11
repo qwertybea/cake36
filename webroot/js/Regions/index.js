@@ -100,11 +100,22 @@ function regionAction(type, id) {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(regionData),
             success: function (msg) {
+
+                console.log(msg);
+
                 if (msg) {
                     alert('Region data has been ' + statusArr[type] + ' successfully.');
                     getRegions();
                     $('.form')[0].reset();
                     $('.formData').slideUp();
+                } else {
+                    alert('Some problem occurred, please try again.');
+                }
+            },
+            error: function (msg) {
+
+                if (msg) {
+                    alert("Error\n"+msg.responseJSON.error.msg);
                 } else {
                     alert('Some problem occurred, please try again.');
                 }

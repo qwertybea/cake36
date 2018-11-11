@@ -23,6 +23,8 @@ class RegionsController extends AppController {
     public function initialize()
     {
         parent::initialize();
+
+        $this->viewBuilder()->setLayout('monopage');
         
         $my_var = 123;
 
