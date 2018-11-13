@@ -44,6 +44,9 @@ use Cake\Mailer\Email;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 
+// https://github.com/FriendsOfCake/bootstrap-ui
+\Cake\Core\Plugin::load('BootstrapUI');
+
 /**
  * Uncomment block of code below if you want to use `.env` file during development.
  * You should copy `config/.env.default to `config/.env` and set/modify the

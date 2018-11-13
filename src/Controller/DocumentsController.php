@@ -554,42 +554,63 @@ class DocumentsController extends AppController
 
     public function handleViewInteraction($doc_id)
     {
-        $user = $this->Auth->user();
-        $visitor_id = $this->Documents->Users->find('all', [
-            'contain' => 'Roles',
-            'conditions' => [
-                'Roles.role' => 'visitor'
-            ]
-        ])->first()['id'];
 
-        if ($user) {
-            $user_id = $this->Auth->user()['id'];
+        $can_view = false;
+        $session = $this->getRequest()->getSession();
+
+        $viewed_docs = $session->read('viewed_docs');
+
+        if (!$viewed_docs) {
+            $viewed_docs = array($doc_id);
+            $session->write('viewed_docs', $viewed_docs);
+            $can_view = true;
         } else {
-            $user_id = $visitor_id;
+            if (!in_array($doc_id, $viewed_docs)) {
+                array_push($viewed_docs, $doc_id);
+                $session->write('viewed_docs', $viewed_docs);
+                $can_view = true;
+            }
         }
         
-        $interactive_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
-            'conditions' => [
-                'InteractiveMethods.method' => 'view'
-            ]
-        ])->first()['id'];
+        if ($can_view) {
+            # code...
+            $user = $this->Auth->user();
 
-        $interaction = $this->Documents->Interactions->find('all', [
-            'conditions' => [
-                'Interactions.document_id' => $doc_id,
-                'Interactions.user_id' => $user_id,
-                'Interactions.interactiveMethod_id' => $interactive_method_id
-            ]
-        ])->first();
+            if ($user) {
+                $user_id = $this->Auth->user()['id'];
+            } else {
+                $visitor_id = $this->Documents->Users->find('all', [
+                    'contain' => 'Roles',
+                    'conditions' => [
+                        'Roles.role' => 'visitor'
+                    ]
+                ])->first()['id'];
+                $user_id = $visitor_id;
+            }
+            
+            $interactive_method_id = $this->Documents->Interactions->InteractiveMethods->find('all', [
+                'conditions' => [
+                    'InteractiveMethods.method' => 'view'
+                ]
+            ])->first()['id'];
 
-        //if (!$interaction || $user_id == $visitor_id) {
-            $new_interaction = $this->Documents->Interactions->newEntity([
-                'document_id' => $doc_id,
-                'user_id' => $user_id,
-                'interactiveMethod_id' => $interactive_method_id
-            ]);
-            $this->Documents->Interactions->save($new_interaction);
-        //}
+            $interaction = $this->Documents->Interactions->find('all', [
+                'conditions' => [
+                    'Interactions.document_id' => $doc_id,
+                    'Interactions.user_id' => $user_id,
+                    'Interactions.interactiveMethod_id' => $interactive_method_id
+                ]
+            ])->first();
+
+            //if (!$interaction || $user_id == $visitor_id) {
+                $new_interaction = $this->Documents->Interactions->newEntity([
+                    'document_id' => $doc_id,
+                    'user_id' => $user_id,
+                    'interactiveMethod_id' => $interactive_method_id
+                ]);
+                $this->Documents->Interactions->save($new_interaction);
+            //}
+        }
     }
 
     public function handleFavorite($doc_id)

@@ -1,21 +1,15 @@
 <?php
 /* @var $this \Cake\View\View */
 $this->extend('/Layout/TwitterBootstrap/dashboard');
+echo $this->Html->script(['back_to_top'], ['block' => 'scriptBottom']);
+?>
+<button onclick="topFunction()" id="toTop" title="Go to top"><i class="fa fa-chevron-up"></i></button>
+<?php
 $this->start('tb_actions');
 ?>
     <li><?= $this->Html->link(__('New Regions'), ['action' => 'add']); ?></li>
 <?php $this->end(); ?>
 <?php $this->assign('tb_sidebar', '<ul class="nav nav-sidebar">' . $this->fetch('tb_actions') . '</ul>'); ?>
-<?php 
-$this->start('my_test_start');
-
-echo 123;
-
-$this->end();
-
-$this->fetch('my_test_start');
-
-?>
 
 <table class="table table-striped" cellpadding="0" cellspacing="0">
     <thead>

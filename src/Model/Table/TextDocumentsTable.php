@@ -36,7 +36,7 @@ class TextDocumentsTable extends Table
         $this->setPrimaryKey('id');
 
 
-        $this->addBehavior('Translate', ['fields' => ['text']]);
+        // $this->addBehavior('Translate', ['fields' => ['text']]);
 
         $this->belongsTo('Documents', [
             'foreignKey' => 'document_id',

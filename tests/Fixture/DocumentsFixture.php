@@ -62,6 +62,36 @@ class DocumentsFixture extends TestFixture
                 'country_id' => 1,
                 'region_id' => 1
             ],
+            [
+                'id' => 2,
+                'type_id' => 1,
+                'user_id' => 1,
+                'document_cover' => 1,
+                'name' => 'Lorem ipsum dolor sit amet',
+                'description' => 'Lorem ipsum dolor sit amet',
+                'other_details' => 'Lorem ipsum dolor sit amet',
+                'published' => 0,
+                'deleted' => 0,
+                'created' => '2018-11-09 06:47:05',
+                'modified' => '2018-11-09 06:47:05',
+                'country_id' => 1,
+                'region_id' => 1
+            ],
+            [
+                'id' => 3,
+                'type_id' => 1,
+                'user_id' => 1,
+                'document_cover' => 1,
+                'name' => 'Lorem ipsum dolor sit amet',
+                'description' => 'Lorem ipsum dolor sit amet',
+                'other_details' => 'Lorem ipsum dolor sit amet',
+                'published' => 1,
+                'deleted' => 1,
+                'created' => '2018-11-09 06:47:05',
+                'modified' => '2018-11-09 06:47:05',
+                'country_id' => 1,
+                'region_id' => 1
+            ],
         ];
         parent::init();
     }

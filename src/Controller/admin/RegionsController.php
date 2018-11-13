@@ -26,22 +26,21 @@ class RegionsController extends AppController {
     public function initialize() {
         parent::initialize();
         // Use the Bootstrap layout from the plugin.
-        $this->viewBuilder()->setLayout('admin');
+        // $this->viewBuilder()->setLayout('admin');
+        $this->viewBuilder()->setClassName('AppTwitBoot');
     }
 
-    // public function isAuthorized($user) {
-    //     if ($user) {
-    //         if ($user['role']['role'] == 'admin') {
-    //             return true;
-    //         }    
-    //     }
-    //     return false;
-    // }
+    public function isAuthorized($user) {
+        if ($user) {
+            if ($user['role']['role'] == 'admin') {
+                return true;
+            }    
+        }
+        return false;
+    }
 
     public function beforeFilter(\Cake\Event\Event $event){
         parent::beforeFilter($event);
-
-        // we seem to be in a different session as $this->Auth returns false
 
         // $user = $this->Auth->user();
         // $auths = array();

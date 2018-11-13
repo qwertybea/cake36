@@ -124,7 +124,6 @@ class PagesController extends AppController
 
     public function about()
     {
-        
     }
 
     public function changeLang($lang = 'en_US')

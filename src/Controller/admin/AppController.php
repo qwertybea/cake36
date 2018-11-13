@@ -27,6 +27,44 @@ class AppController extends Controller {
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'username',
+                        'password' => 'password'
+                    ],
+                    'contain' => [
+                        'Roles'
+                    ]
+                ]
+            ],
+            'loginAction' =>[
+                'prefix' => false,
+                'controller' => 'Users',
+                'action' => 'login'
+             ],
+            'loginRedirect' => [
+                'prefix' => false,
+                'controller' => 'Pages',
+                'action' => 'myhome'
+            ],
+            'logoutRedirect' => [
+                'prefix' => false,
+                'controller' => 'Pages',
+                'action' => 'myhome'
+            ],
+            'authorize' => ['Controller'],
+             // Si pas autorisé, on renvoit sur la page précédente
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+
+        $this->Auth->allow(['changeLang', 'login', 'activate', 'verification', 'send_verification']);
+    }
+
+    public function isAuthorized($user) {
+        return false;
     }
 
 }
