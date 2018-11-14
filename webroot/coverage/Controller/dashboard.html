@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\Program Files (x86)\Ampps\www\A2018\cake36\src/Controller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../.css/style.css" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="../.js/html5shiv.min.js"></script>
+  <script src="../.js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">C:\Program Files (x86)\Ampps\www\A2018\cake36\src</a></li>
+        <li><a href="index.html">Controller</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="CountriesController.php.html#9">App\Controller\CountriesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#9">App\Controller\EmailVerificationsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RegionsController.php.html#7">App\Controller\RegionsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#14">App\Controller\TextDocumentsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#15">App\Controller\UsersController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/AppController.php.html#7">App\Controller\Admin\AppController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#7">App\Controller\Admin\RegionsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/AppController.php.html#8">App\Controller\Api\AppController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#7">App\Controller\Api\RegionsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/UsersController.php.html#10">App\Controller\Api\UsersController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#31">App\Controller\AppController</a></td><td class="text-right">14%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#16">App\Controller\DocumentsController</a></td><td class="text-right">47%</td></tr>
+       <tr><td><a href="PagesController.php.html#31">App\Controller\PagesController</a></td><td class="text-right">54%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="UsersController.php.html#15">App\Controller\UsersController</a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="DocumentsController.php.html#16">App\Controller\DocumentsController</a></td><td class="text-right">584</td></tr>
+       <tr><td><a href="AppController.php.html#31">App\Controller\AppController</a></td><td class="text-right">421</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#7">App\Controller\Admin\RegionsController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#9">App\Controller\EmailVerificationsController</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#14">App\Controller\TextDocumentsController</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="RegionsController.php.html#7">App\Controller\RegionsController</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#7">App\Controller\Api\RegionsController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="api/UsersController.php.html#10">App\Controller\Api\UsersController</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="CountriesController.php.html#9">App\Controller\CountriesController</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="PagesController.php.html#31">App\Controller\PagesController</a></td><td class="text-right">28</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AppController.php.html#95"><abbr title="App\Controller\AppController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#49"><abbr title="App\Controller\UsersController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#189"><abbr title="App\Controller\UsersController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#171"><abbr title="App\Controller\UsersController::login">login</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#158"><abbr title="App\Controller\UsersController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#133"><abbr title="App\Controller\UsersController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#85"><abbr title="App\Controller\UsersController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#63"><abbr title="App\Controller\UsersController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#23"><abbr title="App\Controller\UsersController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/AppController.php.html#18"><abbr title="App\Controller\Admin\AppController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#17"><abbr title="App\Controller\UsersController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#119"><abbr title="App\Controller\TextDocumentsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#95"><abbr title="App\Controller\TextDocumentsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#73"><abbr title="App\Controller\TextDocumentsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#59"><abbr title="App\Controller\TextDocumentsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#45"><abbr title="App\Controller\TextDocumentsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UsersController.php.html#195"><abbr title="App\Controller\UsersController::hasRights">hasRights</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/AppController.php.html#66"><abbr title="App\Controller\Admin\AppController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#16"><abbr title="App\Controller\TextDocumentsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/AppController.php.html#12"><abbr title="App\Controller\Api\AppController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/UsersController.php.html#18"><abbr title="App\Controller\Api\UsersController::anonymousFunction:18#112">anonymousFunction:18#112</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/UsersController.php.html#12"><abbr title="App\Controller\Api\UsersController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#48"><abbr title="App\Controller\Api\RegionsController::anonymousFunction:48#292">anonymousFunction:48#292</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#44"><abbr title="App\Controller\Api\RegionsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#37"><abbr title="App\Controller\Api\RegionsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#21"><abbr title="App\Controller\Api\RegionsController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#140"><abbr title="App\Controller\Admin\RegionsController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#26"><abbr title="App\Controller\Admin\RegionsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#115"><abbr title="App\Controller\Admin\RegionsController::edit">edit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#92"><abbr title="App\Controller\Admin\RegionsController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#78"><abbr title="App\Controller\Admin\RegionsController::view">view</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#64"><abbr title="App\Controller\Admin\RegionsController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#42"><abbr title="App\Controller\Admin\RegionsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#33"><abbr title="App\Controller\Admin\RegionsController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#22"><abbr title="App\Controller\TextDocumentsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RegionsController.php.html#59"><abbr title="App\Controller\RegionsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#122"><abbr title="App\Controller\AppController::changeLang">changeLang</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RegionsController.php.html#35"><abbr title="App\Controller\RegionsController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#133"><abbr title="App\Controller\AppController::array_on_key">array_on_key</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#145"><abbr title="App\Controller\AppController::update_cover">update_cover</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#170"><abbr title="App\Controller\AppController::add_file">add_file</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#197"><abbr title="App\Controller\AppController::delete_file">delete_file</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#209"><abbr title="App\Controller\AppController::send_verification">send_verification</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AppController.php.html#244"><abbr title="App\Controller\AppController::getRealIpAddr">getRealIpAddr</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CountriesController.php.html#11"><abbr title="App\Controller\CountriesController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CountriesController.php.html#16"><abbr title="App\Controller\CountriesController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CountriesController.php.html#33"><abbr title="App\Controller\CountriesController::getCountries">getCountries</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#81"><abbr title="App\Controller\DocumentsController::viewAllDocuments">viewAllDocuments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#419"><abbr title="App\Controller\DocumentsController::myFavorites">myFavorites</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#457"><abbr title="App\Controller\DocumentsController::search">search</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="api/UsersController.php.html#34"><abbr title="App\Controller\Api\UsersController::token">token</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#129"><abbr title="App\Controller\PagesController::changeLang">changeLang</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#55"><abbr title="App\Controller\PagesController::display">display</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#84"><abbr title="App\Controller\EmailVerificationsController::verifyQuery">verifyQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#79"><abbr title="App\Controller\EmailVerificationsController::send_verification">send_verification</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#48"><abbr title="App\Controller\EmailVerificationsController::verification">verification</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#17"><abbr title="App\Controller\EmailVerificationsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#11"><abbr title="App\Controller\EmailVerificationsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#677"><abbr title="App\Controller\DocumentsController::getRegions">getRegions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="RegionsController.php.html#23"><abbr title="App\Controller\RegionsController::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#654"><abbr title="App\Controller\DocumentsController::findDocuments">findDocuments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#617"><abbr title="App\Controller\DocumentsController::handleFavorite">handleFavorite</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PagesController.php.html#125"><abbr title="App\Controller\PagesController::about">about</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#372"><abbr title="App\Controller\DocumentsController::delete">delete</abbr></a></td><td class="text-right">13%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#518"><abbr title="App\Controller\DocumentsController::canView">canView</abbr></a></td><td class="text-right">41%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#488"><abbr title="App\Controller\DocumentsController::hasRights">hasRights</abbr></a></td><td class="text-right">41%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#299"><abbr title="App\Controller\DocumentsController::edit">edit</abbr></a></td><td class="text-right">48%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#168"><abbr title="App\Controller\DocumentsController::add">add</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#556"><abbr title="App\Controller\DocumentsController::handleViewInteraction">handleViewInteraction</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#25"><abbr title="App\Controller\DocumentsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="DocumentsController.php.html#102"><abbr title="App\Controller\DocumentsController::view">view</abbr></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="RegionsController.php.html#35"><abbr title="App\Controller\RegionsController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="PagesController.php.html#55"><abbr title="App\Controller\PagesController::display">display</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="AppController.php.html#145"><abbr title="App\Controller\AppController::update_cover">update_cover</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#17"><abbr title="App\Controller\EmailVerificationsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#21"><abbr title="App\Controller\Api\RegionsController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="UsersController.php.html#195"><abbr title="App\Controller\UsersController::hasRights">hasRights</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="DocumentsController.php.html#518"><abbr title="App\Controller\DocumentsController::canView">canView</abbr></a></td><td class="text-right">21</td></tr>
+       <tr><td><a href="DocumentsController.php.html#488"><abbr title="App\Controller\DocumentsController::hasRights">hasRights</abbr></a></td><td class="text-right">21</td></tr>
+       <tr><td><a href="UsersController.php.html#23"><abbr title="App\Controller\UsersController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#22"><abbr title="App\Controller\TextDocumentsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="UsersController.php.html#171"><abbr title="App\Controller\UsersController::login">login</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#48"><abbr title="App\Controller\EmailVerificationsController::verification">verification</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="UsersController.php.html#85"><abbr title="App\Controller\UsersController::add">add</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AppController.php.html#170"><abbr title="App\Controller\AppController::add_file">add_file</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DocumentsController.php.html#372"><abbr title="App\Controller\DocumentsController::delete">delete</abbr></a></td><td class="text-right">14</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#92"><abbr title="App\Controller\Admin\RegionsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#33"><abbr title="App\Controller\Admin\RegionsController::isAuthorized">isAuthorized</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#95"><abbr title="App\Controller\TextDocumentsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#73"><abbr title="App\Controller\TextDocumentsController::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#44"><abbr title="App\Controller\Api\RegionsController::initialize">initialize</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AppController.php.html#244"><abbr title="App\Controller\AppController::getRealIpAddr">getRealIpAddr</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#140"><abbr title="App\Controller\Admin\RegionsController::delete">delete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="admin/RegionsController.php.html#115"><abbr title="App\Controller\Admin\RegionsController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DocumentsController.php.html#654"><abbr title="App\Controller\DocumentsController::findDocuments">findDocuments</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DocumentsController.php.html#617"><abbr title="App\Controller\DocumentsController::handleFavorite">handleFavorite</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="UsersController.php.html#133"><abbr title="App\Controller\UsersController::edit">edit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AppController.php.html#133"><abbr title="App\Controller\AppController::array_on_key">array_on_key</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DocumentsController.php.html#168"><abbr title="App\Controller\DocumentsController::add">add</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="DocumentsController.php.html#299"><abbr title="App\Controller\DocumentsController::edit">edit</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="api/RegionsController.php.html#37"><abbr title="App\Controller\Api\RegionsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="api/UsersController.php.html#18"><abbr title="App\Controller\Api\UsersController::anonymousFunction:18#112">anonymousFunction:18#112</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UsersController.php.html#158"><abbr title="App\Controller\UsersController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="EmailVerificationsController.php.html#84"><abbr title="App\Controller\EmailVerificationsController::verifyQuery">verifyQuery</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TextDocumentsController.php.html#119"><abbr title="App\Controller\TextDocumentsController::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="RegionsController.php.html#59"><abbr title="App\Controller\RegionsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DocumentsController.php.html#457"><abbr title="App\Controller\DocumentsController::search">search</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DocumentsController.php.html#419"><abbr title="App\Controller\DocumentsController::myFavorites">myFavorites</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CountriesController.php.html#33"><abbr title="App\Controller\CountriesController::getCountries">getCountries</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CountriesController.php.html#16"><abbr title="App\Controller\CountriesController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AppController.php.html#209"><abbr title="App\Controller\AppController::send_verification">send_verification</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AppController.php.html#197"><abbr title="App\Controller\AppController::delete_file">delete_file</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="api/UsersController.php.html#34"><abbr title="App\Controller\Api\UsersController::token">token</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DocumentsController.php.html#556"><abbr title="App\Controller\DocumentsController::handleViewInteraction">handleViewInteraction</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="DocumentsController.php.html#25"><abbr title="App\Controller\DocumentsController::beforeFilter">beforeFilter</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="DocumentsController.php.html#102"><abbr title="App\Controller\DocumentsController::view">view</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 5.3.2</a> using <a href="https://secure.php.net/" target="_top">PHP 7.1.8</a> with <a href="https://xdebug.org/">Xdebug 2.5.5</a> and <a href="https://phpunit.de/">PHPUnit 6.5.13</a> at Wed Nov 14 17:58:56 UTC 2018.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../.js/jquery.min.js" type="text/javascript"></script>
+  <script src="../.js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../.js/holder.min.js" type="text/javascript"></script>
+  <script src="../.js/d3.min.js" type="text/javascript"></script>
+  <script src="../.js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([10,0,1,0,0,1,1,0,0,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([63,0,1,0,0,3,0,1,2,1,0,13], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[14.102564102564102,25,"<a href=\"AppController.php.html#31\">App\\Controller\\AppController<\/a>"],[0,5,"<a href=\"CountriesController.php.html#9\">App\\Controller\\CountriesController<\/a>"],[47.385620915032675,60,"<a href=\"DocumentsController.php.html#16\">App\\Controller\\DocumentsController<\/a>"],[0,15,"<a href=\"EmailVerificationsController.php.html#9\">App\\Controller\\EmailVerificationsController<\/a>"],[100,4,"<a href=\"ErrorController.php.html#24\">App\\Controller\\ErrorController<\/a>"],[54.54545454545454,13,"<a href=\"PagesController.php.html#31\">App\\Controller\\PagesController<\/a>"],[0,13,"<a href=\"RegionsController.php.html#7\">App\\Controller\\RegionsController<\/a>"],[0,15,"<a href=\"TextDocumentsController.php.html#14\">App\\Controller\\TextDocumentsController<\/a>"],[0,26,"<a href=\"UsersController.php.html#15\">App\\Controller\\UsersController<\/a>"],[0,2,"<a href=\"admin\/AppController.php.html#7\">App\\Controller\\Admin\\AppController<\/a>"],[0,16,"<a href=\"admin\/RegionsController.php.html#7\">App\\Controller\\Admin\\RegionsController<\/a>"],[0,1,"<a href=\"api\/AppController.php.html#8\">App\\Controller\\Api\\AppController<\/a>"],[0,12,"<a href=\"api\/RegionsController.php.html#7\">App\\Controller\\Api\\RegionsController<\/a>"],[0,7,"<a href=\"api\/UsersController.php.html#10\">App\\Controller\\Api\\UsersController<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"AppController.php.html#43\">App\\Controller\\AppController::initialize<\/a>"],[0,1,"<a href=\"AppController.php.html#95\">App\\Controller\\AppController::isAuthorized<\/a>"],[0,1,"<a href=\"AppController.php.html#122\">App\\Controller\\AppController::changeLang<\/a>"],[100,1,"<a href=\"AppController.php.html#128\">App\\Controller\\AppController::setLoc<\/a>"],[0,3,"<a href=\"AppController.php.html#133\">App\\Controller\\AppController::array_on_key<\/a>"],[0,7,"<a href=\"AppController.php.html#145\">App\\Controller\\AppController::update_cover<\/a>"],[0,4,"<a href=\"AppController.php.html#170\">App\\Controller\\AppController::add_file<\/a>"],[0,2,"<a href=\"AppController.php.html#197\">App\\Controller\\AppController::delete_file<\/a>"],[0,2,"<a href=\"AppController.php.html#209\">App\\Controller\\AppController::send_verification<\/a>"],[0,3,"<a href=\"AppController.php.html#244\">App\\Controller\\AppController::getRealIpAddr<\/a>"],[0,1,"<a href=\"CountriesController.php.html#11\">App\\Controller\\CountriesController::initialize<\/a>"],[0,2,"<a href=\"CountriesController.php.html#16\">App\\Controller\\CountriesController::beforeFilter<\/a>"],[0,2,"<a href=\"CountriesController.php.html#33\">App\\Controller\\CountriesController::getCountries<\/a>"],[100,1,"<a href=\"DocumentsController.php.html#18\">App\\Controller\\DocumentsController::initialize<\/a>"],[77.777777777777786,5,"<a href=\"DocumentsController.php.html#25\">App\\Controller\\DocumentsController::beforeFilter<\/a>"],[100,1,"<a href=\"DocumentsController.php.html#65\">App\\Controller\\DocumentsController::index<\/a>"],[0,1,"<a href=\"DocumentsController.php.html#81\">App\\Controller\\DocumentsController::viewAllDocuments<\/a>"],[88.888888888888886,3,"<a href=\"DocumentsController.php.html#102\">App\\Controller\\DocumentsController::view<\/a>"],[66,7,"<a href=\"DocumentsController.php.html#168\">App\\Controller\\DocumentsController::add<\/a>"],[48.571428571428569,5,"<a href=\"DocumentsController.php.html#299\">App\\Controller\\DocumentsController::edit<\/a>"],[13.333333333333334,4,"<a href=\"DocumentsController.php.html#372\">App\\Controller\\DocumentsController::delete<\/a>"],[100,1,"<a href=\"DocumentsController.php.html#402\">App\\Controller\\DocumentsController::myWork<\/a>"],[0,2,"<a href=\"DocumentsController.php.html#419\">App\\Controller\\DocumentsController::myFavorites<\/a>"],[0,2,"<a href=\"DocumentsController.php.html#457\">App\\Controller\\DocumentsController::search<\/a>"],[41.17647058823529,8,"<a href=\"DocumentsController.php.html#488\">App\\Controller\\DocumentsController::hasRights<\/a>"],[41.17647058823529,8,"<a href=\"DocumentsController.php.html#518\">App\\Controller\\DocumentsController::canView<\/a>"],[75.757575757575751,5,"<a href=\"DocumentsController.php.html#556\">App\\Controller\\DocumentsController::handleViewInteraction<\/a>"],[0,3,"<a href=\"DocumentsController.php.html#617\">App\\Controller\\DocumentsController::handleFavorite<\/a>"],[0,3,"<a href=\"DocumentsController.php.html#654\">App\\Controller\\DocumentsController::findDocuments<\/a>"],[0,1,"<a href=\"DocumentsController.php.html#677\">App\\Controller\\DocumentsController::getRegions<\/a>"],[0,1,"<a href=\"EmailVerificationsController.php.html#11\">App\\Controller\\EmailVerificationsController::initialize<\/a>"],[0,7,"<a href=\"EmailVerificationsController.php.html#17\">App\\Controller\\EmailVerificationsController::beforeFilter<\/a>"],[0,4,"<a href=\"EmailVerificationsController.php.html#48\">App\\Controller\\EmailVerificationsController::verification<\/a>"],[0,1,"<a href=\"EmailVerificationsController.php.html#79\">App\\Controller\\EmailVerificationsController::send_verification<\/a>"],[0,2,"<a href=\"EmailVerificationsController.php.html#84\">App\\Controller\\EmailVerificationsController::verifyQuery<\/a>"],[100,1,"<a href=\"ErrorController.php.html#31\">App\\Controller\\ErrorController::initialize<\/a>"],[100,1,"<a href=\"ErrorController.php.html#45\">App\\Controller\\ErrorController::beforeFilter<\/a>"],[100,1,"<a href=\"ErrorController.php.html#55\">App\\Controller\\ErrorController::beforeRender<\/a>"],[100,1,"<a href=\"ErrorController.php.html#68\">App\\Controller\\ErrorController::afterFilter<\/a>"],[100,1,"<a href=\"PagesController.php.html#33\">App\\Controller\\PagesController::initialize<\/a>"],[100,1,"<a href=\"PagesController.php.html#39\">App\\Controller\\PagesController::beforeFilter<\/a>"],[0,8,"<a href=\"PagesController.php.html#55\">App\\Controller\\PagesController::display<\/a>"],[100,1,"<a href=\"PagesController.php.html#84\">App\\Controller\\PagesController::myhome<\/a>"],[0,1,"<a href=\"PagesController.php.html#125\">App\\Controller\\PagesController::about<\/a>"],[0,1,"<a href=\"PagesController.php.html#129\">App\\Controller\\PagesController::changeLang<\/a>"],[0,1,"<a href=\"RegionsController.php.html#23\">App\\Controller\\RegionsController::initialize<\/a>"],[0,10,"<a href=\"RegionsController.php.html#35\">App\\Controller\\RegionsController::isAuthorized<\/a>"],[0,2,"<a href=\"RegionsController.php.html#59\">App\\Controller\\RegionsController::beforeFilter<\/a>"],[0,1,"<a href=\"TextDocumentsController.php.html#16\">App\\Controller\\TextDocumentsController::initialize<\/a>"],[0,4,"<a href=\"TextDocumentsController.php.html#22\">App\\Controller\\TextDocumentsController::beforeFilter<\/a>"],[0,1,"<a href=\"TextDocumentsController.php.html#45\">App\\Controller\\TextDocumentsController::index<\/a>"],[0,1,"<a href=\"TextDocumentsController.php.html#59\">App\\Controller\\TextDocumentsController::view<\/a>"],[0,3,"<a href=\"TextDocumentsController.php.html#73\">App\\Controller\\TextDocumentsController::add<\/a>"],[0,3,"<a href=\"TextDocumentsController.php.html#95\">App\\Controller\\TextDocumentsController::edit<\/a>"],[0,2,"<a href=\"TextDocumentsController.php.html#119\">App\\Controller\\TextDocumentsController::delete<\/a>"],[0,1,"<a href=\"UsersController.php.html#17\">App\\Controller\\UsersController::initialize<\/a>"],[0,4,"<a href=\"UsersController.php.html#23\">App\\Controller\\UsersController::beforeFilter<\/a>"],[0,1,"<a href=\"UsersController.php.html#49\">App\\Controller\\UsersController::index<\/a>"],[0,1,"<a href=\"UsersController.php.html#63\">App\\Controller\\UsersController::view<\/a>"],[0,4,"<a href=\"UsersController.php.html#85\">App\\Controller\\UsersController::add<\/a>"],[0,3,"<a href=\"UsersController.php.html#133\">App\\Controller\\UsersController::edit<\/a>"],[0,2,"<a href=\"UsersController.php.html#158\">App\\Controller\\UsersController::delete<\/a>"],[0,4,"<a href=\"UsersController.php.html#171\">App\\Controller\\UsersController::login<\/a>"],[0,1,"<a href=\"UsersController.php.html#189\">App\\Controller\\UsersController::logout<\/a>"],[0,5,"<a href=\"UsersController.php.html#195\">App\\Controller\\UsersController::hasRights<\/a>"],[0,1,"<a href=\"admin\/AppController.php.html#18\">App\\Controller\\Admin\\AppController::initialize<\/a>"],[0,1,"<a href=\"admin\/AppController.php.html#66\">App\\Controller\\Admin\\AppController::isAuthorized<\/a>"],[0,1,"<a href=\"admin\/RegionsController.php.html#26\">App\\Controller\\Admin\\RegionsController::initialize<\/a>"],[0,3,"<a href=\"admin\/RegionsController.php.html#33\">App\\Controller\\Admin\\RegionsController::isAuthorized<\/a>"],[0,1,"<a href=\"admin\/RegionsController.php.html#42\">App\\Controller\\Admin\\RegionsController::beforeFilter<\/a>"],[0,1,"<a href=\"admin\/RegionsController.php.html#64\">App\\Controller\\Admin\\RegionsController::index<\/a>"],[0,1,"<a href=\"admin\/RegionsController.php.html#78\">App\\Controller\\Admin\\RegionsController::view<\/a>"],[0,3,"<a href=\"admin\/RegionsController.php.html#92\">App\\Controller\\Admin\\RegionsController::add<\/a>"],[0,3,"<a href=\"admin\/RegionsController.php.html#115\">App\\Controller\\Admin\\RegionsController::edit<\/a>"],[0,3,"<a href=\"admin\/RegionsController.php.html#140\">App\\Controller\\Admin\\RegionsController::delete<\/a>"],[0,1,"<a href=\"api\/AppController.php.html#12\">App\\Controller\\Api\\AppController::initialize<\/a>"],[0,6,"<a href=\"api\/RegionsController.php.html#21\">App\\Controller\\Api\\RegionsController::isAuthorized<\/a>"],[0,2,"<a href=\"api\/RegionsController.php.html#37\">App\\Controller\\Api\\RegionsController::beforeFilter<\/a>"],[0,3,"<a href=\"api\/RegionsController.php.html#44\">App\\Controller\\Api\\RegionsController::initialize<\/a>"],[0,1,"<a href=\"api\/RegionsController.php.html#48\">App\\Controller\\Api\\RegionsController::anonymousFunction:48#292<\/a>"],[0,1,"<a href=\"api\/UsersController.php.html#12\">App\\Controller\\Api\\UsersController::initialize<\/a>"],[100,2,"<a href=\"api\/UsersController.php.html#17\">App\\Controller\\Api\\UsersController::add<\/a>"],[0,2,"<a href=\"api\/UsersController.php.html#18\">App\\Controller\\Api\\UsersController::anonymousFunction:18#112<\/a>"],[0,2,"<a href=\"api\/UsersController.php.html#34\">App\\Controller\\Api\\UsersController::token<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

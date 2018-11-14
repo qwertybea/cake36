@@ -61,6 +61,10 @@
             <td><a href="https://github.com/qwertybea/cake36">https://github.com/qwertybea/cake36</a></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Test Coverage') ?></th>
+            <td><?= $this->Html->link(__('Covergae'), '/coverage/index.html') ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Problèmes') ?></th>
             <td>
                 <p>La traduction des bases de données marchait avec MySql mais pas avec Sqlite.</p>

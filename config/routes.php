@@ -39,9 +39,9 @@ Cake\Core\Configure::write('CakePdf', [
     'orientation' => 'portrait',
     // 'download' => true
 ]);
-define('DOMPDF_ENABLE_AUTOLOAD', false);
-define('DOMPDF_ENABLE_HTML5PARSER', true);
-define('DOMPDF_ENABLE_REMOTE', true);
+// define('DOMPDF_ENABLE_AUTOLOAD', false);
+// define('DOMPDF_ENABLE_HTML5PARSER', true);
+// define('DOMPDF_ENABLE_REMOTE', true);
 
 /**
  * The default class to use for all routes

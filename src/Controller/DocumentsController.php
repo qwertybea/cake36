@@ -197,17 +197,17 @@ class DocumentsController extends AppController
 
                 $document['document_cover'] = $no_cover['id'];
 
-                if (in_array($_SERVER['REMOTE_ADDR'], ["127.0.0.1", "::1"])) {
+                // if (in_array($_SERVER['REMOTE_ADDR'], ["127.0.0.1", "::1"])) {
 
-                    $country = 'Canada';
-                    $region = 'Quebec';
+                //     $country = 'Canada';
+                //     $region = 'Quebec';
 
-                } else {
+                // } else {
                     
-                    $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".$this->getRealIpAddr());
+                //     $xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".$this->getRealIpAddr());
 
-                    debug($xml);
-                }
+                //     debug($xml);
+                // }
 
                 $country = 'Canada';
                 $region = 'Quebec';

@@ -14,6 +14,7 @@ class DocumentsControllerTest extends IntegrationTestCase
     public $authAdmin;
     public $authCreator;
     public $authVisitor;
+    public $documentsController;
     
     public function setUp()
     {
@@ -27,6 +28,7 @@ class DocumentsControllerTest extends IntegrationTestCase
                     'id' => 1,
                     'username' => 'admin',
                     'email' => 'admin@admin.com',
+                    'verified' => true,
                     'role' => [
                         'role' => 'admin',
                     ],
@@ -39,6 +41,7 @@ class DocumentsControllerTest extends IntegrationTestCase
                     'id' => 2,
                     'username' => 'creator',
                     'email' => 'creator@creator.com',
+                    'verified' => true,
                     'role' => [
                         'role' => 'creator',
                     ],
@@ -49,6 +52,8 @@ class DocumentsControllerTest extends IntegrationTestCase
             'Auth' => [
             ]
         ];
+
+        $this->documentsController = new DocumentsController();
     }
 
     public function tearDown()
@@ -56,6 +61,7 @@ class DocumentsControllerTest extends IntegrationTestCase
         unset($this->authAdmin);
         unset($this->authCreator);
         unset($this->authVisitor);
+        unset($this->documentsController);
         parent::tearDown();
     }
 
@@ -70,11 +76,12 @@ class DocumentsControllerTest extends IntegrationTestCase
         'app.users',
         'app.roles',
         'app.files',
-        'app.i18n',
         'app.interactions',
+        'app.interactive_methods',
         'app.text_documents',
         'app.countries',
-        'app.regions'
+        'app.regions',
+        'core.translates'
     ];
 
     // /**
@@ -106,7 +113,7 @@ class DocumentsControllerTest extends IntegrationTestCase
     {
         $this->session($this->authAdmin);
         $this->get('/documents');
-        $this->assertResponseContains('Story city');
+        $this->assertResponseContains('Les documents');
         // echo $this->_response->getBody();
         $this->assertResponseOk();
     }
@@ -145,8 +152,11 @@ class DocumentsControllerTest extends IntegrationTestCase
     public function testAdd()
     {
         $this->session($this->authAdmin);
-        $this->get('/clients/add');
-        $this->assertResponseOk();
+        $this->get('/documents/add/1');
+
+        $this->assertResponseSuccess();
+        $this->assertRedirect(['controller' => 'Documents', 'action' => 'edit', 4]);
+
     }
 
     /**
@@ -157,7 +167,7 @@ class DocumentsControllerTest extends IntegrationTestCase
     public function testEdit()
     {
         $this->session($this->authAdmin);
-        $this->get('/clients/edit/1');
+        $this->get('/documents/edit/1');
         $this->assertResponseOk();
     }
 
@@ -169,29 +179,25 @@ class DocumentsControllerTest extends IntegrationTestCase
     public function testDelete()
     {
         $this->session($this->authAdmin);
-        $this->get('/clients/delete/1');
+        $this->get('/documents/my-work');
+        $this->assertResponseOk();
+        $this->get('/documents/delete/1');
         $this->assertResponseSuccess();
     }
 
     public function testAdminNonPosAuth()
     {
         $this->session($this->authAdmin);
-        $authorized = $this->get('/clients/has-rights/1');
-        $this->assertEquals(true, $authorized);
-    }
-
-    public function testCreatorNonPosAuth()
-    {
-        $this->session($this->authCreator);
-        $authorized = $this->get('/clients/has-rights/1');
-        $this->assertEquals(false, $authorized);
+        $this->get('/documents/edit/1');
+        $this->assertResponseContains('document 1');
+        $this->assertResponseOk();
     }
 
     public function testVisitorNonPosAuth()
     {
         $this->session($this->authVisitor);
-        $authorized = $this->get('/clients/has-rights/1');
-        $this->assertEquals(false, $authorized);
+        $this->get('/documents/edit/1');
+        $this->assertRedirect(['controller' => 'users', 'action' => 'login', 'redirect' => '/documents/edit/1']);
     }
 
     // /**

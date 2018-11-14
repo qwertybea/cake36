@@ -40,7 +40,7 @@ class RegionsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
+                'name' => 'Quebec',
                 'code' => 'Lorem ip',
                 'country_id' => 1
             ],

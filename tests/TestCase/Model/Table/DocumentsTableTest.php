@@ -54,7 +54,7 @@ class DocumentsTableTest extends TestCase
         parent::tearDown();
     }
 
-	public function testFindPublished()
+	public function testFindNotDeleted()
     {
         $query = $this->Documents->find('NotDeleted');
         $this->assertInstanceOf('Cake\ORM\Query', $query);
@@ -78,7 +78,7 @@ class DocumentsTableTest extends TestCase
             [
                 'id' => 2,
                 'type_id' => 1,
-                'user_id' => 1,
+                'user_id' => 2,
                 'document_cover' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
                 'description' => 'Lorem ipsum dolor sit amet',
