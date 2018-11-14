@@ -106,7 +106,7 @@ class DocumentsControllerTest extends IntegrationTestCase
     {
         $this->session($this->authAdmin);
         $this->get('/documents');
-        // $this->assertResponseContains('Story city');
+        $this->assertResponseContains('Story city');
         // echo $this->_response->getBody();
         $this->assertResponseOk();
     }
@@ -171,6 +171,27 @@ class DocumentsControllerTest extends IntegrationTestCase
         $this->session($this->authAdmin);
         $this->get('/clients/delete/1');
         $this->assertResponseSuccess();
+    }
+
+    public function testAdminNonPosAuth()
+    {
+        $this->session($this->authAdmin);
+        $authorized = $this->get('/clients/has-rights/1');
+        $this->assertEquals(true, $authorized);
+    }
+
+    public function testCreatorNonPosAuth()
+    {
+        $this->session($this->authCreator);
+        $authorized = $this->get('/clients/has-rights/1');
+        $this->assertEquals(false, $authorized);
+    }
+
+    public function testVisitorNonPosAuth()
+    {
+        $this->session($this->authVisitor);
+        $authorized = $this->get('/clients/has-rights/1');
+        $this->assertEquals(false, $authorized);
     }
 
     // /**

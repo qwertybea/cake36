@@ -23,7 +23,25 @@ use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
 
-Router::extensions(['json', 'xml']);
+Router::extensions(['json', 'xml', 'pdf']);
+
+Cake\Core\Configure::write('CakePdf', [
+    'engine' => [
+        'className' => 'CakePdf.WkHtmlToPdf',
+        'binary' => 'C:\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
+    ],
+    'margin' => [
+        'bottom' => 15,
+        'left' => 30,
+        'right' => 30,
+        'top' => 30
+    ],
+    'orientation' => 'portrait',
+    // 'download' => true
+]);
+define('DOMPDF_ENABLE_AUTOLOAD', false);
+define('DOMPDF_ENABLE_HTML5PARSER', true);
+define('DOMPDF_ENABLE_REMOTE', true);
 
 /**
  * The default class to use for all routes

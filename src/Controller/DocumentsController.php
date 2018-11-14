@@ -19,6 +19,7 @@ class DocumentsController extends AppController
     {
         parent::initialize();
         // $this->setLoc();
+        ini_set("allow_url_fopen", true);
     }
 
     public function beforeFilter(Event $event)

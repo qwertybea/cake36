@@ -46,6 +46,8 @@ use Cake\Utility\Security;
 
 // https://github.com/FriendsOfCake/bootstrap-ui
 \Cake\Core\Plugin::load('BootstrapUI');
+// https://github.com/FriendsOfCake/CakePdf
+Plugin::load('CakePdf', ['bootstrap' => true]);
 
 /**
  * Uncomment block of code below if you want to use `.env` file during development.

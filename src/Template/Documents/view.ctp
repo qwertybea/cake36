@@ -29,6 +29,8 @@
             "alt" => $document->file->name,
             "width" => "600px",
             "height" => "600px",
+            'fullBase'   => true,
+            'pathPrefix' => Cake\Core\Configure::read('App.imageBaseUrl')
         ]);
     }
     ?>
@@ -96,6 +98,8 @@
                 $fav_style = ($favorited) ? 'color:DeepSkyBlue' : 'color:gray';
                 ?>
                 <td><?= __('Favorite'); ?> <?php echo $this->Html->link('<i class="fa fa-star fa-lg" style="'.$fav_style.'"></i>', ['controller' => 'Documents',  'action' => 'handleFavorite', $document->id], ['escape' => false]); ?></td>
+                <!-- <td><?= $this->Html->link(__('Download in format pdf'), ['action' => 'view', $document->id . '.pdf']) ?></td> -->
+                <td><?= $this->Html->link('PDF<i class="fa fa-download fa-2x></i>', ['action' => 'view', $document->id . '.pdf'], ['escape' => false]); ?></td>
             </tr>
         </table>
     </div>

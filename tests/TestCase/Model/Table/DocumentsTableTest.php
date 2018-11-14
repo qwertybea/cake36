@@ -103,6 +103,47 @@ class DocumentsTableTest extends TestCase
         $this->assertEquals('&lt;script&gt;five = 2+2;&lt;/script&gt;', $doc->name);
     }
 
+    public function testSaving() {
+        $data = [
+            'id' => 4,
+            'type_id' => 1,
+            'user_id' => 1,
+            'document_cover' => 1,
+            'name' => 'document 4',
+            'description' => 'Lorem ipsum dolor sit amet',
+            'other_details' => 'Lorem ipsum dolor sit amet',
+            'published' => 1,
+            'deleted' => 0,
+            'created' => null,
+            'modified' => null,
+            'country_id' => 1,
+            'region_id' => 1
+        ];
+        $doc = $this->Documents->newEntity($data);
+        $countBeforeSave = $this->Documents->find()->count();
+        $this->Documents->save($doc);
+        $countAfterSave = $this->Documents->find()->count();
+        $this->assertEquals($countAfterSave, $countBeforeSave + 1);
+    }
+
+    public function testEditing() {
+        $doc = $this->Documents->find('all', ['conditions' => ['published' => true]])->first();
+        $id = $doc->id;
+        $doc->published = false;
+        $this->Documents->save($doc);
+        $doc = $this->Documents->find('all', ['conditions' => ['id' => $id]])->first();
+        $this->assertEquals(false, $doc->published);
+    }
+
+    public function testDeleting() {
+        $doc = $this->Documents->find('all', ['conditions' => ['deleted' => false]])->first();
+        $id = $doc->id;
+        $doc->deleted = true;
+        $this->Documents->save($doc);
+        $doc = $this->Documents->find('all', ['conditions' => ['id' => $id]])->first();
+        $this->assertEquals(true, $doc->deleted);
+    }
+
 
     // /**
     //  * Test initialize method

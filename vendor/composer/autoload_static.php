@@ -83,8 +83,13 @@ class ComposerStaticInit839157af1f7ff49b510b4267407c1913
             'JsonSchema\\' => 11,
             'Jasny\\Twig\\' => 11,
         ),
+        'F' => 
+        array (
+            'FontLib\\' => 8,
+        ),
         'D' => 
         array (
+            'Dompdf\\' => 7,
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
             'DebugKit\\Test\\Fixture\\' => 22,
@@ -102,6 +107,7 @@ class ComposerStaticInit839157af1f7ff49b510b4267407c1913
             'Cake\\Composer\\' => 14,
             'Cake\\Chronos\\' => 13,
             'Cake\\' => 5,
+            'CakePdf\\' => 8,
             'CakePHP\\' => 8,
         ),
         'B' => 
@@ -229,6 +235,14 @@ class ComposerStaticInit839157af1f7ff49b510b4267407c1913
         array (
             0 => __DIR__ . '/..' . '/jasny/twig-extensions/src',
         ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -284,6 +298,10 @@ class ComposerStaticInit839157af1f7ff49b510b4267407c1913
         'Cake\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/src',
+        ),
+        'CakePdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofcake/cakepdf/src',
         ),
         'CakePHP\\' => 
         array (
@@ -342,6 +360,17 @@ class ComposerStaticInit839157af1f7ff49b510b4267407c1913
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
+        'S' => 
+        array (
+            'Svg\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src',
+            ),
+            'Sabberworm\\CSS' => 
+            array (
+                0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -377,9 +406,15 @@ class ComposerStaticInit839157af1f7ff49b510b4267407c1913
     );
 
     public static $classMap = array (
+        'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
+        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
+        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
+        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
+        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
         'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
