@@ -35,7 +35,11 @@ class InteractiveMethodsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'method' => 'Lorem ipsum dolor sit amet'
+                'method' => 'view'
+            ],
+            [
+                'id' => 2,
+                'method' => 'favorite'
             ],
         ];
         parent::init();

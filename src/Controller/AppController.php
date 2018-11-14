@@ -211,17 +211,14 @@ class AppController extends Controller
         if ($this->Auth->user()) {
             
             $userTable = TableRegistry::get('Users');
-            $user = $userTable->find('all', [
-                'contain' => ['EmailVerifications'],
-                'conditions' => [
-                    'id' => $this->Auth->user()['id']
-                ]
-            ])->first();
+            $user = $userTable->get($this->Auth->user()['id'], [
+                'contain' => ['EmailVerifications']
+            ]);
 
             $user_email = $user->email;
             $subject = 'Verification email for Story City';
 
-            $uuid = $user->email_verifications[0]->code;
+            $uuid = $user->email_verification->code;
 
             $webroot = $this->request->webroot;
 
@@ -232,9 +229,9 @@ class AppController extends Controller
             $msg = __('Welcome to Story city in order to get access to all our functionalities please verify your email by clicking the link bellow. <br><br>{0}', $link);
 
             // TODO: REMOVE COMMENT TO SEND EMAIL
-            // $email = new Email('default');
-            // $email->emailFormat('html');
-            // $email->to($user_email)->subject($subject)->send($msg);
+            $email = new Email('default');
+            $email->emailFormat('html');
+            $email->to($user_email)->subject($subject)->send($msg);
 
             $this->Flash->success(__('You have been sent an email to verify your account.'));
 

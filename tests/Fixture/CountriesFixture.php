@@ -38,7 +38,7 @@ class CountriesFixture extends TestFixture
             [
                 'id' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
-                'code' => 'Lorem ip'
+                'code' => '1'
             ],
         ];
         parent::init();

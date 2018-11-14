@@ -3,6 +3,7 @@ namespace App\Test\TestCase\Model\Table;
 use App\Model\Table\DocumentsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Cake\Validation\Validator;
 /**
  * App\Model\Table\CarsTable Test Case
  */
@@ -40,7 +41,7 @@ class DocumentsTableTest extends TestCase
     {
         parent::setUp();
         $config = TableRegistry::getTableLocator()->exists('Documents') ? [] : ['className' => DocumentsTable::class];
-        $this->DocumentsTable = TableRegistry::getTableLocator()->get('Documents', $config);
+        $this->Documents = TableRegistry::getTableLocator()->get('Documents', $config);
     }
     /**
      * tearDown method
@@ -53,10 +54,9 @@ class DocumentsTableTest extends TestCase
         parent::tearDown();
     }
 
-
 	public function testFindPublished()
     {
-        $query = $this->Documents->find('published');
+        $query = $this->Documents->find('NotDeleted');
         $this->assertInstanceOf('Cake\ORM\Query', $query);
         $result = $query->hydrate(false)->toArray();
         $expected = [
@@ -65,28 +65,28 @@ class DocumentsTableTest extends TestCase
                 'type_id' => 1,
                 'user_id' => 1,
                 'document_cover' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
+                'name' => 'document 1',
                 'description' => 'Lorem ipsum dolor sit amet',
                 'other_details' => 'Lorem ipsum dolor sit amet',
                 'published' => 1,
                 'deleted' => 0,
-                'created' => '2018-11-09 06:47:05',
-                'modified' => '2018-11-09 06:47:05',
+                'created' => null,
+                'modified' => null,
                 'country_id' => 1,
                 'region_id' => 1
             ],
             [
-                'id' => 3,
+                'id' => 2,
                 'type_id' => 1,
                 'user_id' => 1,
                 'document_cover' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
                 'description' => 'Lorem ipsum dolor sit amet',
                 'other_details' => 'Lorem ipsum dolor sit amet',
-                'published' => 1,
-                'deleted' => 1,
-                'created' => '2018-11-09 06:47:05',
-                'modified' => '2018-11-09 06:47:05',
+                'published' => 0,
+                'deleted' => 0,
+                'created' => null,
+                'modified' => null,
                 'country_id' => 1,
                 'region_id' => 1
             ],
@@ -94,32 +94,41 @@ class DocumentsTableTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testSaveXSS() {
+        $doc = $this->Documents->find('all')->first();
+        $id = $doc->id;
+        $doc->name = '<script>five = 2+2;</script>';
+        $this->Documents->save($doc);
+        $doc = $this->Documents->find('all', ['conditions' => ['id' => $id]])->first();
+        $this->assertEquals('&lt;script&gt;five = 2+2;&lt;/script&gt;', $doc->name);
+    }
 
-    /**
-     * Test initialize method
-     *
-     * @return void
-     */
-    public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     */
-    public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
+
+    // /**
+    //  * Test initialize method
+    //  *
+    //  * @return void
+    //  */
+    // public function testInitialize()
+    // {
+    //     $this->markTestIncomplete('Not implemented yet.');
+    // }
+    // /**
+    //  * Test validationDefault method
+    //  *
+    //  * @return void
+    //  */
+    // public function testValidationDefault()
+    // {
+    //     $this->markTestIncomplete('Not implemented yet.');
+    // }
+    // /**
+    //  * Test buildRules method
+    //  *
+    //  * @return void
+    //  */
+    // public function testBuildRules()
+    // {
+    //     $this->markTestIncomplete('Not implemented yet.');
+    // }
 }

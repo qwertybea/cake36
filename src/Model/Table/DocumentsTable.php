@@ -132,4 +132,20 @@ class DocumentsTable extends Table
 
         return $rules;
     }
+
+    public function beforeSave($event, $entity, $options) {
+        if ($entity->isNew() && !$entity->slug) {
+            $sluggedName = Text::slug($entity->name);
+            // trim slug to maximum length defined in schema
+            $entity->slug = substr($sluggedName, 0, 191);
+        }
+        $entity->name = htmlspecialchars($entity->name);
+    }
+
+    public function findNotDeleted (Query $query, array $options) {
+        $query->where([
+            $this->alias() . '.deleted' => 0
+        ]);
+        return $query;
+    }
 }

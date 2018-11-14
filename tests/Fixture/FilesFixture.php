@@ -38,12 +38,12 @@ class FilesFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 1,
+                'id' => 0,
                 'name' => 'Lorem ipsum dolor sit amet',
                 'path' => 'Lorem ipsum dolor sit amet',
                 'created' => '2018-11-09 06:47:05',
                 'modified' => '2018-11-09 06:47:05',
-                'status' => 1
+                'status' => 0
             ],
         ];
         parent::init();
