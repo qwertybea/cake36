@@ -4,8 +4,8 @@
  * @var \App\Model\Entity\Document $document
  */
 $urlToLinkedListFilter = $this->Url->build([
-    "controller" => "Documents",
-    "action" => "getRegions",
+    "controller" => "Countries",
+    "action" => "getCountries",
     "_ext" => "json"
         ]);
 echo $this->Html->scriptBlock('var urlToLinkedListFilter = "' . $urlToLinkedListFilter . '";', ['block' => true]);
@@ -23,7 +23,7 @@ echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
         <li><?= $this->Html->link(__('List my documents'), ['action' => 'myWork']) ?></li>
     </ul>
 </nav>
-<div class="documents form large-9 medium-8 columns content">
+<div class="documents form large-9 medium-8 columns content" ng-app="linkedlists" ng-controller="categoriesController">
     <?= $this->Form->create($document, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Edit Document') ?></legend>
@@ -38,8 +38,15 @@ echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
             echo '<hr>';
 
 
-            echo $this->Form->control('country_id', ['options' => $countries]);
-            echo $this->Form->control('region_id', ['options' => $regions]);
+            echo $this->Form->control('country_id', [
+                    'ng-model' => 'country', 
+                    'ng-options' => 'country.name for country in countries track by country.id'
+                ]);
+            echo $this->Form->control('region_id', [
+                    'ng-disabled' => '!country', 
+                    'ng-model' => 'region',
+                    'ng-options' => "region.name for region in country.regions track by region.id"
+                ]);
 
 
             echo $this->Form->control('published');

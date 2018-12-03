@@ -63,4 +63,17 @@ class RegionsController extends AppController {
         }
     }
 
+    public function getRegions() {
+        $this->autoRender = false; // avoid to render view
+
+        $categories = $this->Categories->find('all', [
+            'contain' => ['Subcategories'],
+        ]);
+
+        $categoriesJ = json_encode($categories);
+        $this->response->type('json');
+        $this->response->body($categoriesJ);
+
+    }
+
 }

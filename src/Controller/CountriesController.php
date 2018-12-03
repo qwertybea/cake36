@@ -30,18 +30,20 @@ class CountriesController extends AppController
 
     }
 
-    public function getCountries()
-    {
-        if ($this->request->is('ajax')) {
+    public function getCountries() {
+        $this->autoRender = false; // avoid to render view
 
-            $countries = $this->Countries->find('all', []);
+        $countries = $this->Countries->find('all', [
+            'contain' => ['Regions' => [
+                    'conditions' => ['Regions.name !=' => '']
+                ]
+            ],
+        ]);
 
-            $this->set('countries', $countries);
-            $this->set('_serialize', ['countries']);
+        $countries_json = json_encode($countries);
+        $this->response->type('json');
+        $this->response->body($countries_json);
 
-        } else {
-            return $this->redirect(['controller' => 'Pages', 'action' => 'myhome']);
-        }
     }
 
 }

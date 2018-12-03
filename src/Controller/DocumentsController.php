@@ -214,6 +214,8 @@ class DocumentsController extends AppController
 
                 $country = $this->Documents->Countries->find('all', [
 
+                    'contain' => ['Regions'],
+
                     'conditions' => [
 
                         'Countries.name' => $country
@@ -222,18 +224,16 @@ class DocumentsController extends AppController
 
                 ])->first();
 
+                $val_region = false;
+                if ($country != null) {
+                    
+                    $associated_regions = parent::array_on_key($country->regions, 'name');
 
-                $region = $this->Documents->Regions->find('all', [
+                    $val_region = in_array($region, $associated_regions);
+                    
+                }
 
-                    'conditions' => [
-
-                        'Regions.name' => $region
-
-                    ]
-
-                ])->first();
-
-                if ($country == null or $region == null) {
+                if (!$val_region) {
                     $country = 'Canada';
                     $region = 'Quebec';
 
