@@ -1,144 +1,140 @@
+var app = angular.module('app', []);
 
-// i dont know how to do this server side
-(function () {
-    $.ajax({
-        url: urlToGetCountries,
-        dataType: "json",
-        success:
-            function (countries, b, c) {
-                $select_add = $('#country-id-add');
-                $select_edit = $('#country-id-edit');
-                $select_add.find('option').remove();
-                $select_edit.find('option').remove();
-                $.each(countries, function (key, value)
-                {
-                    $.each(value, function (childKey, childValue) {
-                        $select_add.append('<option value=' + childValue.id + '>' + childValue.name + '</option>');
-                        $select_edit.append('<option value=' + childValue.id + '>' + childValue.name + '</option>');
-                    });
+app.controller('RegionCRUDCtrl', ['$scope', 'RegionCRUDService', 
+    function ($scope, RegionCRUDService) {
+
+        $scope.getRegion = function () {
+            var id = $scope.region.id;
+            RegionCRUDService.getRegion($scope.region.id)
+                .then(function success(response) {
+                    $scope.region = response.data.data;
+                    $scope.region.id = id;
+                    $scope.region.country_id = response.data.data.country_id;
+                    $scope.message='';
+                    $scope.errorMessage = '';
+                },
+                function error (response) {
+                    $scope.message = '';
+                    if (response.status === 404){
+                        $scope.errorMessage = 'Region not found!';
+                    }
+                    else {
+                        $scope.errorMessage = "Error getting region!";
+                    }
                 });
+        };
+
+        $scope.addSubscription = function () {
+            if ($scope.subscription != null && $scope.subscription.name) {
+
+
+                SubscriptionCRUDService.addSubscription($scope.subscription.name)
+                    .then (function success(response){
+                            $scope.message = 'Subscription added!';
+                            $scope.errorMessage = '';
+                        },
+                        function error(response){
+                            $scope.errorMessage = 'Error adding subscription!';
+                            $scope.message = '';
+                        });
             }
-    });
-})();
+            else {
+                $scope.errorMessage = 'Please enter a name!';
+                $scope.message = '';
+            }
+        };
 
-function getRegions() {
-    $.ajax({
-        type: 'GET',
-        url: urlToRestApi,
-        dataType: "json",
-        success:
-                function (regions) {
-                    console.log(regions);
-                    var regionTable = $('#regionData');
-                    regionTable.empty();
-                    var count = 1;
-                    $.each(regions.data, function (key, value)
-                    {
-                        var editDeleteButtons = '</td><td>' +
-                                '<a href="javascript:void(0);" class="glyphicon glyphicon-edit" onclick="editRegion(' + value.id + ')"></a>' +
-                                '<a href="javascript:void(0);" class="glyphicon glyphicon-trash" onclick="return confirm(\'Are you sure to delete data?\') ? regioonAction(\'delete\', ' + value.id + ') : false;"></a>' +
-                                '</td></tr>';
-                        regionTable.append('<tr><td>#' + count + '</td><td>' + value.name + '</td><td>' + value.country.name + editDeleteButtons);
-                        count++;
+        $scope.updateSubscription = function () {
+            SubscriptionCRUDService.updateSubscription($scope.subscription.id,$scope.subscription.name)
+                .then(function success(response){
+                        $scope.message = 'Subscription data updated!';
+                        $scope.errorMessage = '';
+                    },
+                    function error(response){
+                        $scope.errorMessage = 'Error updating subscription!';
+                        $scope.message = '';
                     });
+        };
 
-                }
-    });
-}
+        $scope.deleteSubscription = function () {
+            SubscriptionCRUDService.deleteSubscription($scope.subscription.id)
+                .then (function success(response){
+                        $scope.message = 'Subscription deleted!';
+                        $scope.subscription = null;
+                        $scope.errorMessage='';
+                    },
+                    function error(response){
+                        $scope.errorMessage = 'Error deleting subscription!';
+                        $scope.message='';
+                    });
+        };
 
-/* Function takes a jquery form
- and converts it to a JSON dictionary */
-function convertFormToJSON(form) {
-    var array = $(form).serializeArray();
-    var json = {};
+        $scope.getAllRegions = function () {
+            RegionCRUDService.getAllRegions()
+                .then(function success(response){
+                        $scope.regions = response.data.data;
+                        $scope.message=''
+                        $scope.errorMessage = '';
+                    },
+                    function error (response ){
+                        $scope.message='';
+                        $scope.errorMessage = 'Error getting subscriptions!';
+                    });
+        };
 
-    $.each(array, function () {
-        json[this.name] = this.value || '';
-    });
+}]);
 
-    return json;
-}
-
-/*
- $('#cocktailAddForm').submit(function (e) {
- e.preventDefault();
- var data = convertFormToJSON($(this));
- alert(data);
- console.log(data);
- });
- */
-
-function regionAction(type, id) {
-    id = (typeof id == "undefined") ? '' : id;
-    var statusArr = {add: "added", edit: "updated", delete: "deleted"};
-    var requestType = '';
-    var regionData = '';
-    var ajaxUrl = urlToRestApi;
-    if (type == 'add') {
-        requestType = 'POST';
-        regionData = convertFormToJSON($("#addForm").find('.form'));
-    } else if (type == 'edit') {
-        requestType = 'PUT';
-        regionData = convertFormToJSON($("#editForm").find('.form'));
-        ajaxUrl = ajaxUrl + "/" + regionData.id;
-    } else {
-        requestType = 'DELETE';
-        ajaxUrl = ajaxUrl + "/" + id;
+app.service('RegionCRUDService',['$http', function ($http) {
+    
+    this.getRegion = function getRegion(regionId){
+        return $http({
+          method: 'GET',
+          url: 'api/regions/'+ regionId,
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'}
+        });
     }
-
-    if (regionData.name != '') {
-
-        $.ajax({
-            type: requestType,
-            headers: {
-                // 'X-CSRF-Token': $('[name="_csrfToken"]').val()
-                'X-CSRF-Token': csrfToken
-                // 'X-CSRF-Token': $('#csrftoken').val()
-            },
-            url: ajaxUrl,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(regionData),
-            success: function (msg) {
-
-                console.log(msg);
-
-                if (msg) {
-                    alert('Region data has been ' + statusArr[type] + ' successfully.');
-                    getRegions();
-                    $('.form')[0].reset();
-                    $('.formData').slideUp();
-                } else {
-                    alert('Some problem occurred, please try again.');
-                }
-            },
-            error: function (msg) {
-
-                if (msg) {
-                    alert("Error\n"+msg.responseJSON.error.msg);
-                } else {
-                    alert('Some problem occurred, please try again.');
-                }
+    
+    this.addRegion = function addRegion(name, country_id){
+        return $http({
+          method: 'POST',
+          url: 'api/regions',
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'},
+          data: {
+              name:name, 
+              country_id:country_id
             }
         });
-
-    } else {
-        alert('You must input a name.');
     }
-}
+    
+    this.updateRegion = function updateRegion(id, name, country_id){
+        return $http({
+          method: 'PATCH',
+          url: 'api/regions/'+ id,
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'},
+          data: {
+              name:name, 
+              country_id:country_id
+            }
+        })
+    }
 
-/*** à déboguer ... ***/
-function editRegion(id) {
-    $.ajax({
-        type: 'GET',
-        dataType: 'JSON',
-        url: urlToRestApi+ "/" + id,
-        success: function (data) {
-            console.log(data);
-            $('#idEdit').val(data.data.id);
-            $('#nameEdit').val(data.data.name);
-            $('#country-id-edit').val(data.data.country_id);
-            $('#editForm').slideDown();
-        }
-    });
-}
+    this.deleteRegion = function deleteRegion(id){
+        return $http({
+          method: 'DELETE',
+          url: 'api/regions/'+ id,
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'}
+        })
+    }
+    
+    this.getAllRegions  = function getAllRegions(){
+        return $http({
+          method: 'GET',
+          url: 'api/regions',
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'}
+        });
+    }
+
+}]);
+
+// either this or print them before hand with php
+window.onload = function () { $("#get_all_regs").click(); }

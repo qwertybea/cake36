@@ -23,7 +23,7 @@ echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
         <li><?= $this->Html->link(__('List my documents'), ['action' => 'myWork']) ?></li>
     </ul>
 </nav>
-<div class="documents form large-9 medium-8 columns content" ng-app="linkedlists" ng-controller="categoriesController">
+<div class="documents form large-9 medium-8 columns content" ng-app="linkedlists" ng-controller="countriesController">
     <?= $this->Form->create($document, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Edit Document') ?></legend>

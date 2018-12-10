@@ -26,9 +26,11 @@ class RegionsController extends AppController {
 
         $this->viewBuilder()->setLayout('monopage');
         
-        $my_var = 123;
+        $countries = $this->Regions->Countries->find('list', [
+            
+        ]);
 
-        $this->set(compact('my_var'));
+        $this->set(compact('countries'));
 
     }
 

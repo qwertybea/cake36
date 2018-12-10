@@ -50,6 +50,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js',
             // 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
             'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
+            'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js',
                 ], ['block' => 'scriptLibraries']
         );
     ?>
