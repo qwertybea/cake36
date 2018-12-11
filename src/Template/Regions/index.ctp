@@ -1,5 +1,6 @@
 <?php
 echo $this->Html->script(['regions/index', 'back_to_top'], ['block' => 'scriptBottom']);
+echo $this->Html->scriptBlock('var csrfToken = '.json_encode($this->request->getParam('_csrfToken')).';', ['block' => true]);
 ?>
 
 <button onclick="topFunction()" id="toTop" title="Go to top"><i class="fa fa-chevron-up"></i></button>

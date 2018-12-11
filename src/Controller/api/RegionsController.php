@@ -51,10 +51,7 @@ class RegionsController extends AppController {
             $this->paginate['conditions']['Countries.name !='] = '';
         });
 
-
-
         $action = $this->request->getParam('action');
-        
 
         if ($action == 'delete') {
             

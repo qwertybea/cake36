@@ -10,6 +10,14 @@ app.controller('RegionCRUDCtrl', ['$scope', 'RegionCRUDService',
                     $scope.region = response.data.data;
                     $scope.region.id = id;
                     $scope.region.country_id = response.data.data.country_id;
+
+                    //temp
+                    $('#country-id > option[selected]').each(function () {
+                        console.log(this)
+                        $(this).prop('selected', false);
+                    })
+                    $('#country-id > option').eq(response.data.data.country_id).attr('selected','selected');
+
                     $scope.message='';
                     $scope.errorMessage = '';
                 },
@@ -24,17 +32,17 @@ app.controller('RegionCRUDCtrl', ['$scope', 'RegionCRUDService',
                 });
         };
 
-        $scope.addSubscription = function () {
-            if ($scope.subscription != null && $scope.subscription.name) {
-
-
-                SubscriptionCRUDService.addSubscription($scope.subscription.name)
+        $scope.addRegion = function () {
+            if ($scope.region != null && $scope.region.name) {
+                RegionCRUDService.addRegion($scope.region.name, $scope.region.country_id)
                     .then (function success(response){
-                            $scope.message = 'Subscription added!';
+                            $scope.message = 'Region added!';
+                            $scope.region.id = response.data.data.id;
                             $scope.errorMessage = '';
+                            $scope.getAllRegions();
                         },
                         function error(response){
-                            $scope.errorMessage = 'Error adding subscription!';
+                            $scope.errorMessage = 'Error adding region!';
                             $scope.message = '';
                         });
             }
@@ -44,27 +52,29 @@ app.controller('RegionCRUDCtrl', ['$scope', 'RegionCRUDService',
             }
         };
 
-        $scope.updateSubscription = function () {
-            SubscriptionCRUDService.updateSubscription($scope.subscription.id,$scope.subscription.name)
+        $scope.updateRegion = function () {
+            RegionCRUDService.updateRegion($scope.region.id, $scope.region.name, $scope.region.country_id)
                 .then(function success(response){
-                        $scope.message = 'Subscription data updated!';
+                        $scope.message = 'Region data updated!';
                         $scope.errorMessage = '';
+                        $scope.getAllRegions();
                     },
                     function error(response){
-                        $scope.errorMessage = 'Error updating subscription!';
+                        $scope.errorMessage = 'Error updating region!';
                         $scope.message = '';
                     });
         };
 
-        $scope.deleteSubscription = function () {
-            SubscriptionCRUDService.deleteSubscription($scope.subscription.id)
+        $scope.deleteRegion = function () {
+            RegionCRUDService.deleteRegion($scope.region.id)
                 .then (function success(response){
-                        $scope.message = 'Subscription deleted!';
-                        $scope.subscription = null;
+                        $scope.message = 'Region deleted!';
+                        $scope.region = null;
                         $scope.errorMessage='';
+                        $scope.getAllRegions();
                     },
                     function error(response){
-                        $scope.errorMessage = 'Error deleting subscription!';
+                        $scope.errorMessage = 'Error deleting region!';
                         $scope.message='';
                     });
         };
@@ -78,7 +88,7 @@ app.controller('RegionCRUDCtrl', ['$scope', 'RegionCRUDService',
                     },
                     function error (response ){
                         $scope.message='';
-                        $scope.errorMessage = 'Error getting subscriptions!';
+                        $scope.errorMessage = 'Error getting regions!';
                     });
         };
 
@@ -98,7 +108,7 @@ app.service('RegionCRUDService',['$http', function ($http) {
         return $http({
           method: 'POST',
           url: 'api/regions',
-          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'},
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json', 'X-CSRF-Token': csrfToken},
           data: {
               name:name, 
               country_id:country_id
@@ -110,7 +120,7 @@ app.service('RegionCRUDService',['$http', function ($http) {
         return $http({
           method: 'PATCH',
           url: 'api/regions/'+ id,
-          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'},
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json', 'X-CSRF-Token': csrfToken},
           data: {
               name:name, 
               country_id:country_id
@@ -122,7 +132,7 @@ app.service('RegionCRUDService',['$http', function ($http) {
         return $http({
           method: 'DELETE',
           url: 'api/regions/'+ id,
-          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json'}
+          headers: { 'X-Requested-With' : 'XMLHttpRequest', 'Accept' : 'application/json', 'X-CSRF-Token': csrfToken}
         })
     }
     
