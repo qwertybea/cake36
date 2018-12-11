@@ -8,8 +8,14 @@ $urlToLinkedListFilter = $this->Url->build([
     "action" => "getCountries",
     "_ext" => "json"
         ]);
+$urlRedirectToIndex = $this->Url->build([
+    "controller" => "Files",
+    "action" => "index"
+        ]);
 echo $this->Html->scriptBlock('var urlToLinkedListFilter = "' . $urlToLinkedListFilter . '";', ['block' => true]);
 echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
+echo $this->Html->css('dropzone/dropzone');
+echo $this->Html->script('dropzone/dropzone', ['block' => 'scriptLibraries']);
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
@@ -33,6 +39,7 @@ echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
             echo $this->Form->control('other_details');
 
             echo '<hr>';
+            
             echo $this->Form->control('document_cover_tmp', ['label' => 'Document Cover', 'type' => 'file']);
             echo $this->Form->control('remove_cover', ['type' => 'checkbox']);
             echo '<hr>';
@@ -57,4 +64,8 @@ echo $this->Html->script('Documents/edit', ['block' => 'scriptBottom']);
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+    <?php echo $this->Form->create('image',array('url'=>array('controller'=>'Controller_Name','action'=>'function_name'),'method'=>'post','id'=>'my-awesome-dropzone','class'=>'dropzone','type'=>'file','autocomplete'=>'off',));?>
+                        
+    <?php echo $this->Form->end();?>
+    </div>
 </div>
