@@ -1,4 +1,82 @@
+var onloadCallback = function() {
+    widgetId1 = grecaptcha.render('capcha', {
+        'sitekey': '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+        'theme': 'light'
+    });
+};
+
 var app = angular.module('app', []);
+
+app.controller('UsersController', function($scope, $http) {
+
+    // Login Process
+    $scope.login = function () {
+
+        if (grecaptcha.getResponse(widgetId1) == '') {
+            $scope.captcha_status = 'Please verify captha.';
+            return;
+        }
+
+        var req = {
+            method: 'POST',
+            url: 'api/users/token',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken
+            },
+            data: {username: $scope.username, password: $scope.password}
+        }
+        // fields in key-value pairs
+        $http(req)
+                .then(function (jsonData, status, headers, config) {
+                    // console.log(jsonData.data.token);
+                    // tell the user was logged
+                    localStorage.setItem('token', jsonData.data.data.token);
+                    localStorage.setItem('user_id', jsonData.data.data.user_id);
+                    $('#logout').show();
+                    $('#motpasse').show();
+                    $('#modififcationAjout').show();
+                    $('#login').hide();
+                    alert('User sucessfully logged in');
+                },function(data, status, headers, config) {
+                    //console.log(data.response.result);
+                    // tell the user was not logged
+                    alert('Erreur lors de la connexion');
+                });
+    }
+    // Login Process
+    $scope.logout = function () {
+        localStorage.setItem('token', "no token");
+        localStorage.setItem('user_id', null);
+        $('#logout').hide();
+        $('#motpasse').hide();
+        $('#modififcationAjout').hide();
+        $('#login').show();
+        alert("User sucessfully logged out");
+    }
+    $scope.changePassword = function () {
+        var req = {
+            method: 'PUT',
+            url: 'api/users/' + localStorage.getItem("user_id"),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            data: {'password': $scope.newPassword}
+        }
+        $http(req)
+                .then(function (response) {
+                    // tell the user subcategory record was updated
+                    alert('Password successfully changed');
+                },function(response) {
+                    // tell the user subcategory record was not updated
+                    //console.log(response);
+                    alert('Could not update Password');
+                });
+    }
+});
 
 app.controller('RegionCRUDCtrl', ['$scope', 'RegionCRUDService', 
     function ($scope, RegionCRUDService) {

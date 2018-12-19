@@ -1,6 +1,7 @@
 <?php
 echo $this->Html->script(['regions/index', 'back_to_top'], ['block' => 'scriptBottom']);
 echo $this->Html->scriptBlock('var csrfToken = '.json_encode($this->request->getParam('_csrfToken')).';', ['block' => true]);
+echo $this->Html->script('https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit');
 ?>
 
 <button onclick="topFunction()" id="toTop" title="Go to top"><i class="fa fa-chevron-up"></i></button>
@@ -8,8 +9,38 @@ echo $this->Html->scriptBlock('var csrfToken = '.json_encode($this->request->get
 <!-- <?= $this->form->control('csrfToken', ['type' => 'hidden', 'value' => $this->request->getParam('_csrfToken')]) ?> -->
 
 <div class="container">
-    <div class="row">
-        <div class="panel panel-default regions-content" ng-app="app" ng-controller="RegionCRUDCtrl">
+    <div class="row" ng-app="app">
+        <div ng-controller="UsersController">
+            <div id="login">
+                <h3>Login</h3>
+                    <table>
+                        <tr>
+                            <td width="100">Username:</td>
+                            <td><input type="text" id="username" ng-model="username" /></td>
+                        </tr>
+                        <tr>
+                            <td width="100">Password:</td>
+                            <td><input type="password" id="password" ng-model="password" /></td>
+                        </tr>
+                    </table>
+                    <div id="capcha"></div> 
+                    <p style="color:red;">{{ captcha_status }}</p>
+                    <a ng-click="login()">Login</a><br />
+                </div>            
+                <a id="logout" ng-click="logout()">Logout</a><br />
+            <div id="motpasse">
+            <h3>Changement de mot de passe</h3>
+            <table>
+                    <tr>
+                        <td width="100">Nouveau mot de passe:</td>
+                        <td><input type="password" id="newPassword" ng-model="newPassword" /></td>
+                    </tr>
+                </table>
+                <a ng-click="changePassword()">Changer de mot de passe</a><br />
+            </div>
+        </div>
+        <br /><br /><br />
+        <div class="panel panel-default regions-content" ng-controller="RegionCRUDCtrl">
             <table>
                 <tr>
                     <td width="100">ID:</td>

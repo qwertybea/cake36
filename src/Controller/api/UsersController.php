@@ -11,6 +11,7 @@ class UsersController extends AppController {
 
     public function initialize() {
         parent::initialize();
+        $this->viewBuilder()->setClassName('AppTwitBoot');
         $this->Auth->allow(['add', 'token']);
     }
 

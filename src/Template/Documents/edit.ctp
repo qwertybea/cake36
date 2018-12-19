@@ -64,7 +64,7 @@ echo $this->Html->script('dropzone/dropzone', ['block' => 'scriptLibraries']);
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-    <?php echo $this->Form->create('image',array('url'=>array('controller'=>'Controller_Name','action'=>'function_name'),'method'=>'post','id'=>'my-awesome-dropzone','class'=>'dropzone','type'=>'file','autocomplete'=>'off',));?>
+    <?php echo $this->Form->create(null,array('url'=>array('controller'=>'Controller_Name','action'=>'function_name'),'method'=>'post',null,'class'=>'dropzone','type'=>'file','autocomplete'=>'off',));?>
                         
     <?php echo $this->Form->end();?>
     </div>
