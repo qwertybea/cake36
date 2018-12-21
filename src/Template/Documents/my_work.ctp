@@ -40,9 +40,10 @@
                 <td><?= h($document->description) ?></td>
                 <!-- <td><?= h($document->other_details) ?></td> -->
                 <td>
-
+                    
                     <?php
-                    if ($document->file->status) {
+                    echo $this->Html->link('<i class="fa fa-edit"></i>', ['controller' => 'Documents', 'action' => 'changeCover', $document->id], ['escape' => false]);
+                    if ($document->file and $document->file->status) {
                         echo $this->Html->image($document->file->path . $document->file->name, [
                             "alt" => $document->file->name,
                             "width" => "220px",

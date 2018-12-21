@@ -39,8 +39,6 @@ echo $this->Html->script('dropzone/dropzone', ['block' => 'scriptLibraries']);
             echo $this->Form->control('other_details');
 
             echo '<hr>';
-            
-            echo $this->Form->control('document_cover_tmp', ['label' => 'Document Cover', 'type' => 'file']);
             echo $this->Form->control('remove_cover', ['type' => 'checkbox']);
             echo '<hr>';
 
@@ -64,8 +62,5 @@ echo $this->Html->script('dropzone/dropzone', ['block' => 'scriptLibraries']);
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-    <?php echo $this->Form->create(null,array('url'=>array('controller'=>'Controller_Name','action'=>'function_name'),'method'=>'post',null,'class'=>'dropzone','type'=>'file','autocomplete'=>'off',));?>
-                        
-    <?php echo $this->Form->end();?>
     </div>
 </div>

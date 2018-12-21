@@ -34,13 +34,13 @@ class DocumentsController extends AppController
         if ($user) {
            switch ($user['role']['role']) {
             case 'creator':
-                array_push($auths, 'add', 'delete', 'myWork', 'hasRights', 'myFavorites'
+                array_push($auths, 'add', 'delete', 'myWork', 'hasRights', 'myFavorites', 'changeCover'
                         // temp permissions
                         ,'edit', 'getRegions'
                     );
                 break;
             case 'admin':
-                array_push($auths, 'index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'myFavorites'
+                array_push($auths, 'index', 'viewAllDocuments', 'view', 'add', 'delete', 'myWork', 'myFavorites', 'changeCover'
                     // temp permissions
                         ,'edit', 'getRegions'
                     );
@@ -233,7 +233,7 @@ class DocumentsController extends AppController
                     
                 }
 
-                if (!$val_region) {
+                if ($val_region) {
                     $country = 'Canada';
                     $region = 'Quebec';
 
@@ -258,6 +258,10 @@ class DocumentsController extends AppController
 
                     ])->first();
                 }
+
+                // debug($country);
+                // debug($region);
+                // die();
 
                 $document['country_id'] = $country->id;
                 $document['region_id'] = $region->id;
@@ -309,9 +313,9 @@ class DocumentsController extends AppController
                 if ($this->request->is(['patch', 'post', 'put'])) {
                     $document = $this->Documents->patchEntity($document, $this->request->getData());
 
-                    $file_data = $this->request->getData()['document_cover_tmp'];
                     $remove_cover = $this->request->getData()['remove_cover'];
 
+                    $file_data = null;
                     $this->update_cover($document, $file_data, $remove_cover);
 
                     if ($this->Documents->save($document)) {
@@ -452,6 +456,57 @@ class DocumentsController extends AppController
         $documents = $this->paginate($this->Documents);
 
         $this->set(compact('documents'));
+    }
+
+    public function changeCover($id = null)
+    {
+        if ($this->hasRights($id)) {
+            $document = $this->Documents->find('all', [
+                'contain' => ['Files'],
+                'conditions' => [
+                    'Documents.id' => $id
+                ]
+            ])->first();
+            if ($document) {
+                $file = $this->Documents->Files->newEntity();
+                if ($this->request->is('post') or $this->request->is('ajax')) {
+                    $this->autoRender = false;
+                    //debug($this->request->data);
+                    //die();
+                    if (!empty($this->request->data['file']['name'])) {
+                        //debug($this->request->data);
+                        //die();
+                        $fileName = $this->request->data['file']['name'];
+                        $uploadPath = 'Files/';
+                        $uploadFile = $uploadPath . $fileName;
+                        if (move_uploaded_file($this->request->data['file']['tmp_name'], 'img/' . $uploadFile)) {
+                            //$file = $this->Files->patchEntity($file, $this->request->getData());
+                            $file->name = $fileName;
+                            $file->path = $uploadPath;
+                            $file->status = 1;
+                            if ($this->Documents->Files->save($file)) {
+
+                                $document->document_cover = $file['id'];
+
+                                if ($this->Documents->save($document)) {
+                                    
+                                    $this->Flash->success(__('File has been uploaded and inserted successfully.'));
+
+                                }
+
+                            } else {
+                                $this->Flash->error(__('Unable to upload file, please try again.'));
+                            }
+                        } else {
+                            $this->Flash->error(__('Unable to upload file, please try again.'));
+                        }
+                    } else {
+                        $this->Flash->error(__('Please choose a file to upload.'));
+                    }
+                }
+            }
+        }
+        $this->set(compact('id'));
     }
 
     public function search()

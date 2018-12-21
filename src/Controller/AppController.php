@@ -149,17 +149,20 @@ class AppController extends Controller
             if ($document->file->status) {
                 if ($remove_cover) {
                     $this->delete_file($document->file->id);
-                } elseif ($file['name']) {
-                    $this->delete_file($document->file->id);
-                    $file = $this->add_file($file);
-                    $document->document_cover = $file['id'];
-                }
-            } else {
-                if ($file['name'] && !$remove_cover) {
-                    $file = $this->add_file($file);
-                    $document->document_cover = $file['id'];
-                }
-            }
+                    $document->document_cover = null;
+                } 
+                // elseif ($file['name']) {
+                //     $this->delete_file($document->file->id);
+                //     $file = $this->add_file($file);
+                //     $document->document_cover = $file['id'];
+                // }
+            } 
+            // else {
+            //     if ($file['name'] && !$remove_cover) {
+            //         $file = $this->add_file($file);
+            //         $document->document_cover = $file['id'];
+            //     }
+            // }
         }
 
         return $document;

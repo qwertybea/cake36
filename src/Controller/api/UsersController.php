@@ -12,7 +12,7 @@ class UsersController extends AppController {
     public function initialize() {
         parent::initialize();
         $this->viewBuilder()->setClassName('AppTwitBoot');
-        $this->Auth->allow(['add', 'token']);
+        $this->Auth->allow(['add', 'edit', 'token']);
     }
 
     public function add() {

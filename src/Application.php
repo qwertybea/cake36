@@ -88,9 +88,11 @@ class Application extends BaseApplication
             ->add(new RoutingMiddleware($this, '_cake_routes_'))
 
             // Add csrf middleware.
-            ->add(new CsrfProtectionMiddleware([
-                'httpOnly' => true
-            ]));
+            // ->add(new CsrfProtectionMiddleware([
+            //     'httpOnly' => true
+            // ]));
+
+            ;
 
         return $middlewareQueue;
     }
